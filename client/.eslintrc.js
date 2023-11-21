@@ -28,8 +28,9 @@ module.exports = {
     'react'
   ],
   rules: {
-    "react/react-in-jsx-scope": "off",
-    "semi": ["error", "always"],
-    "indent": ["error", 2],
+    'react/react-in-jsx-scope': 'off',
+    semi: ['warn', 'always'],
+    indent: ['warn', 2],
+    'no-unused-vars': 'off'
   }
-}
+};
