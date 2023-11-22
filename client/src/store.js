@@ -2,9 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import tokenReducer from './reducers/tokenReducer';
 
 const store = configureStore({
-    reducer: {
-        token: tokenReducer
-    }
+  reducer: {
+    token: tokenReducer
+  }
 });
 
 console.log(store.getState());
