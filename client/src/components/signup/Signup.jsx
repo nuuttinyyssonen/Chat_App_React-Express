@@ -46,7 +46,6 @@ const Signup = () => {
 
   return (
     <div>
-      {errorMessage && <h3>{errorMessage}</h3>}
       <SignupForm
         username={username}
         setUsername={setUsername}
@@ -61,6 +60,7 @@ const Signup = () => {
         email={email}
         setEmail={setEmail}
         onSubmit={onSubmit}
+        errorMessage={errorMessage}
       />
     </div>
   );

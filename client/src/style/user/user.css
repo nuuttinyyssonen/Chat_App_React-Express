@@ -53,3 +53,7 @@
     text-decoration: none;
 }
 
+.errorMsg {
+    text-align: center;
+    color: red;
+}

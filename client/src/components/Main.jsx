@@ -1,13 +1,8 @@
-import { useSelector } from "react-redux";
-
+import Navbar from "./Navbar/Navbar";
 const Main = () => {
-    const token = useSelector(({ token }) => {
-        return token
-    })
-
     return (
         <div>
-            {token}
+            <Navbar />
         </div>
     );
 };

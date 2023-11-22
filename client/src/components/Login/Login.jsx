@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import LoginForm from './LoginForm';
 import userService from '../../services/userService';
-import { useDispatch } from 'react-redux';
-import { setToken } from '../../reducers/tokenReducer';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState();
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -20,12 +18,16 @@ const Login = () => {
         password
       };
       const response = await userService.loginUser(user);
-      console.log(response.token);
-      dispatch(setToken(response.token))
-      navigate('/main')
+      localStorage.setItem('token', response.token);
+      navigate('/main');
     } catch (error) {
-      console.log(error);
-    }
+      if (error.response.data.error) {
+        setErrorMessage(error.response.data.error);
+        setTimeout(() => {
+          setErrorMessage();
+        }, 5000)
+      };
+    };
   };
 
   return (
@@ -36,6 +38,7 @@ const Login = () => {
         password={password}
         setPassword={setPassword}
         onSubmit={onSubmit}
+        errorMessage={errorMessage}
       />
     </div>
   );

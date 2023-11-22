@@ -1,10 +1,11 @@
 import '../../style/user/user.css';
 import { Link } from 'react-router-dom';
-const SignupForm = ({ username, setUsername, password, setPassword, passwordRepeat, setPasswordRepeat, firstName, setFirstName, lastName, setLastName, email, setEmail, onSubmit }) => {
+const SignupForm = ({ username, setUsername, password, setPassword, passwordRepeat, setPasswordRepeat, firstName, setFirstName, lastName, setLastName, email, setEmail, onSubmit, errorMessage }) => {
   return (
     <div className='container' id='container-signup'>
       <h2>Register</h2>
       <p className='paragraph'>You and your friends aways connected.</p>
+      { errorMessage && <p className='errorMsg'>{errorMessage}</p>}
       <form className='login-form' onSubmit={onSubmit}>
         <input id='firstName' className='login-input' placeholder="First name..." value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
         <input id='lastName' className='login-input' placeholder="Last name..." value={lastName} onChange={(e) => setLastName(e.target.value)}/>
