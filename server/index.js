@@ -6,7 +6,7 @@ const { MONGODB_URI, PORT } = require('./utils/config');
 const signupRouter = require('./controls/signup');
 const loginRouter = require('./controls/login');
 
-app.use(express.json())
+app.use(express.json());
 
 mongoose.set('strictQuery', false);
 
