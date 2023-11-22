@@ -1,22 +1,53 @@
-import { useState } from "react";
+import { useState } from 'react';
 import SignupForm from './SignupForm';
+import userService from '../../services/userService';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [passwordRepeat, setPasswordRepeat] = useState();
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
 
-  const onSubmit = (event) => {
+  const [errorMessage, setErrorMessage] = useState();
+
+  const navigate = useNavigate();
+
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log("here")
-  }
+    if (password !== passwordRepeat) {
+      setErrorMessage('Passwords are not the same');
+      setTimeout(() => {
+        setErrorMessage();
+      }, 5000);
+      return;
+    };
+    try {
+      const user = {
+        username,
+        password,
+        firstName,
+        lastName,
+        email
+      };
+      await userService.createUser(user);
+      navigate('/');
+    } catch (error) {
+      if (error.response.data.error) {
+        setErrorMessage(error.response.data.error);
+        setTimeout(() => {
+          setErrorMessage();
+        }, 5000);
+      };
+    };
+  };
 
-  return(
+  return (
     <div>
-      <SignupForm 
+      {errorMessage && <h3>{errorMessage}</h3>}
+      <SignupForm
         username={username}
         setUsername={setUsername}
         password={password}

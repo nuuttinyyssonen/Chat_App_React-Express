@@ -29,8 +29,10 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
     semi: ['warn', 'always'],
     indent: ['warn', 2],
+    quotes: ['warn', 'single', { avoidEscape: true }],
     'no-unused-vars': 'off'
   }
 };

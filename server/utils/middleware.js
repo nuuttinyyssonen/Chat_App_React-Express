@@ -6,7 +6,7 @@ const unknownEndpoint = (req, res) => {
 };
 
 const errorHandler = (error, req, res, next) => {
-  console.log(error.message);
+  console.log("this", error.message);
 
   if (error.name === 'CastError') {
     return res.status(400).send({ error: 'malformatted id' });
@@ -14,8 +14,9 @@ const errorHandler = (error, req, res, next) => {
     return res.status(400).json({ error: error.message });
   } else if (error.name === 'JsonWebTokenError') {
     return res.status(400).json({ error: 'token missing or invalid' });
+  } else if(error.name === 'MongoServerError' && error.code === 11000) {
+    return res.status(400).json({ error: 'this username already exists' });
   }
-
   next(error);
 };
 
