@@ -24,7 +24,6 @@ signupRouter.post('/', async (req, res, next) => {
     await user.save();
     res.status(200).json(user);
   } catch (error) {
-    // console.log("here", error)
     next(error);
   };
 });
