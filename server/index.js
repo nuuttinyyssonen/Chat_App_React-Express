@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const { MONGODB_URI, PORT } = require('./utils/config');
 const cors = require('cors');
-const {errorHandler} = require('./utils/middleware');
+const { errorHandler } = require('./utils/middleware');
 
 const signupRouter = require('./controls/signup');
 const loginRouter = require('./controls/login');
@@ -25,6 +25,7 @@ connectToMongoDB();
 
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
+
 app.use(errorHandler);
 
 app.listen(PORT, () => {
