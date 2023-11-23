@@ -1,8 +1,11 @@
-import Navbar from "./Navbar/Navbar";
+import Leftside from "./Leftside";
+import '../style/main/main.css';
+import Chat from "./Chat/Chat";
 const Main = () => {
     return (
-        <div>
-            <Navbar />
+        <div className="Main-container">
+            <Leftside />
+            <Chat />
         </div>
     );
 };
