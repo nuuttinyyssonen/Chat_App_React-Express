@@ -1,20 +1,9 @@
-import { useState } from "react";
 import { SlLogout, SlSettings } from "react-icons/sl";
-import { useNavigate } from "react-router-dom";
-import profile from '../style/images/Profile_picture.png';
+import profile from '../../style/images/Profile_picture.png';
 
-const Leftside = () => {
-    const [search, setSearch] = useState('');
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        navigate('/')
-    }
-
+const Navbar = ({ handleLogout, search, setSearch }) => {
     return (
-        <div className="left-side">
-            <div className="navbar">
+        <div className="navbar">
                 <div className="header">
                     <img src={profile} className="profile-pic"/>
                     <div>
@@ -28,8 +17,7 @@ const Leftside = () => {
                 </div>
                 <input className="search-input" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
             </div>
-        </div>
     );
 };
 
-export default Leftside;
+export default Navbar;
