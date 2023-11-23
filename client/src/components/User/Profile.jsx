@@ -8,8 +8,15 @@ const Profile = () => {
 
     const getSearchedUser = async () => {
         try {
-            const data = userService.getUser(username);
-            console.log(data);
+            const data = await userService.getUser(username);
+            const userObject = {
+                username: data.username,
+                id: data._id,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email
+            }
+            setUser(userObject);
         } catch (error) {
             console.log(error);
         }
@@ -21,6 +28,7 @@ const Profile = () => {
 
     return (
         <div>
+            {user && <h1>{user.id}</h1>}
         </div>
     );
 };

@@ -23,7 +23,14 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     validate: [isEmail, 'invalid email']
-  }
+  },
+  friends: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
+
 });
 
 module.exports = mongoose.model('User', userSchema);
