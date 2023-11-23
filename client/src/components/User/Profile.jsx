@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import userService from "../../services/userService";
+import friendsService from "../../services/friendsService";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
@@ -26,9 +27,19 @@ const Profile = () => {
         getSearchedUser();
     }, []);
 
+    const addFriend = async (username) => {
+        try {
+            const response = await friendsService.addFriend(username);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div>
             {user && <h1>{user.id}</h1>}
+            <button onClick={() => addFriend(username)}>Add</button>
         </div>
     );
 };

@@ -2,12 +2,6 @@ import axios from 'axios';
 
 const baseUrl = 'http://localhost:5000';
 
-let token = null;
-
-const setToken = (newToken) => {
-  token = `Bearer ${newToken}`;
-};
-
 const createUser = async (user) => {
   const response = await axios.post(`${baseUrl}/signup`, user, {
     headers: {
@@ -39,7 +33,6 @@ const getUser = async (username) => {
 export default {
   createUser,
   loginUser,
-  setToken,
   getUsers,
   getUser
 };

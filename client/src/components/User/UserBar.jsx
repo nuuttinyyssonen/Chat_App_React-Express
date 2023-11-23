@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import userService from "../../services/userService";
 import UsersList from "./UsersList";
+import FriendsList from "./FriendsList";
+import friendsService from "../../services/friendsService";
 
 const UserBar = () => {
     const [search, setSearch] = useState('');
@@ -23,6 +25,19 @@ const UserBar = () => {
             console.log(error);
         }
     };
+
+    const getFriends = async () => {
+        try {
+            const data = await friendsService.getFriends();
+            console.log(data.friends)
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    useEffect(() => {
+        getFriends();
+    }, [])
 
     useEffect(() => {
         if (search === '') {
@@ -47,6 +62,7 @@ const UserBar = () => {
                 users={users}
             />
             : null}
+            <FriendsList />
         </div>
     );
 };

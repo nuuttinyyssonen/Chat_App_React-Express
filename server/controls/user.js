@@ -11,6 +11,7 @@ userRouter.get('/:username', async(req, res) => {
 });
 
 userRouter.put('/:username', tokenExtractor, async(req, res, next) => {
+    console.log(req.decodedToken)
     const userToAdd = await User.findOne({ username: req.params.username });
     const user = await User.findById(req.decodedToken.id);
     if(user.friends.includes(userToAdd._id)) {
