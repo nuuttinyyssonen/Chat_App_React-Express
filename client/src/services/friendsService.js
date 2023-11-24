@@ -14,7 +14,7 @@ const addFriend = async (username) => {
 };
 
 const getFriends = async () => {
-  const response = await axios.get(`${baseUrl}/user`, config);
+  const response = await axios.get(`${baseUrl}/friends`, config);
   return response.data;
 };
 

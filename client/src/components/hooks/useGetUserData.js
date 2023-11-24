@@ -1,24 +1,23 @@
-import { useState, useEffect } from "react"
-import friendsService from "../../services/friendsService";
+import { useState, useEffect } from 'react';
+import userService from '../../services/userService';
 
 const useGetUserData = () => {
-    const [user, setUser] = useState();
+  const [user, setUser] = useState();
 
-    const getUserData = async () => {
-        try {
-            const data = await friendsService.getFriends();
-            setUser(data)
-            console.log(user)
-        } catch (error) {
-            console.log(error)
-        }
-    };
+  const getUserData = async () => {
+    try {
+      const data = await userService.getAuthUser();
+      setUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    useEffect(() => {
-        getUserData();
-    }, [])
+  useEffect(() => {
+    getUserData();
+  }, []);
 
-    return { user }
+  return { user };
 };
 
 export default useGetUserData;

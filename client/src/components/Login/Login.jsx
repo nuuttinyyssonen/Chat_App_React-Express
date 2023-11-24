@@ -25,7 +25,7 @@ const Login = () => {
         setErrorMessage(error.response.data.error);
         setTimeout(() => {
           setErrorMessage();
-        }, 5000)
+        }, 5000);
       };
     };
   };

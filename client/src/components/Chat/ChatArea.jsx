@@ -1,8 +1,8 @@
 const ChatArea = () => {
-    return (
-        <div>
-        </div>
-    );
+  return (
+    <div>
+    </div>
+  );
 };
 
 export default ChatArea;
