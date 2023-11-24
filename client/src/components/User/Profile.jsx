@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import friendsService from '../../services/friendsService';
-import useSearchedUser from '../hooks/useSearchedUser';
+import useSearchedUser from '../../hooks/useSearchedUser'
 
 const Profile = () => {
   const username = useParams().username;

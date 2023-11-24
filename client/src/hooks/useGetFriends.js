@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import friendsService from '../../services/friendsService';
+import friendsService from '../services/friendsService'
 
 const useGetFriends = () => {
   const [friends, setFriends] = useState();
