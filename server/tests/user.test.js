@@ -5,13 +5,14 @@ const supertest = require('supertest');
 const app = require('../index');
 const api = supertest(app);
 const { initialUser, usersInDb } = require('../tests/test_helper');
+let authHeader;
 
 describe('users api', () => {
   beforeEach(async () => {
     await User.deleteOne({ username: 'tester' });
   });
   describe('user', () => {
-    test('create user', async () => {
+    test('can signup', async () => {
       const users = await usersInDb();
       await api
         .post('/signup')
@@ -20,7 +21,7 @@ describe('users api', () => {
       const usersAfter = await usersInDb();
       expect(usersAfter).toHaveLength(users.length + 1);
     });
-    test('login user', async () => {
+    test('can login', async () => {
       const user = {
         username: 'testuser',
         password: 'secret'
@@ -32,6 +33,30 @@ describe('users api', () => {
       const token = response.body.token;
       expect(token).toBeDefined();
     });
+  });
+});
+
+describe('Friends api', () => {
+  beforeEach(async () => {
+    const user = initialUser[0];
+    await api.post('/signup').send(user);
+    const response = await api.post('/login').send(user);
+    authHeader = `bearer ${response.body.token}`
+  });
+  test('can add friends', async () => {
+    const user = await User.findOne({ username: initialUser[0].username });
+    const response = await api
+      .put(`/user/testuser`)
+      .set('Authorization', authHeader)
+      .expect(200)
+    const friends = response.body.friends;
+    expect(friends).toHaveLength(user.friends.length + 1);
+  });
+  test('fails when adding existing friend', async () => {
+    await api
+      .put(`/user/testuser`)
+      .set('Authorization', authHeader)
+      .expect(400)
   });
 });
 

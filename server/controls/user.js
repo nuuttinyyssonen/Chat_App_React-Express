@@ -10,6 +10,14 @@ userRouter.get('/:username', async(req, res) => {
     res.status(200).json(user);
 });
 
+userRouter.get('/id/:id', async(req, res) => {
+    const user = await User.findById(req.params.id);
+    if(!user) {
+        return res.status(404).json({ error: "user was not found!" });
+    }
+    res.status(200).json(user);
+});
+
 userRouter.get('/', tokenExtractor, async(req, res) => {
     const user = await User.findById(req.decodedToken.id);
     if(!user) {

@@ -9,6 +9,7 @@ const signupRouter = require('./controls/signup');
 const loginRouter = require('./controls/login');
 const usersRouter = require('./controls/users');
 const userRouter = require('./controls/user');
+const friendsRouter = require('./controls/friends');
 
 app.use(express.json());
 app.use(cors());
@@ -29,6 +30,7 @@ app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
 app.use('/user', userRouter);
+app.use('/friends', friendsRouter);
 
 app.use(errorHandler);
 

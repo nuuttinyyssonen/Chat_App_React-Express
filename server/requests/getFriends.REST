@@ -1,0 +1,2 @@
+GET http://localhost:5000/friends
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51dXR0aW55eXNzb25lbiIsImlkIjoiNjU1ZGYzMGNmMmQ0NWNiYzlmMWEzMjhiIiwiaWF0IjoxNzAwODEyOTM5fQ.MrnzNlw-EBSjsHUIHJ6EZE8Cw0mPIdoN6oj0G4oHhi8
