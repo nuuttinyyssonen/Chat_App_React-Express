@@ -8,20 +8,20 @@ const UsersList = ({ users }) => {
         navigate(`/users/${username}`);
     };
 
-    const usersMap = users.map((user, key) => {
-        return (
-            <div className="userInList" onClick={() => viewProfile(user)} key={key}>
-                <img className="profilePicInUserList" src={profilePic}/>
-                <h2 className="usernameInList">{user}</h2>
-            </div>
-        )
-    })
-
     return (
-        <div className="usersList">
-            {usersMap}
-        </div>
-    );
+        users.users
+        ? (
+          <div className="usersList">
+            {users.users.map((user, key) => (
+              <div className="userInList" onClick={() => viewProfile(user)} key={key}>
+                <img className="profilePicInUserList" src={profilePic} alt={`Profile for ${user}`} />
+                <h2 className="usernameInList">{user}</h2>
+              </div>
+            ))}
+          </div>
+        )
+        : null
+      );
 };
 
 export default UsersList;

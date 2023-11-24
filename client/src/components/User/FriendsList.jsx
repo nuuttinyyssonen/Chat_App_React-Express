@@ -1,7 +1,14 @@
-const FriendsList = () => {
+const FriendsList = ({ friends }) => {
     return (
-        <div>
-        </div>
+        friends && (
+            <div>
+                {friends.map((friend, key) => (
+                    <div key={key}>
+                        <p>{friend}</p>
+                    </div>
+                ))}
+            </div>
+        )
     );
 };
 

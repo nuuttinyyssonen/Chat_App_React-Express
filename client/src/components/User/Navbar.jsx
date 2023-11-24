@@ -1,14 +1,14 @@
 import { SlLogout, SlSettings } from "react-icons/sl";
 import profile from '../../style/images/Profile_picture.png';
 
-const Navbar = ({ handleLogout, search, setSearch }) => {
+const Navbar = ({ handleLogout, search, setSearch, user }) => {
     return (
         <div className="navbar">
                 <div className="header">
                     <img src={profile} className="profile-pic"/>
                     <div>
-                        <h4>User name...</h4>
-                        <p>paragraph...</p>
+                        {user.user && <h4>{user.user.firstName} {user.user.lastName}</h4>}
+                        <p>...</p>
                     </div>
                     <div className="menu">
                         <SlLogout onClick={handleLogout} className="icon"/>

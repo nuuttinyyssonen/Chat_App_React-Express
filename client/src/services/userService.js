@@ -23,12 +23,12 @@ const loginUser = async (user) => {
 const getUsers = async (username) => {
   const response = await axios.get(`${baseUrl}/users/${username}`);
   return response.data;
-}
+};
 
 const getUser = async (username) => {
   const response = await axios.get(`${baseUrl}/user/${username}`);
   return response.data;
-}
+};
 
 export default {
   createUser,
