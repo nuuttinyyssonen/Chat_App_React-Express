@@ -1,24 +1,15 @@
 import { useParams } from 'react-router-dom';
-import friendsService from '../../services/friendsService';
 import useSearchedUser from '../../hooks/useSearchedUser'
+import useAddFriend from '../../hooks/useAddFriend';
 
 const Profile = () => {
   const username = useParams().username;
   const user = useSearchedUser(username);
-
-  const addFriend = async (username) => {
-    try {
-      const response = await friendsService.addFriend(username);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  const [newFriend] = useAddFriend();
   return (
     <div>
       {user.user && <h1>{user.user.id}</h1>}
-      <button onClick={() => addFriend(username)}>Add</button>
+      <button onClick={() => newFriend(username)}>Add</button>
     </div>
   );
 };
