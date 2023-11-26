@@ -3,7 +3,7 @@ const ChatHeader = () => {
   const location = useLocation();
   return (
     <div className="ChatHeader">
-      {location.state && <p>{location.state.firstName} {location.state.lastName}</p>}
+      {location.state && <p id='headerFirstName' >{location.state.firstName} {location.state.lastName}</p>}
     </div>
   );
 };

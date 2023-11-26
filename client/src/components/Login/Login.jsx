@@ -21,7 +21,7 @@ const Login = () => {
       localStorage.setItem('token', response.token);
       navigate('/main');
     } catch (error) {
-      if (error.response.data.error) {
+      if (error.response) {
         setErrorMessage(error.response.data.error);
         setTimeout(() => {
           setErrorMessage();
