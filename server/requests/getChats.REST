@@ -1,0 +1,2 @@
+GET http://localhost:5000/chat
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51dXR0aW55eXNzb25lbiIsImlkIjoiNjU2MmZmOTFlZTUxYTY0OTViMGY2OWJmIiwiaWF0IjoxNzAwOTg2OTEyfQ.Tl5TH5lPTdXeOvTdUe8gTccFWtiz8cRNpmhZ0zchyOU

@@ -1,5 +1,6 @@
 const userRouter = require('express').Router();
 const User = require('../models/user');
+const Chat = require('../models/chat');
 const { tokenExtractor } = require('../utils/middleware');
 
 userRouter.get('/:username', async(req, res) => {
@@ -19,7 +20,7 @@ userRouter.get('/id/:id', async(req, res) => {
 });
 
 userRouter.get('/', tokenExtractor, async(req, res) => {
-    const user = await User.findById(req.decodedToken.id);
+    const user = await User.findById(req.decodedToken.id).populate('chats').populate('friends');
     if(!user) {
         res.status(404).json({ error: "User was not found!" })
     }
@@ -32,7 +33,15 @@ userRouter.put('/:username', tokenExtractor, async(req, res, next) => {
     if(user.friends.includes(userToAdd._id)) {
         return res.status(400).json({ error: "This user is already in your friends" });
     }
+    const chat = new Chat({
+        users: [
+            user._id,
+            userToAdd._id
+        ]
+    });
     try {
+        const savedChat = await chat.save();
+        user.chats.push(savedChat._id)
         user.friends.push(userToAdd._id);
         await user.save();
         res.status(200).send(user);

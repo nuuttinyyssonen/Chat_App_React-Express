@@ -12,6 +12,7 @@ const App = () => {
         <Route path='/signup' element={<Signup />} />
         <Route path='/main' element={<Main />} />
         <Route path='/users/:username' element={<Profile />} />
+        <Route path='/chat/:id' element={<Main />} />
       </Routes>
     </div>
   );

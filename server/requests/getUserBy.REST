@@ -1,1 +1,2 @@
-GET http://localhost:5000/user/id/655f2f3fb5847e05c20cef93
+GET http://localhost:5000/user
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51dXR0aW55eXNzb25lbiIsImlkIjoiNjU2MmZmOTFlZTUxYTY0OTViMGY2OWJmIiwiaWF0IjoxNzAwOTkwMDgzfQ.D-hjm1OMXxB8Sws_o0GFPFixm-w5DPOASi-os6vPzh4

@@ -9,7 +9,7 @@ const Main = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
-      navigate('/')
+      navigate('/');
     }
   }, [token]);
   return (

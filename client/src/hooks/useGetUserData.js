@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import userService from '../services/userService';
 
 const useGetUserData = () => {
-  const [user, setUser] = useState();
+  const [data, setData] = useState();
 
   const getUserData = async () => {
     try {
-      const data = await userService.getAuthUser();
-      setUser(data);
+      const response = await userService.getAuthUser();
+      setData(response);
     } catch (error) {
       console.log(error);
     }
@@ -17,7 +17,7 @@ const useGetUserData = () => {
     getUserData();
   }, []);
 
-  return { user };
+  return { data };
 };
 
 export default useGetUserData;

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import useSearchedUser from '../../hooks/useSearchedUser'
+import useSearchedUser from '../../hooks/useSearchedUser';
 import useAddFriend from '../../hooks/useAddFriend';
 
 const Profile = () => {

@@ -11,6 +11,7 @@ const usersRouter = require('./controls/users');
 const userRouter = require('./controls/user');
 const friendsRouter = require('./controls/friends');
 const resetCypressRouter = require('./controls/resetCypress');
+const chatRouter = require('./controls/chat');
 
 app.use(express.json());
 app.use(cors());
@@ -33,6 +34,7 @@ app.use('/users', usersRouter);
 app.use('/user', userRouter);
 app.use('/friends', friendsRouter);
 app.use('/resetCypress', resetCypressRouter);
+app.use('/chat', chatRouter);
 
 app.use(errorHandler);
 
