@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import socket from '../../socketConfig';
 import { useParams } from "react-router-dom";
 import useGetChat from "../../hooks/useGetChat";
+import useGetUserData from "../../hooks/useGetUserData";
 const ChatArea = () => {
   const [messages, setMessages] = useState([]);
   const id = useParams().id;
   const chat = useGetChat();
+  const user = useGetUserData();
 
   socket.emit('joinRoom', id);
   useEffect(() => {
@@ -17,12 +19,10 @@ const ChatArea = () => {
 
   const messagesMap = () => {
     return messages.map((message, key) => {
-      console.log(message)
       if (message.room === id) {
-        console.log(message)
         return (
-          <div className="messageContainer" key={key}>
-            <p className="message">{message.message}</p>
+          <div className="currentUserMsgs" key={key}>
+            <p className="messageOther">{message.message}</p>
           </div>
         )
       }
@@ -31,17 +31,15 @@ const ChatArea = () => {
   }
 
   const chatHistory = () => {
-    if (chat.chat && chat.chat.messages) {
+    if (chat.chat && chat.chat.messages && user.data) {
       return chat.chat.messages.map((message, key) => (
-        <div key={key}>
-          <p>{message.message}</p>
+        <div className={message.user === user.data._id ? "currentUserMsgs" : "otherUserMsgs"} key={key}>
+          <p className="messageCurrent">{message.message}</p>
         </div>
       ));
     }
     return null;
   };
-
-  console.log(chatHistory());
 
   return (
     <div className="chatAreaContainer">
