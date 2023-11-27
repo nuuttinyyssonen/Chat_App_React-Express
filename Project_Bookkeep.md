@@ -7,3 +7,4 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 23.11.2023 |        8        | Added lot of visuals to "main" page. Made update to user model to include friends list and routes to use those. Also made them to work in client side.|
 | 24.11.2023 |        6        | Moved a lot of queries to custom hooks. Much cleaner code. Updated FriendList component. Made Jest tests to backend and cypress to frontend. |
 | 26.11.2023 |       5.5       | Made new models for chat and messages. Also made it possible to access and create chats from client side. Couple cypress tests as well. |
+| 27.11.2023 |        8        | Configured Socket.io library on both client and server side to handle real-time communication. Made rooms possible as well. Added lot of styling |
