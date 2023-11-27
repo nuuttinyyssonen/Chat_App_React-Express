@@ -166,3 +166,13 @@ html, body {
     text-align: center;
     border: 1px solid lightgray;
 }
+
+.chatAreaContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.messageContainer {
+    display: flex;
+    justify-content: flex-start;
+}

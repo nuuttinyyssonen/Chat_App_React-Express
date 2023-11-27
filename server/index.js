@@ -5,6 +5,7 @@ const { MONGODB_URI, PORT } = require('./utils/config');
 const cors = require('cors');
 const { errorHandler } = require('./utils/middleware');
 const { Server } = require('socket.io');
+const ChatMessage = require('./models/chatMessage');
 
 const signupRouter = require('./controls/signup');
 const loginRouter = require('./controls/login');
@@ -58,8 +59,14 @@ io.on('connection', (socket) => {
     console.log(`joined room: ${room}`);
   });
 
-  socket.on('message', (data) => {
-    const { message, room } = data;
+  socket.on('message', async (data) => {
+    const { message, room, userId } = data;
+    const chatMessage = new ChatMessage({
+      message: message,
+      user: userId,
+      chat: room
+    })
+    await chatMessage.save();
     console.log(`message ${message} to ${room}`);
     io.in(room).emit('receive_message', data);
   })

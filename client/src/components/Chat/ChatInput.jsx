@@ -2,8 +2,10 @@ import { SlPaperPlane } from 'react-icons/sl';
 import socket from '../../socketConfig';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useGetUserData from '../../hooks/useGetUserData';
 const ChatInput = () => {
   const [message, setMessage] = useState("");
+  const user = useGetUserData();
   const id = useParams().id;
   useEffect(() => {
     socket.on('connect', () => {
@@ -16,8 +18,10 @@ const ChatInput = () => {
   }, []);
 
   const sendMessage = () => {
-    socket.emit('message', { message: message, room: id });
-    setMessage('');
+    if (user) {
+      socket.emit('message', { message: message, room: id, userId: user.data._id });
+      setMessage('');
+    }
   };
 
   return (

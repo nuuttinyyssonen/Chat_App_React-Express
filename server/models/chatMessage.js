@@ -11,7 +11,11 @@ const chatMessageSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    chat: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Chat'
     }
 });
 
-module.exports = mongoose.model('chatMessage', chatMessageSchema);
+module.exports = mongoose.model('ChatMessage', chatMessageSchema);

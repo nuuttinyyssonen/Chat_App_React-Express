@@ -19,8 +19,8 @@ const ChatArea = () => {
       if (message.room === id) {
         console.log(message)
         return (
-          <div key={key}>
-            <p>{message.message}</p>
+          <div className="messageContainer" key={key}>
+            <p className="message">{message.message}</p>
           </div>
         )
       }
@@ -29,7 +29,7 @@ const ChatArea = () => {
   }
 
   return (
-    <div>
+    <div className="chatAreaContainer">
       {messages && messagesMap()}
     </div>
   );
