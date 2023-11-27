@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import socket from '../../socketConfig';
 import { useParams } from "react-router-dom";
+import useGetChat from "../../hooks/useGetChat";
 const ChatArea = () => {
   const [messages, setMessages] = useState([]);
   const id = useParams().id;
+  const chat = useGetChat();
 
   socket.emit('joinRoom', id);
   useEffect(() => {
@@ -28,8 +30,22 @@ const ChatArea = () => {
     })
   }
 
+  const chatHistory = () => {
+    if (chat.chat && chat.chat.messages) {
+      return chat.chat.messages.map((message, key) => (
+        <div key={key}>
+          <p>{message.message}</p>
+        </div>
+      ));
+    }
+    return null;
+  };
+
+  console.log(chatHistory());
+
   return (
     <div className="chatAreaContainer">
+      {chatHistory()}
       {messages && messagesMap()}
     </div>
   );

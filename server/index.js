@@ -6,6 +6,7 @@ const cors = require('cors');
 const { errorHandler } = require('./utils/middleware');
 const { Server } = require('socket.io');
 const ChatMessage = require('./models/chatMessage');
+const Chat = require('./models/chat');
 
 const signupRouter = require('./controls/signup');
 const loginRouter = require('./controls/login');
@@ -61,12 +62,15 @@ io.on('connection', (socket) => {
 
   socket.on('message', async (data) => {
     const { message, room, userId } = data;
+    const chatRoom = await Chat.findById(room);
     const chatMessage = new ChatMessage({
       message: message,
       user: userId,
       chat: room
     })
-    await chatMessage.save();
+    const msg = await chatMessage.save();
+    chatRoom.messages.push(msg._id);
+    await chatRoom.save();
     console.log(`message ${message} to ${room}`);
     io.in(room).emit('receive_message', data);
   })

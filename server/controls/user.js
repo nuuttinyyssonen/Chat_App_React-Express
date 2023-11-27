@@ -41,9 +41,12 @@ userRouter.put('/:username', tokenExtractor, async(req, res, next) => {
     });
     try {
         const savedChat = await chat.save();
-        user.chats.push(savedChat._id)
+        user.chats.push(savedChat._id);
         user.friends.push(userToAdd._id);
+        userToAdd.chats.push(savedChat._id);
+        userToAdd.friends.push(user._id);
         await user.save();
+        await userToAdd.save();
         res.status(200).send(user);
     } catch(error) {
         next(error);
