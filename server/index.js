@@ -62,7 +62,6 @@ io.on('connection', (socket) => {
     const { message, room } = data;
     console.log(`message ${message} to ${room}`);
     io.in(room).emit('receive_message', data);
-    // socket.emit('receive_message', data);
   })
 
   socket.on('disconnect', () => {

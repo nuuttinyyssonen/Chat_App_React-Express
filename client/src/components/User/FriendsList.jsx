@@ -1,6 +1,5 @@
 import profilePic from '../../style/images/Profile_picture.png';
 import { useNavigate } from 'react-router-dom';
-import socket from '../../socketConfig';
 const FriendsList = ({ friends, chats }) => {
   const navigate = useNavigate();
   const navigateToChat = (id, firstName, lastName) => {
