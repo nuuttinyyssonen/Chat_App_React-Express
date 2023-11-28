@@ -1,0 +1,102 @@
+.chat-container {
+    flex: 2;
+    background-color: #F0F0F0;
+    padding: 20px;
+}
+
+.chatInput-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    padding: 30px;
+    width: 64%;
+    text-align: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.chatInput {
+    padding: 10px;
+    border-radius: 25px;
+    border-width: 1px;
+    width: 60vh;
+}
+
+.send-btn {
+    cursor: pointer;
+    font-size: 50px;
+    border: 1px solid black;
+    border-radius: 180px;
+    padding: 10px;
+    background-color: #4399FF;
+    color: #fff;
+    border-width: 1px;
+    border-color: #fff;
+}
+
+.ChatHeader {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.chatAreaContainer {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    height: 73vh;
+    gap: 20px;
+}
+
+.currentUserMsgs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 20px;
+    background-color: #4399FF;
+    color: white;
+    padding: 10px;
+    width: fit-content;
+    max-width: 80%;
+    margin-left: auto;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 15px;
+}
+
+.messageCurrent {
+    align-self: flex-end;
+    margin-bottom: 5px
+}
+
+.messageOther {
+    align-self: flex-start;
+    margin-bottom: 5px;
+}
+
+.otherUserMsgs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+    background-color: #fff;
+    padding: 10px;
+    width: fit-content;
+    max-width: 80%;
+    margin-right: auto;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 15px;
+}

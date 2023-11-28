@@ -1,0 +1,22 @@
+.friendsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    cursor: pointer;
+}
+
+.friendsList {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border-bottom: 1px solid black;
+    padding-bottom: 30px;
+}
+
+.profilePicInUserList {
+    width: 40px;
+}
+
+.name {
+    font-weight: 400;
+}

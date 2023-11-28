@@ -1,0 +1,27 @@
+.userInList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+.usernameInList {
+    font-size: 20px;
+    font-weight: 200;
+    padding-top: 5px;
+}
+
+.profilePicInUserList {
+    width: 40px;
+}
+
+.usersList {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 20px;
+}

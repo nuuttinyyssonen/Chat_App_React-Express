@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
-import UsersList from './UsersList';
+import SearchedUsers from './SearchedUsers';
 import FriendsList from './FriendsList';
 import useGetUsers from '../../hooks/useGetUsers';
 import useGetUserData from '../../hooks/useGetUserData';
@@ -26,7 +26,7 @@ const UserBar = () => {
         setSearch={setSearch}
       />
       {users
-        ? <UsersList
+        ? <SearchedUsers
           users={users}
         />
         : null}

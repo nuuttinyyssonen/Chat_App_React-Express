@@ -2,7 +2,7 @@ const { describe, beforeEach, test, expect, afterAll } = require('@jest/globals'
 const User = require('../models/user');
 const mongoose = require('mongoose');
 const supertest = require('supertest');
-const app = require('../index');
+const { app } = require('../index');
 const api = supertest(app);
 const { initialUser, usersInDb } = require('../tests/test_helper');
 let authHeader;
