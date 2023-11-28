@@ -53,11 +53,11 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-  console.log(`⚡: ${socket.id} user just connected!`);
 
   socket.on('joinRoom', (room) => {
     socket.join(room);
     console.log(`joined room: ${room}`);
+    socket.emit('joinedRoom', room);
   });
 
   socket.on('message', async (data) => {
@@ -75,8 +75,11 @@ io.on('connection', (socket) => {
     io.in(room).emit('receive_message', data);
   })
 
+  socket.on('error', (error) => {
+    console.error('Socket error:', error);
+  });  
+
   socket.on('disconnect', () => {
-    console.log('🔥: A user disconnected');
   });
 });
 module.exports = app;
