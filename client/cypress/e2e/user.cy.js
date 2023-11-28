@@ -26,7 +26,8 @@ describe('User', () => {
   describe('Signup', () => {
     beforeEach(() => {
       cy.request('DELETE', 'http://localhost:5000/resetCypress')
-    })
+    });
+
     it('succeeds with correct credentials', () => {
       cy.get('#signup-link').click();
       cy.contains('Register');
@@ -39,12 +40,14 @@ describe('User', () => {
       cy.get('#Signup').click();
       cy.contains('Login');
     });
+
     it('fails with wrong credentials', () => {
       cy.get('#signup-link').click();
       cy.contains('Register');
       cy.get('#Signup').click();
       cy.contains('Password or username must be greater than 3');
-    })
+    });
+
     it('fails if passwords not the same', () => {
       cy.get('#signup-link').click();
       cy.contains('Register');
@@ -56,6 +59,6 @@ describe('User', () => {
       cy.get('#passwordRepeat').type('test');
       cy.get('#Signup').click();
       cy.contains('Passwords are not the same');
-    })
+    });
   });
 });

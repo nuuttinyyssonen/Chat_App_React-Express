@@ -26,8 +26,8 @@ const ChatInput = () => {
 
   return (
     <div className="chatInput-container">
-      <input className="chatInput" placeholder="Write something..." value={message} onChange={(e) => setMessage(e.target.value)}/>
-      <SlPaperPlane className="send-btn" onClick={sendMessage}/>
+      <input id='chatInput' className="chatInput" placeholder="Write something..." value={message} onChange={(e) => setMessage(e.target.value)}/>
+      <SlPaperPlane id='send' className="send-btn" onClick={sendMessage}/>
     </div>
   );
 };

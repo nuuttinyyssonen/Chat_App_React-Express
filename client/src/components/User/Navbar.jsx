@@ -12,7 +12,7 @@ const Navbar = ({ handleLogout, search, setSearch, user }) => {
           <p>...</p>
         </div>
         <div className="menu">
-          <SlLogout onClick={handleLogout} className="icon"/>
+          <SlLogout id='logout' onClick={handleLogout} className="icon"/>
           <SlSettings className="icon"/>
         </div>
       </div>
