@@ -5,6 +5,7 @@ describe('User', () => {
   it('Login form is showed', () => {
     cy.contains('Login');
   });
+
   describe('Login', () => {
     it('succeeds with correct credentials', () => {
       cy.get('#username').type('testuser');
@@ -23,6 +24,7 @@ describe('User', () => {
       cy.contains('Login');
     })
   });
+
   describe('Signup', () => {
     beforeEach(() => {
       cy.request('DELETE', 'http://localhost:5000/resetCypress')
