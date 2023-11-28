@@ -27,6 +27,15 @@ userRouter.get('/', tokenExtractor, async(req, res) => {
     res.status(200).json(user);
 })
 
+userRouter.delete('/', tokenExtractor, async(req, res, next) => {
+    try {
+        await User.findByIdAndDelete(req.decodedToken.id);
+        res.status(200).send("User was successfully deleted");
+    } catch(error) {
+        next(error);
+    }
+});
+
 userRouter.put('/:username', tokenExtractor, async(req, res, next) => {
     const userToAdd = await User.findOne({ username: req.params.username });
     const user = await User.findById(req.decodedToken.id);

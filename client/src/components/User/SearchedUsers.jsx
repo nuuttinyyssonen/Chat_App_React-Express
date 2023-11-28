@@ -5,7 +5,7 @@ const UsersList = ({ users }) => {
   const navigate = useNavigate();
 
   const viewProfile = (username) => {
-    navigate(`/users/${username}`);
+    navigate(`/profile/${username}`);
   };
 
   return (

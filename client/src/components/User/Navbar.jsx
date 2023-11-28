@@ -1,10 +1,11 @@
 import { SlLogout, SlSettings } from 'react-icons/sl';
 import profile from '../../style/images/Profile_picture.png';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ handleLogout, search, setSearch, user }) => {
+  const navigate = useNavigate();
   return (
     <div className="navbar">
-      <input className="search-input" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
       <div className="header">
         <img src={profile} className="profile-pic"/>
         <div>
@@ -13,7 +14,7 @@ const Navbar = ({ handleLogout, search, setSearch, user }) => {
         </div>
         <div className="menu">
           <SlLogout id='logout' onClick={handleLogout} className="icon"/>
-          <SlSettings className="icon"/>
+          <SlSettings onClick={() => navigate(`/profile/${user.data.username}`)} className="icon"/>
         </div>
       </div>
     </div>

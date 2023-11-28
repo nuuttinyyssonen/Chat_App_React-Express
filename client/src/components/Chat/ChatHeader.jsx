@@ -1,9 +1,11 @@
 import { useLocation } from 'react-router-dom';
+import Profile from '../../style/images/Profile_picture.png';
 const ChatHeader = () => {
   const location = useLocation();
   return (
-    <div className="ChatHeader">
-      {location.state && <p id='headerFirstName' >{location.state.firstName} {location.state.lastName}</p>}
+    location.state && <div className="ChatHeader">
+      {location.state && <img src={Profile} className='ProfilepicHeader'/>}
+      {location.state && <p id='headerFirstName' className='headerName'>{location.state.firstName} {location.state.lastName}</p>}
     </div>
   );
 };

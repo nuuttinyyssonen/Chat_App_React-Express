@@ -2,19 +2,15 @@ import { useEffect, useState } from 'react';
 import userService from '../services/userService';
 
 const useSearchedUser = (username) => {
-  const [user, setUser] = useState();
+  const [data, setData] = useState();
 
   const getSearchedUser = async () => {
+    if (!username) {
+      return
+    }
     try {
-      const data = await userService.getUser(username);
-      const userObject = {
-        username: data.username,
-        id: data._id,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email
-      };
-      setUser(userObject);
+      const response = await userService.getUser(username);
+      setData(response);
     } catch (error) {
       console.log(error);
     }
@@ -24,7 +20,7 @@ const useSearchedUser = (username) => {
     getSearchedUser();
   }, [username]);
 
-  return { user };
+  return { data };
 };
 
 export default useSearchedUser;

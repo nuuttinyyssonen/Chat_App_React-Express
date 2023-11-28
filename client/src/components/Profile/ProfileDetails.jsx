@@ -1,8 +1,8 @@
 const ProfileDetails = ({ user }) => {
     return (
         <div className="profileDetails">
-            {user.user && <p>E-Mail: {user.user.email}</p>}
-            {user.user && <p>Username: {user.user.username}</p>}
+            {user.data && <p>E-Mail: {user.data.email}</p>}
+            {user.data && <p>Username: {user.data.username}</p>}
         </div>
     );
 };

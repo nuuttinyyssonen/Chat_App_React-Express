@@ -7,6 +7,9 @@ const useGetChat = () => {
   const id = useParams().id;
 
   const queryChat = async () => {
+    if (!id) {
+      return
+    }
     try {
       const data = await chatService.getChat(id);
       console.log(data);

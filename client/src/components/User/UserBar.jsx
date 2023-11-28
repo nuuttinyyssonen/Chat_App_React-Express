@@ -19,18 +19,19 @@ const UserBar = () => {
 
   return (
     <div className="left-side">
-      <Navbar
+      <input className="search-input" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
+      {!search && <Navbar
         user={data}
         handleLogout={handleLogout}
         search={search}
         setSearch={setSearch}
-      />
+      />}
       {users
         ? <SearchedUsers
           users={users}
         />
         : null}
-      {data.data
+      {data.data && !search
         ? <FriendsList friends={data.data.friends} chats={data.data.chats}/>
         : null}
     </div>

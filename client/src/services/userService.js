@@ -53,11 +53,18 @@ const getAuthUser = async () => {
   return response.data;
 };
 
+const deleteUser = async () => {
+  const config = getConfig();
+  const response = await axios.delete(`${baseUrl}/user`, config);
+  return response.data;
+}
+
 export default {
   createUser,
   loginUser,
   getUsers,
   getUser,
   getUserById,
-  getAuthUser
+  getAuthUser,
+  deleteUser
 };
