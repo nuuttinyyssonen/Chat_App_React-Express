@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import socket from '../../socketConfig';
 import { useParams } from 'react-router-dom';
 import useGetChat from '../../hooks/useGetChat';
@@ -9,6 +9,7 @@ const ChatArea = () => {
   const id = useParams().id;
   const chat = useGetChat();
   const user = useGetUserData();
+  const chatContainerRef = useRef(null);
 
   socket.emit('joinRoom', id);
   useEffect(() => {
@@ -19,7 +20,7 @@ const ChatArea = () => {
   }, [socket]);
 
   return (
-    <div>
+    <div className="chatContainer">
       <ChatMessages
         messages={messages}
         user={user}

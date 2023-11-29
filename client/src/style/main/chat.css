@@ -54,13 +54,15 @@
     gap: 10px;
 }
 
+.chatContainer {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
 .chatAreaContainer {
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
-    padding-bottom: 20px;
     padding-top: 20px;
-    height: 73vh;
     gap: 20px;
 }
 

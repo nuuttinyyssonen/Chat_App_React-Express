@@ -1,14 +1,17 @@
+import { useRef, useEffect } from "react";
 const ChatMessages = ({ messages, id, chat, user }) => {
+  const chatContainerRef = useRef(null);
+
   const messagesMap = () => {
     return messages.map((message, key) => {
       if (message.room === id) {
         const messageDate = new Date();
         return (
           <div key={key}>
-            <div className="currentUserMsgs">
+            <div className={message.userId === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
               <p className="messageOther">{message.message}</p>
             </div>
-            <div className='currentUserMsgTime'>
+            <div className={message.userId === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
               <p>{messageDate.getHours()}:{messageDate.getMinutes()}</p>
             </div>
           </div>
@@ -37,8 +40,16 @@ const ChatMessages = ({ messages, id, chat, user }) => {
     return null;
   };
 
+  useEffect(() => {
+    if (messages.length > 0) {
+      chatContainerRef.current.scrollIntoView({ behavior: 'smooth', block: "end", inline: "nearest" });
+    } else {
+      chatContainerRef.current.scrollIntoView({ block: "end", inline: "nearest" });
+    }
+  }, [chatHistory, messagesMap]);
+
   return (
-    <div className="chatAreaContainer">
+    <div ref={chatContainerRef} className="chatAreaContainer">
       {chatHistory()}
       {messages && messagesMap()}
     </div>
