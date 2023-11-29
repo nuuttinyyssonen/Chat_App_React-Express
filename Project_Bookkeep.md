@@ -9,3 +9,4 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 26.11.2023 |       5.5       | Made new models for chat and messages. Also made it possible to access and create chats from client side. Couple cypress tests as well. |
 | 27.11.2023 |        8        | Configured Socket.io library on both client and server side to handle real-time communication. Made rooms possible as well. Added lot of styling |
 | 28.11.2023 |        8        | Refactored a lot of frontend. Made jest testing for chat rooms/messaging. Cypress tests for the same in frontend. Added Profile components to handle searched user as well as own profile view. Delete account possibility. |
+| 29.11.2023 |        4        | Added time stamps to all messages. Made autoscroll to chat when refreshing page or sending msg. Fixed some bugs as well.|

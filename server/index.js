@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const { MONGODB_URI, PORT } = require('./utils/config');
+const { MONGODB_URI, PORT, SECRET } = require('./utils/config');
 const cors = require('cors');
 const { errorHandler } = require('./utils/middleware');
 const { Server } = require('socket.io');
 const ChatMessage = require('./models/chatMessage');
 const Chat = require('./models/chat');
+const jwt = require('jsonwebtoken');
 
 const signupRouter = require('./controls/signup');
 const loginRouter = require('./controls/login');
@@ -80,6 +81,7 @@ io.on('connection', (socket) => {
   });  
 
   socket.on('disconnect', () => {
+    console.log("disconnected")
   });
 });
 module.exports = app;

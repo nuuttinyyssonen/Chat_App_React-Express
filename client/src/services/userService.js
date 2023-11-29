@@ -66,5 +66,6 @@ export default {
   getUser,
   getUserById,
   getAuthUser,
-  deleteUser
+  deleteUser,
+  getToken
 };

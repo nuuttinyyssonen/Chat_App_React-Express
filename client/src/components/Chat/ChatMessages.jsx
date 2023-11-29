@@ -6,13 +6,14 @@ const ChatMessages = ({ messages, id, chat, user }) => {
     return messages.map((message, key) => {
       if (message.room === id) {
         const messageDate = new Date();
+        const messageMinutes = messageDate.getMinutes().length < 10 ? "0" + messageDate.getMinutes() : messageDate.getMinutes()
         return (
           <div key={key}>
             <div className={message.userId === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
               <p className="messageOther">{message.message}</p>
             </div>
             <div className={message.userId === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
-              <p>{messageDate.getHours()}:{messageDate.getMinutes()}</p>
+              <p>{messageDate.getHours()}:{messageMinutes}</p>
             </div>
           </div>
         );
@@ -25,13 +26,14 @@ const ChatMessages = ({ messages, id, chat, user }) => {
     if (chat.chat && chat.chat.messages && user.data) {
       return chat.chat.messages.map((message, key) => {
         const messageDate = new Date(message.date);
+        const messageMinutes = messageDate.getMinutes() < 10 ? "0" + messageDate.getMinutes() : messageDate.getMinutes()
         return (
           <div key={key}>
             <div className={message.user === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
               <p className="messageCurrent">{message.message}</p>
             </div>
             <div className={message.user === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
-              <p>{messageDate.getHours()}:{messageDate.getMinutes()}</p>
+              <p>{messageDate.getHours()}:{messageMinutes}</p>
             </div>
           </div>
         );
