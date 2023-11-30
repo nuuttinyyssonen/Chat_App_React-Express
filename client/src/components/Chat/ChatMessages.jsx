@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-const ChatMessages = ({ messages, id, chat, user }) => {
+const ChatMessages = ({ messages, id, chat, user, typingText }) => {
   const chatContainerRef = useRef(null);
 
   const messagesMap = () => {

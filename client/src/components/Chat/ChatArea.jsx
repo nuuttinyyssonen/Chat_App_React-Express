@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
 import socket from '../../socketConfig';
-import { useParams } from 'react-router-dom';
 import useGetChat from '../../hooks/useGetChat';
-import useGetUserData from '../../hooks/useGetUserData';
 import ChatMessages from './ChatMessages';
-const ChatArea = () => {
+const ChatArea = ({ typingText, user, id }) => {
   const [messages, setMessages] = useState([]);
-  const id = useParams().id;
   const chat = useGetChat();
-  const user = useGetUserData();
 
   socket.emit('joinRoom', id);
   useEffect(() => {
@@ -25,6 +21,7 @@ const ChatArea = () => {
         user={user}
         id={id}
         chat={chat}
+        typingText={typingText}
       />
     </div>
   );
