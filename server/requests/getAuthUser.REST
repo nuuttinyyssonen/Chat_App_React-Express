@@ -1,2 +1,2 @@
 GET http://localhost:5000/user
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6I
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51dXR0aW55eXNzb25lbiIsImlkIjoiNjU2NWNhYTU0ZjQ5ZDY3OWIyNGQ1NGViIiwiaWF0IjoxNzAxMzMyMDM0fQ.uGEezfcPAu52sf9CDTyAx-bozr0WWOuAF_UOU8NCvp8
