@@ -53,12 +53,19 @@ const io = new Server(server, {
   },
 });
 
+const users = {};
 io.on('connection', (socket) => {
+
+  socket.on('login', (data) => {
+    console.log(data)
+    users[socket.id] = data;
+  })
 
   socket.on('joinRoom', (room) => {
     socket.join(room);
     console.log(`joined room: ${room}`);
     socket.emit('joinedRoom', room);
+    io.emit('online', users[socket.id])
   });
 
   socket.on('typing', (data)=>{

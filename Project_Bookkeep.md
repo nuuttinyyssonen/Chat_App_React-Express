@@ -10,3 +10,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 27.11.2023 |        8        | Configured Socket.io library on both client and server side to handle real-time communication. Made rooms possible as well. Added lot of styling |
 | 28.11.2023 |        8        | Refactored a lot of frontend. Made jest testing for chat rooms/messaging. Cypress tests for the same in frontend. Added Profile components to handle searched user as well as own profile view. Delete account possibility. |
 | 29.11.2023 |        4        | Added time stamps to all messages. Made autoscroll to chat when refreshing page or sending msg. Fixed some bugs as well.|
+| 30.11.2023 |        9        | Added some visuals and animations. Made dropdown menu, added latest message to list, live typing text, refactoring and started working on online status. |
+|   Total    |        61       |   

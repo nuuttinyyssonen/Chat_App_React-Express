@@ -6,7 +6,7 @@ const ChatMessages = ({ messages, id, chat, user, typingText }) => {
     return messages.map((message, key) => {
       if (message.room === id) {
         const messageDate = new Date();
-        const messageMinutes = messageDate.getMinutes().length < 10 ? "0" + messageDate.getMinutes() : messageDate.getMinutes()
+        const messageMinutes = messageDate.getMinutes() < 10 ? "0" + messageDate.getMinutes() : messageDate.getMinutes()
         return (
           <div key={key}>
             <div className={message.userId === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>

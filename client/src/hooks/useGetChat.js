@@ -12,7 +12,6 @@ const useGetChat = () => {
     }
     try {
       const data = await chatService.getChat(id);
-      console.log(data);
       setChat(data);
     } catch (error) {
       console.log(error);
