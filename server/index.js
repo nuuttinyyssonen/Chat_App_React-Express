@@ -61,6 +61,13 @@ io.on('connection', (socket) => {
     socket.emit('joinedRoom', room);
   });
 
+  socket.on('typing', (data)=>{
+    if(data.typing==true)
+       io.emit('display', data)
+    else
+       io.emit('display', data)
+  })
+
   socket.on('message', async (data) => {
     const { message, room, userId } = data;
     const chatRoom = await Chat.findById(room);

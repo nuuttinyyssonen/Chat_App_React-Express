@@ -8,17 +8,22 @@
 .friendsList {
     display: flex;
     flex-direction: row;
+    /* align-items: center; */
+    /* align-self: center; */
+
     gap: 10px;
     border-bottom: 1px solid black;
 }
 
 .profilePicInUserList {
-    width: 60px;
-    height: 60px;
+    align-self: center;
+    margin-bottom: 20px;
 }
 
 .name {
     font-weight: 400;
+    position: relative;
+    top: 10px;
 }
 
 .friendDetails {
