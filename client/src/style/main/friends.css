@@ -8,9 +8,9 @@
 .friendsList {
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
+    align-items: center;
+    /* justify-content: center; */
     /* align-self: center; */
-
     gap: 10px;
     border-bottom: 1px solid black;
 }
@@ -41,4 +41,16 @@
     position: relative;
     bottom: 10px;
     color:  gray;
+}
+
+.onlineStatus {
+    color: #00FF00;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.offlineStatus {
+    color: grey;
+    margin-bottom: 20px;
+    font-size: 30px;
 }

@@ -5,20 +5,14 @@ import { useState, useEffect } from 'react';
 import socket from '../../socketConfig';
 import { useParams } from 'react-router-dom';
 import useGetUserData from '../../hooks/useGetUserData';
+
 const Chat = () => {
   const [message, setMessage] = useState('');
   const [typing, setTyping] = useState(false);
   const [typingText, setTypingText] = useState('');
-  const [onlineUsers, setOnlineUsers] = useState([]);
 
   const user = useGetUserData();
   const id = useParams().id;
-
-  // useEffect(() => {
-  //   if (user.data) {
-  //     console.log(user.data._id)
-  //   }
-  // }, [user])
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -26,6 +20,7 @@ const Chat = () => {
     });
 
     if (user.data) {
+      console.log(user.data)
       socket.emit('login', user.data._id);
     }
 
@@ -63,7 +58,6 @@ const Chat = () => {
   useEffect(() => {
     socket.on('display', (data) => {
       if (data.typing === true) {
-        console.log(data.user.data.username)
         setTypingText(`${data.user.data.username} is typing...`);
       } else {
         setTypingText('');
@@ -77,11 +71,6 @@ const Chat = () => {
 
   return (
     <div className="chat-container">
-    {onlineUsers.length > 0 && onlineUsers.map((user, key) => (
-      <div key={key}>
-        <p>{user}</p>
-      </div>
-    ))}
       <ChatHeader />
       <ChatArea
         typingText={typingText}

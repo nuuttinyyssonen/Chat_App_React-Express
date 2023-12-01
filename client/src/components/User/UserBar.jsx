@@ -7,6 +7,7 @@ import useGetUsers from '../../hooks/useGetUsers';
 import { useSpring, animated } from 'react-spring';
 import useGetUserData from '../../hooks/useGetUserData';
 import { SlPencil, SlUser, SlPeople, SlClose } from "react-icons/sl";
+import socket from '../../socketConfig';
 
 const UserBar = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -22,6 +23,7 @@ const UserBar = () => {
   const handleLogout = () => {
     localStorage.clear();
     navigate('/');
+    socket.emit('logout', data.data._id)
   };
 
   const handleDropDown = () => {

@@ -53,19 +53,18 @@ const io = new Server(server, {
   },
 });
 
-const users = {};
+const users = new Set();
 io.on('connection', (socket) => {
 
   socket.on('login', (data) => {
-    console.log(data)
-    users[socket.id] = data;
+    users.add(data);
+    io.emit('online', Array.from(users));
   })
 
   socket.on('joinRoom', (room) => {
     socket.join(room);
     console.log(`joined room: ${room}`);
     socket.emit('joinedRoom', room);
-    io.emit('online', users[socket.id])
   });
 
   socket.on('typing', (data)=>{
@@ -88,6 +87,12 @@ io.on('connection', (socket) => {
     await chatRoom.save();
     console.log(`message ${message} to ${room}`);
     io.in(room).emit('receive_message', data);
+  })
+
+  socket.on('logout', (data) => {
+    console.log("logout", data);
+    users.delete(data)
+    io.emit('online', Array.from(users));
   })
 
   socket.on('error', (error) => {

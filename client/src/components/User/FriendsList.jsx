@@ -2,18 +2,25 @@ import profilePic from '../../style/images/Profile_picture.png';
 import { useNavigate } from 'react-router-dom';
 import socket from '../../socketConfig';
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { GoDotFill } from "react-icons/go";
+import { initalizeUsers } from '../../reducers/onlineUserReducer';
 
 const FriendsList = ({ friends, chats }) => {
   const navigate = useNavigate();
-  const [onlineUsers, setOnlineUsers] = useState([]);
+  const dispatch = useDispatch();
   const navigateToChat = (id, firstName, lastName) => {
     navigate(`/chat/${id}`, { state: { firstName, lastName } });
   };
 
+  const onlineUsers = useSelector(({ onlineUsers }) => {
+    return onlineUsers;
+  })
+
   useEffect(() => {
     socket.on('online', (data) => {
-      console.log(data)
-      setOnlineUsers(prev => ([...prev, data]));
+      console.log("data from server", data)
+      dispatch(initalizeUsers(data));
     });
   }, [socket]);
 
@@ -22,10 +29,9 @@ const FriendsList = ({ friends, chats }) => {
       const fullMessage = chats[key].messages.length > 0 ? chats[key].messages[chats[key].messages.length - 1].message : ""
       const message = fullMessage.length > 30 ? fullMessage.substring(0, 30) + "..." : fullMessage;
       const isOnline = onlineUsers.includes(friend._id)
-      console.log(onlineUsers)
       return (
         <div id='friend' className='friendsList' key={key} onClick={() => navigateToChat(chats[key]._id, friend.firstName, friend.lastName)}>
-        {isOnline && <p>Dot</p>}
+        <GoDotFill className={isOnline ? 'onlineStatus' : 'offlineStatus'}/>
           <img className="profilePicInUserList" src={profilePic} style={{ width: '60px' }} />
           <div className='friendDetails'>
             <div className='friendName'>
