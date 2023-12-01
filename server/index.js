@@ -68,10 +68,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('typing', (data)=>{
-    if(data.typing==true)
-       io.emit('display', data)
+    const { user, room, typing } = data;
+    if(typing == true)
+       io.in(room).emit('display', data)
     else
-       io.emit('display', data)
+       io.in(room).emit('display', data)
   })
 
   socket.on('message', async (data) => {

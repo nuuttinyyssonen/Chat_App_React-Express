@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import socket from '../../socketConfig';
 import { useParams } from 'react-router-dom';
 import useGetUserData from '../../hooks/useGetUserData';
+import useGetChat from '../../hooks/useGetChat';
 
 const Chat = () => {
   const [message, setMessage] = useState('');
@@ -13,6 +14,11 @@ const Chat = () => {
 
   const user = useGetUserData();
   const id = useParams().id;
+  const chat = useGetChat();
+
+  // useEffect(() => {
+  //   console.log(chat.chat._id)
+  // }, [chat])
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -39,13 +45,13 @@ const Chat = () => {
   let timeout;
   const typingTimeout = () => {
     setTyping(false);
-    socket.emit('typing', { user: user, typing: false });
+    socket.emit('typing', { user: user, typing: false, room: chat.chat._id });
   }
 
   const handleKeyDown = (e) => {
     if (e.which !== 13) {
       setTyping(true);
-      socket.emit('typing', { user: user, typing: true });
+      socket.emit('typing', { user: user, typing: true, room: chat.chat._id });
       clearTimeout(timeout)
       timeout = setTimeout(typingTimeout, 3000);
     } else {
