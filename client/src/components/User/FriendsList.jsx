@@ -9,8 +9,8 @@ import { initalizeUsers } from '../../reducers/onlineUserReducer';
 const FriendsList = ({ friends, chats }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigateToChat = (id, firstName, lastName) => {
-    navigate(`/chat/${id}`, { state: { firstName, lastName } });
+  const navigateToChat = (id, firstName, lastName, friendId) => {
+    navigate(`/chat/${id}`, { state: { firstName, lastName, friendId } });
   };
 
   const onlineUsers = useSelector(({ onlineUsers }) => {
@@ -19,7 +19,6 @@ const FriendsList = ({ friends, chats }) => {
 
   useEffect(() => {
     socket.on('online', (data) => {
-      console.log("data from server", data)
       dispatch(initalizeUsers(data));
     });
   }, [socket]);
@@ -30,7 +29,7 @@ const FriendsList = ({ friends, chats }) => {
       const message = fullMessage.length > 30 ? fullMessage.substring(0, 30) + "..." : fullMessage;
       const isOnline = onlineUsers.includes(friend._id)
       return (
-        <div id='friend' className='friendsList' key={key} onClick={() => navigateToChat(chats[key]._id, friend.firstName, friend.lastName)}>
+        <div id='friend' className='friendsList' key={key} onClick={() => navigateToChat(chats[key]._id, friend.firstName, friend.lastName, friend._id)}>
         <GoDotFill className={isOnline ? 'onlineStatus' : 'offlineStatus'}/>
           <img className="profilePicInUserList" src={profilePic} style={{ width: '60px' }} />
           <div className='friendDetails'>

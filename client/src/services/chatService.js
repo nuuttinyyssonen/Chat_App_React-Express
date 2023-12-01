@@ -7,6 +7,12 @@ const getChat = async (id) => {
   return response.data;
 };
 
+const deleteMessage = async (chat, message) => {
+  const response = await axios.delete(`${baseUrl}/chat/${chat}/message/${message}`);
+  return response.data;
+}
+
 export default {
-  getChat
+  getChat,
+  deleteMessage
 };

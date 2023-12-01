@@ -16,17 +16,12 @@ const Chat = () => {
   const id = useParams().id;
   const chat = useGetChat();
 
-  // useEffect(() => {
-  //   console.log(chat.chat._id)
-  // }, [chat])
-
   useEffect(() => {
     socket.on('connect', () => {
       console.log('connected');
     });
 
     if (user.data) {
-      console.log(user.data)
       socket.emit('login', user.data._id);
     }
 
@@ -77,7 +72,9 @@ const Chat = () => {
 
   return (
     <div className="chat-container">
-      <ChatHeader />
+      <ChatHeader
+        user={user}
+      />
       <ChatArea
         typingText={typingText}
         id={id}

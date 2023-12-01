@@ -18,10 +18,17 @@ const useGetChat = () => {
     }
   };
 
+  const addMessage = (newMessage) => {
+    setChat((prevChat) => ({
+      ...prevChat,
+      messages: [...prevChat.messages, newMessage]
+    }));
+  };
+
   useEffect(() => {
     queryChat();
   }, [id]);
-  return { chat };
+  return { chat, addMessage, setChat };
 };
 
 export default useGetChat;

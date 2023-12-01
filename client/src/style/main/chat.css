@@ -142,3 +142,26 @@
     left: 10px;
     top: 10px;
 }
+
+.onlineStatusHeader {
+    color: #00FF00;
+    font-size: 30px;
+}
+
+.offlineStatusHeader {
+    color: grey;
+    font-size: 30px;
+}
+
+.deleteMessage {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .currentUserMsgs:hover .deleteMessage {
+    opacity: 1;
+    max-height: 100px;
+  }

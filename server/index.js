@@ -87,11 +87,10 @@ io.on('connection', (socket) => {
     chatRoom.messages.push(msg._id);
     await chatRoom.save();
     console.log(`message ${message} to ${room}`);
-    io.in(room).emit('receive_message', data);
+    io.in(room).emit('receive_message', msg);
   })
 
   socket.on('logout', (data) => {
-    console.log("logout", data);
     users.delete(data)
     io.emit('online', Array.from(users));
   })
