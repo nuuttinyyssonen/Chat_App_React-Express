@@ -25,6 +25,7 @@ describe('Chat api', () => {
       const response = await api.post('/login').send(user);
       authHeader = `bearer ${response.body.token}`;
     });
+
     describe('Chat', () => {
       test('room can be created', async () => {
         const user = await User.findOne({ username: 'test2' });
@@ -36,6 +37,20 @@ describe('Chat api', () => {
         chatId = response.body.chats[0];
         expect(response.body.chats).toHaveLength(user.chats.length + 1);
       });
+
+      test('user can appear online', async () => {
+        const user = await User.findOne({ username: 'test1' })
+        const loginPromise = new Promise((resolve) => {
+          socket.on('online', (data) => {
+            resolve(data);
+          });
+        });
+
+        socket.emit('login', user._id);
+        const onlineUserArray = await loginPromise;
+        expect(onlineUserArray).toHaveLength(1);
+      });
+
       test('room can be joined and message sent', async () => {
         const user = await User.findOne({ username: 'test1' });
         const joinRoomPromise = new Promise((resolve) => {
