@@ -20,10 +20,10 @@ const UserBar = () => {
   const [newChat, setNewChat] = useState(false);
   const [newGroupChat, setNewGroupChat] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogout = (id) => {
     localStorage.clear();
     navigate('/');
-    socket.emit('logout', data.data._id)
+    socket.emit('logout', id)
   };
 
   const handleDropDown = () => {

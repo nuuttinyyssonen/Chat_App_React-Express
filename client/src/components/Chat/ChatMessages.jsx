@@ -11,7 +11,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
         return (
           <div key={key}>
             <div className={message.user === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
-              {message.user === user.data._id && <SlTrash className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, message._id)} />}
+              {message.user === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, message._id)} />}
               <p className="messageCurrent">{message.message}</p>
             </div>
             <div className={message.user === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>

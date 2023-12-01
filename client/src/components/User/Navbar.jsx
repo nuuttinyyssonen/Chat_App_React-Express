@@ -13,7 +13,7 @@ const Navbar = ({ handleLogout, search, setSearch, user }) => {
           <p>...</p>
         </div>
         <div className="menu">
-          <SlLogout id='logout' onClick={handleLogout} className="icon"/>
+          {user.data && <SlLogout id='logout' onClick={() => handleLogout(user.data._id)} className="icon"/>}
           <SlSettings onClick={() => navigate(`/profile/${user.data.username}`)} className="icon"/>
         </div>
       </div>
