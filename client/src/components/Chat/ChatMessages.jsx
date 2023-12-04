@@ -7,14 +7,15 @@ const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
     if (chat.chat && chat.chat.messages && user.data) {
       return chat.chat.messages.map((message, key) => {
         const messageDate = new Date(message.date);
-        const messageMinutes = messageDate.getMinutes() < 10 ? "0" + messageDate.getMinutes() : messageDate.getMinutes()
+        const messageMinutes = messageDate.getMinutes() < 10 ? "0" + messageDate.getMinutes() : messageDate.getMinutes();
         return (
           <div key={key}>
-            <div className={message.user === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
-              {message.user === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, message._id)} />}
+            <div className={message.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
+              {chat.chat.users.length > 2 && message.user._id !== user.data._id && <p>{message.user.username}</p>}
+              {message.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, message._id)} />}
               <p className="messageCurrent">{message.message}</p>
             </div>
-            <div className={message.user === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
+            <div className={message.user._id === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
               <p>{messageDate.getHours()}:{messageMinutes}</p>
             </div>
           </div>

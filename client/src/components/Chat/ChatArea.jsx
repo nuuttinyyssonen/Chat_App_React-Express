@@ -18,9 +18,7 @@ const ChatArea = ({ typingText, user, id }) => {
     if (window.confirm('do you really want to delete this message')) {
       try {
         const data = await chatService.deleteMessage(chatId, messageId);
-        console.log(data)
         chat.setChat(data);
-        console.log(chat)
       } catch (error) {
         console.log(error);
       }

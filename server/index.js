@@ -48,7 +48,7 @@ const server = app.listen(PORT, () => {
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:3790',
     methods: ['GET', 'POST'],
   },
 });
@@ -86,8 +86,9 @@ io.on('connection', (socket) => {
     const msg = await chatMessage.save();
     chatRoom.messages.push(msg._id);
     await chatRoom.save();
+    const queriedMessage = await ChatMessage.findById(msg._id).populate('user');
     console.log(`message ${message} to ${room}`);
-    io.in(room).emit('receive_message', msg);
+    io.in(room).emit('receive_message', queriedMessage);
   })
 
   socket.on('logout', (data) => {

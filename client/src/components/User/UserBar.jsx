@@ -74,7 +74,7 @@ const UserBar = () => {
         : null}
       <animated.div style={animationProps}>
       {data.data && !search && !newChat && !newGroupChat
-        ? <FriendsList friends={data.data.friends} chats={data.data.chats} data={data}/>
+        ? <FriendsList chats={data.data.chats} data={data}/>
         : null}
       </animated.div>
         <div className='newChat'>

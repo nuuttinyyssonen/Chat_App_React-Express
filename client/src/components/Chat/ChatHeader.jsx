@@ -1,20 +1,16 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Profile from '../../style/images/Profile_picture.png';
-import { useSelector } from 'react-redux';
-import { GoDotFill } from "react-icons/go";
-import { initalizeUsers } from '../../reducers/onlineUserReducer';
+import useGetChat from '../../hooks/useGetChat';
 
-const ChatHeader = () => {
-  const location = useLocation();
-  const onlineUsers = useSelector(({ onlineUsers }) => {
-    return onlineUsers;
-  })
-  const isOnline = location.state && onlineUsers.includes(location.state.friendId);
+const ChatHeader = ({ user }) => {
+  const id = useParams().id;
+  const chat = useGetChat(id);
+  const person = chat.chat && user.data && chat.chat.users.find(person => person.username !== user.data.username)
+  const isGrourpChat = chat.chat && chat.chat.users.length > 2;
   return (
     <div className="ChatHeader">
-      <GoDotFill className={isOnline ? 'onlineStatusHeader' : 'offlineStatusHeader'}/>
       <img src={Profile} className='ProfilepicHeader'/>
-      {location.state && <p id='headerFirstName' className='headerName'>{location.state.firstName} {location.state.lastName}</p>}
+      {!isGrourpChat && chat.chat && user.data && <p id='headerFirstName' className='headerName'>{person.username}</p>}
     </div>
   );
 };

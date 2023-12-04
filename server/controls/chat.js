@@ -5,7 +5,15 @@ const User = require('../models/user');
 
 chatRouter.get('/:id', async (req, res, next) => {
     try {
-        const chat = await Chat.findById(req.params.id).populate('messages');
+        const chat = await Chat.findById(req.params.id)
+            .populate({
+                path: 'messages',
+                populate: {
+                    path: 'user',
+                    model: 'User'
+                }
+            })
+            .populate('users');
         if(!chat) {
             return res.status(404).json({ error: "chat was not found!" });
         }
@@ -38,7 +46,15 @@ chatRouter.delete('/chat/:chat/message/:message', async (req, res, next) => {
         const chat = await Chat.findById(req.params.chat);
         chat.messages = chat.messages.filter(message => message != req.params.message);
         await chat.save();
-        const newChat = await Chat.findById(req.params.chat).populate('messages');
+        const newChat = await Chat.findById(req.params.chat)
+            .populate({
+                path: 'messages',
+                populate: {
+                    path: 'user',
+                    model: 'User'
+                }
+            })
+            .populate('users');
         await ChatMessage.findByIdAndDelete(req.params.message);
         res.status(200).json(newChat);
     } catch (error) {
