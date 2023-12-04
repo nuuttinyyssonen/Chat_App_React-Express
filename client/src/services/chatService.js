@@ -13,7 +13,8 @@ const createGroupChat = async (users) => {
 }
 
 const deleteMessage = async (chat, message) => {
-  const response = await axios.delete(`${baseUrl}/chat/${chat}/message/${message}`);
+  const response = await axios.delete(`${baseUrl}/${chat}/message/${message}`);
+  console.log(response)
   return response.data;
 };
 

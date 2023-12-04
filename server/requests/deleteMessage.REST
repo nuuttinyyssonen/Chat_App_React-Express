@@ -1,0 +1,1 @@
+DELETE http://localhost:5000/chat/6569c9cd84f7dc3e38ab92eb/message/6569c9cf84f7dc3e38ab9300

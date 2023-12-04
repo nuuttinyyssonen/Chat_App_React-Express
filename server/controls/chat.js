@@ -41,7 +41,9 @@ chatRouter.post('/groupChat', async (req, res, next) => {
     }
 });
 
-chatRouter.delete('/chat/:chat/message/:message', async (req, res, next) => {
+chatRouter.delete('/:chat/message/:message', async (req, res, next) => {
+    console.log(req.params.chat)
+    console.log(req.params.message)
     try {
         const chat = await Chat.findById(req.params.chat);
         chat.messages = chat.messages.filter(message => message != req.params.message);

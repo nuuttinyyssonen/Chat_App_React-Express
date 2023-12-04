@@ -9,7 +9,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
         const messageDate = new Date(message.date);
         const messageMinutes = messageDate.getMinutes() < 10 ? "0" + messageDate.getMinutes() : messageDate.getMinutes();
         return (
-          <div key={key}>
+          message.user && <div key={key}>
             <div className={message.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
               {chat.chat.users.length > 2 && message.user._id !== user.data._id && <p>{message.user.username}</p>}
               {message.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, message._id)} />}

@@ -10,7 +10,7 @@ const ChatHeader = ({ user }) => {
   return (
     <div className="ChatHeader">
       <img src={Profile} className='ProfilepicHeader'/>
-      {!isGrourpChat && chat.chat && user.data && <p id='headerFirstName' className='headerName'>{person.username}</p>}
+      <p id='headerFirstName' className='headerName'>{person?.username}</p>
     </div>
   );
 };
