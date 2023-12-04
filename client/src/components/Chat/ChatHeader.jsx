@@ -11,9 +11,9 @@ const ChatHeader = () => {
   })
   const isOnline = location.state && onlineUsers.includes(location.state.friendId);
   return (
-    location.state && <div className="ChatHeader">
+    <div className="ChatHeader">
       <GoDotFill className={isOnline ? 'onlineStatusHeader' : 'offlineStatusHeader'}/>
-      {location.state && <img src={Profile} className='ProfilepicHeader'/>}
+      <img src={Profile} className='ProfilepicHeader'/>
       {location.state && <p id='headerFirstName' className='headerName'>{location.state.firstName} {location.state.lastName}</p>}
     </div>
   );

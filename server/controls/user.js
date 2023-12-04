@@ -21,14 +21,24 @@ userRouter.get('/id/:id', async(req, res) => {
 
 userRouter.get('/', tokenExtractor, async(req, res) => {
     const user = await User.findById(req.decodedToken.id)
-            .populate({
+        .populate([
+            {
                 path: 'chats',
-                populate: {
-                    path: 'messages',
-                    model: 'ChatMessage'
-                }
-            })
-            .populate('friends');
+                populate: [
+                    {
+                        path: 'messages',
+                        model: 'ChatMessage'
+                    },
+                    {
+                        path: 'users',
+                        model: 'User'
+                    }
+                ]
+            },
+            {
+                path: 'friends'
+            }
+        ]);
     if(!user) {
         res.status(404).json({ error: "User was not found!" })
     }

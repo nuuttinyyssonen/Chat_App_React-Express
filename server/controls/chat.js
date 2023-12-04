@@ -1,6 +1,7 @@
 const chatRouter = require('express').Router();
 const Chat = require('../models/chat');
 const ChatMessage = require('../models/chatMessage');
+const User = require('../models/user');
 
 chatRouter.get('/:id', async (req, res, next) => {
     try {
@@ -12,7 +13,25 @@ chatRouter.get('/:id', async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-})
+});
+
+chatRouter.post('/groupChat', async (req, res, next) => {
+    const usernames = req.body;
+    try {
+        const users = await User.find({ username: { $in: usernames } });
+        const chat = new Chat({
+            users: users.map(user => user._id)
+        });
+        const groupChat = await chat.save();
+        for (let i = 0; i < users.length; i++ ){
+            users[i].chats.push(groupChat._id);
+            await users[i].save();
+        }
+        res.status(200).json(chat);
+    } catch (error) {
+        next(error);
+    }
+});
 
 chatRouter.delete('/chat/:chat/message/:message', async (req, res, next) => {
     try {
