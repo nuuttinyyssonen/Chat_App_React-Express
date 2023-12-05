@@ -2,7 +2,7 @@ import { SlLogout, SlSettings } from 'react-icons/sl';
 import profile from '../../style/images/Profile_picture.png';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ handleLogout, search, setSearch, user }) => {
+const Navbar = ({ handleLogout, user }) => {
   const navigate = useNavigate();
   return (
     <div className="navbar">

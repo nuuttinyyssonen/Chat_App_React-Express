@@ -33,8 +33,6 @@ const ChatSideBarContainer = ({
         {displayNavbar && <Navbar
           user={data}
           handleLogout={handleLogout}
-          search={search}
-          setSearch={setSearch}
         />}
       </div>
 

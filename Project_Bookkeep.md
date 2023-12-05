@@ -13,4 +13,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 30.11.2023 |        9        | Added some visuals and animations. Made dropdown menu, added latest message to list, live typing text, refactoring and started working on online status. |
 | 1.12.2023  |        8        | Configured redux store to handle new feature online status. Added reducers to it and also made online status possible with socketio. A lot of debugging and refactoring. More Jest tests to backend. |
 | 4.12.20203 |        8        | Made group chat feature. Had to refactor A LOT of code to make it work as expected. Did some debugging as well. Made some backend tests to it with Jest.|
-|   Total    |        77       |   
+| 5.12.2023  |       7.5       | Did a lot of refactoring again and debugging to make everything better. Added also some animations to make the app smooth. Jest testing to bakend. |
+|   Total    |      84.5       |   
