@@ -12,7 +12,11 @@ const chatSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }
-    ]
+    ],
+    chatName: {
+        type: String,
+        default: 'New Group Chat'
+    }
 });
 
 module.exports = mongoose.model('Chat', chatSchema);

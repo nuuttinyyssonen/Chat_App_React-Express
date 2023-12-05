@@ -1,4 +1,4 @@
-const CreateGroupChatMap = ({ username, setUsername, users, addToGroup, removeFromGroup, createGroup, group, profilePic }) => {
+const CreateGroupChatMap = ({ username, setUsername, users, addToGroup, removeFromGroup, createGroup, group, profilePic, errorMessage }) => {
     return (
         <div>
         <input placeholder="search for users..." value={username} onChange={e => setUsername(e.target.value)}/>
@@ -16,6 +16,7 @@ const CreateGroupChatMap = ({ username, setUsername, users, addToGroup, removeFr
                 </div>
             ))}
             <button onClick={() => createGroup()}>Create</button>
+            <p className="errorMsg">{errorMessage}</p>
         </div>
     );
 };

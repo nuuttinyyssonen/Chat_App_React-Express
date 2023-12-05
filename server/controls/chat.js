@@ -2,6 +2,7 @@ const chatRouter = require('express').Router();
 const Chat = require('../models/chat');
 const ChatMessage = require('../models/chatMessage');
 const User = require('../models/user');
+const { tokenExtractor } = require('../utils/middleware');
 
 chatRouter.get('/:id', async (req, res, next) => {
     try {
@@ -23,14 +24,21 @@ chatRouter.get('/:id', async (req, res, next) => {
     }
 });
 
-chatRouter.post('/groupChat', async (req, res, next) => {
+chatRouter.post('/groupChat', tokenExtractor, async (req, res, next) => {
     const usernames = req.body;
+    const user = await User.findById(req.decodedToken.id);
     try {
         const users = await User.find({ username: { $in: usernames } });
         const chat = new Chat({
             users: users.map(user => user._id)
         });
+        chat.users.push(user);
+        if(chat.users.length <= 2) {
+            return res.status(400).json({ "error": "Group chats must have more than 2 persons" });
+        }
         const groupChat = await chat.save();
+        user.chats.push(groupChat._id);
+        await user.save();
         for (let i = 0; i < users.length; i++ ){
             users[i].chats.push(groupChat._id);
             await users[i].save();
@@ -41,9 +49,28 @@ chatRouter.post('/groupChat', async (req, res, next) => {
     }
 });
 
+chatRouter.delete('/:id', async (req, res, next) => {
+    try {
+        const chat = await Chat.findByIdAndDelete(req.params.id);
+        res.status(200).json(chat);
+    } catch (error) {
+        next(error);
+    }
+});
+
+chatRouter.put('/:id', async (req, res, next) => {
+    const { groupChatName } = req.body;
+    try {
+        const chat = await Chat.findById(req.params.id);
+        chat.chatName = groupChatName;
+        await chat.save();
+        res.status(200).json(chat);
+    } catch (error) {
+        next(error);
+    }
+});
+
 chatRouter.delete('/:chat/message/:message', async (req, res, next) => {
-    console.log(req.params.chat)
-    console.log(req.params.message)
     try {
         const chat = await Chat.findById(req.params.chat);
         chat.messages = chat.messages.filter(message => message != req.params.message);

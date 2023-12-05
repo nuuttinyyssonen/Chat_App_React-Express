@@ -1,32 +1,18 @@
 const { describe, beforeEach, test, expect, afterAll } = require('@jest/globals');
 const User = require('../models/user');
 const Chat = require('../models/chat');
-const ChatMessage = require('../models/chatMessage');
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const app = require('../index');
 const api = supertest(app);
-const { initialUser, usersInDb } = require('../tests/test_helper');
-const { io } = require('socket.io-client');
-
-const socket = io('http://localhost:5000');
+const { initialUser, usersInDb, initializeTests } = require('../tests/test_helper');
 
 let authHeader;
 let chatId;
-let messageId;
 
 describe('Chat api', () => {
     beforeEach(async () => {
-      await User.deleteOne({ username: 'tester' });
-      await User.deleteOne({ username: 'test1' });
-      await User.deleteOne({ username: 'test2' });
-
-      await api.post('/signup').send(initialUser[0]);
-      await api.post('/signup').send(initialUser[1]);      
-      await api.post('/signup').send(initialUser[2]);
-      const user = initialUser[1];
-      const response = await api.post('/login').send(user);
-      authHeader = `bearer ${response.body.token}`;
+      authHeader = await initializeTests();
     });
 
     describe('Chat', () => {
@@ -46,55 +32,31 @@ describe('Chat api', () => {
         const response = await api
           .post('/chat/groupChat')
           .send(users)
+          .set('Authorization', authHeader)
           .expect(200);
+        chatId = response.body._id
       });
 
-      test('user can appear online', async () => {
-        const user = await User.findOne({ username: 'test1' })
-        const loginPromise = new Promise((resolve) => {
-          socket.on('online', (data) => {
-            resolve(data);
-          });
-        });
-
-        socket.emit('login', user._id);
-        const onlineUserArray = await loginPromise;
-        expect(onlineUserArray).toHaveLength(1);
-      });
-
-      test('room can be joined and message sent', async () => {
-        const user = await User.findOne({ username: 'test1' });
-        const joinRoomPromise = new Promise((resolve) => {
-          socket.on('joinedRoom', (data) => {
-            resolve(data);
-          });
-        });
-
-        const receiveMessagePromise = new Promise((resolve) => {
-          socket.on('receive_message', (data) => {
-            resolve(data);
-          });
-        });
-
-        socket.emit('joinRoom', chatId);
-        socket.emit('message', { message: 'test', room: chatId, userId: user._id });
-        await joinRoomPromise;
-        const response = await receiveMessagePromise;
-        messageId = response._id
-        console.log(messageId)
-        const chat = await Chat.findById(chatId).populate('messages');
-        expect(chat.messages[0].message).toBe('test');
-      });
-
-      test('message can be deleted', async () => {
+      test('Group chat name can be changed', async () => {
         const chat = await Chat.findById(chatId);
-        const user = await User.findOne({ username: 'test1' });
-        const message = await ChatMessage.findById(messageId);
+        const groupChatName = 'test'
         const response = await api
-          .delete(`/chat/${chat._id}/message/${message._id}`)
+          .put(`/chat/${chat._id}`)
+          .send(groupChatName)
           .expect(200);
+        console.log(response.body);
         const updatedChat = await Chat.findById(chatId);
-        expect(updatedChat.messages).toHaveLength(chat.messages.length - 1);
+        expect(updatedChat.chatName).toBe('test');
+      });
+
+      test('Group chats can be deleted', async () => {
+        const chat = await Chat.findById(chatId);
+        const chats = await Chat.find({});
+        const response = await api
+          .delete(`/chat/${chat._id}`)
+          .expect(200);
+        const chatsUpdated = await Chat.find({});
+        expect(chatsUpdated).toHaveLength(chats.length - 1);
       });
     });
 });

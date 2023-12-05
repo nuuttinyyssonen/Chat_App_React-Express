@@ -7,6 +7,7 @@ const CreateGroupChat = () => {
     const [group, setGroup] = useState([]);
     const [username, setUsername] = useState("");
     const users = useGetUsers(username);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const addToGroup = (user) => {
         if (group.includes(user)) {
@@ -20,14 +21,15 @@ const CreateGroupChat = () => {
     };
 
     const createGroup = async () => {
-        if (group.length <= 2) {
-            return;
-        }
         try {
             const data = await chatService.createGroupChat(group);
-            console.log(data);
         } catch (error) {
-            console.log(error);
+            if (error.response?.data?.error) {
+                setErrorMessage(error.response.data.error);
+                setTimeout(() => {
+                    setErrorMessage("");
+                }, [5000])
+            }
         }
     }
 
@@ -41,6 +43,7 @@ const CreateGroupChat = () => {
             createGroup={createGroup}
             group={group}
             profilePic={profilePic}
+            errorMessage={errorMessage}
         />
     );
 };
