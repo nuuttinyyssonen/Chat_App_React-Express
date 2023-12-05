@@ -6,7 +6,7 @@ const useSearchedUser = (username) => {
 
   const getSearchedUser = async () => {
     if (!username) {
-      return
+      return;
     }
     try {
       const response = await userService.getUser(username);

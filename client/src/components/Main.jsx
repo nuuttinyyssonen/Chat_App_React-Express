@@ -1,4 +1,4 @@
-import UserBar from './User/UserBar';
+import ChatSideBar from './ChatSideBar/ChatSideBar';
 import '../style/main/main.css';
 import '../style/main/chat.css';
 import '../style/main/friends.css';
@@ -18,7 +18,7 @@ const Main = () => {
   }, [token]);
   return (
     <div className="Main-container">
-      <UserBar />
+      <ChatSideBar />
       <Chat />
     </div>
   );

@@ -1,5 +1,5 @@
-import { useRef, useEffect } from "react";
-import { SlTrash } from "react-icons/sl";
+import { useRef, useEffect } from 'react';
+import { SlTrash } from 'react-icons/sl';
 const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
   const chatContainerRef = useRef(null);
 
@@ -7,7 +7,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
     if (chat.chat && chat.chat.messages && user.data) {
       return chat.chat.messages.map((message, key) => {
         const messageDate = new Date(message.date);
-        const messageMinutes = messageDate.getMinutes() < 10 ? "0" + messageDate.getMinutes() : messageDate.getMinutes();
+        const messageMinutes = messageDate.getMinutes() < 10 ? '0' + messageDate.getMinutes() : messageDate.getMinutes();
         if (message.chat === chat.chat._id) {
           return (
             message.user && <div key={key}>
@@ -30,7 +30,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
   };
 
   useEffect(() => {
-    chatContainerRef.current.scrollIntoView({ behavior: 'smooth', block: "end", inline: "nearest" });
+    chatContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
   }, [chatHistory]);
 
   return (

@@ -23,11 +23,11 @@ const createGroupChat = async (users) => {
   const config = getConfig();
   const response = await axios.post(`${baseUrl}/groupChat`, users, config);
   return response.data;
-}
+};
 
 const deleteMessage = async (chat, message) => {
   const response = await axios.delete(`${baseUrl}/${chat}/message/${message}`);
-  console.log(response)
+  console.log(response);
   return response.data;
 };
 

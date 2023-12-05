@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import socket from '../../socketConfig';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { GoDotFill } from "react-icons/go";
+import { GoDotFill } from 'react-icons/go';
 import { initalizeUsers } from '../../reducers/onlineUserReducer';
 
 const FriendsList = ({ chats, data }) => {
@@ -15,7 +15,7 @@ const FriendsList = ({ chats, data }) => {
 
   const onlineUsers = useSelector(({ onlineUsers }) => {
     return onlineUsers;
-  })
+  });
 
   useEffect(() => {
     socket.on('online', (data) => {
@@ -25,8 +25,8 @@ const FriendsList = ({ chats, data }) => {
 
   const listMap = () => {
     return data.data.chats.map((chat, key) => {
-      const fullMessage = chats[key].messages.length > 0 ? chats[key].messages[chats[key].messages.length - 1].message : ""
-      const message = fullMessage.length > 30 ? fullMessage.substring(0, 30) + "..." : fullMessage;
+      const fullMessage = chats[key].messages.length > 0 ? chats[key].messages[chats[key].messages.length - 1].message : '';
+      const message = fullMessage.length > 30 ? fullMessage.substring(0, 30) + '...' : fullMessage;
       const isOnline = chat.users.map(user => onlineUsers.includes(user._id));
       const isPrivateChat = chat.users.length === 2;
       const userIndex = isPrivateChat ? (chat.users[0].username === data.data.username ? 1 : 0) : -1;
@@ -35,25 +35,25 @@ const FriendsList = ({ chats, data }) => {
           <GoDotFill className={isOnline[userIndex] ? 'onlineStatus' : 'offlineStatus'}/>
           <img className="profilePicInUserList" src={profilePic} style={{ width: '60px' }} />
           <div className='friendDetails'>
-          {userIndex !== -1 && (
-            <div className='friendName'>
-              <p>{chat.users[userIndex].username}</p>
-            </div>
-          )}
-          {userIndex === -1 && (
-            <div>
-              {chat.users.map((user, index) => (
-                <div key={index}>
-                  <p>{user.username}</p>
-                </div>
-              ))}
-            </div>
-          )}
-          <p className='latestMessage'>{message}</p>
+            {userIndex !== -1 && (
+              <div className='friendName'>
+                <p>{chat.users[userIndex].username}</p>
+              </div>
+            )}
+            {userIndex === -1 && (
+              <div>
+                {chat.users.map((user, index) => (
+                  <div key={index}>
+                    <p>{user.username}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+            <p className='latestMessage'>{message}</p>
           </div>
         </div>
       );
-    })
+    });
   };
   return (
     data.data && (

@@ -5,15 +5,15 @@ import { useState, useRef, useEffect } from 'react';
 import '../../style/main/animations.css';
 
 const ChatHeader = ({ user }) => {
-  const mountedStyle = { animation: "inAnimation 300ms ease-in" };
+  const mountedStyle = { animation: 'inAnimation 300ms ease-in' };
   const unmountedStyle = {
-    animation: "outAnimation 300ms ease-out",
-    animationFillMode: "forwards"
+    animation: 'outAnimation 300ms ease-out',
+    animationFillMode: 'forwards'
   };
   const [isEditMode, setIsEditMode] = useState(false);
   const id = useParams().id;
   const chat = useGetChat(id);
-  const person = chat.chat?.users.find(person => person.username !== user.data?.username)
+  const person = chat.chat?.users.find(person => person.username !== user.data?.username);
   const isGrourpChat = chat.chat?.users.length > 2;
 
   const handleEditGroupName = () => {
@@ -22,7 +22,7 @@ const ChatHeader = ({ user }) => {
 
   const undoEditGroupName = () => {
     setIsEditMode(false);
-  }
+  };
 
   return (
     <div className="ChatHeader">

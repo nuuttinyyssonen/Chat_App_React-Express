@@ -57,7 +57,7 @@ const deleteUser = async () => {
   const config = getConfig();
   const response = await axios.delete(`${baseUrl}/user`, config);
   return response.data;
-}
+};
 
 export default {
   createUser,

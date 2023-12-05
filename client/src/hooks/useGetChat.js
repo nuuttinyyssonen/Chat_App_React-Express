@@ -8,7 +8,7 @@ const useGetChat = () => {
 
   const queryChat = async () => {
     if (!id) {
-      return
+      return;
     }
     try {
       const data = await chatService.getChat(id);

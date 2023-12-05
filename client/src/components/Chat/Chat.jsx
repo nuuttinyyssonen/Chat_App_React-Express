@@ -40,14 +40,14 @@ const Chat = () => {
   let timeout;
   const typingTimeout = () => {
     setTyping(false);
-    socket.emit('typing', { user: user, typing: false, room: chat.chat._id });
-  }
+    socket.emit('typing', { user, typing: false, room: chat.chat._id });
+  };
 
   const handleKeyDown = (e) => {
     if (e.which !== 13) {
       setTyping(true);
-      socket.emit('typing', { user: user, typing: true, room: chat.chat._id });
-      clearTimeout(timeout)
+      socket.emit('typing', { user, typing: true, room: chat.chat._id });
+      clearTimeout(timeout);
       timeout = setTimeout(typingTimeout, 3000);
     } else {
       typingTimeout();
@@ -59,8 +59,8 @@ const Chat = () => {
   useEffect(() => {
     socket.on('display', (data) => {
       if (data.typing === true) {
-        console.log(data)
-        const temp = { text: `${data.user.data.username} is typing...`, room: data.room }
+        console.log(data);
+        const temp = { text: `${data.user.data.username} is typing...`, room: data.room };
         setTypingText(temp);
         // setTypingText(`${data.user.data.username} is typing...`);
       } else {

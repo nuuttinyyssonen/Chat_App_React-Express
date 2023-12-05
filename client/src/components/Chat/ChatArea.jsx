@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import socket from '../../socketConfig';
 import useGetChat from '../../hooks/useGetChat';
 import ChatMessages from './ChatMessages';
-import chatService from "../../services/chatService";
+import chatService from '../../services/chatService';
 const ChatArea = ({ typingText, user, id }) => {
   const chat = useGetChat();
 
