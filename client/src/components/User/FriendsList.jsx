@@ -1,7 +1,7 @@
 import profilePic from '../../style/images/Profile_picture.png';
 import { useNavigate } from 'react-router-dom';
 import socket from '../../socketConfig';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { GoDotFill } from "react-icons/go";
 import { initalizeUsers } from '../../reducers/onlineUserReducer';

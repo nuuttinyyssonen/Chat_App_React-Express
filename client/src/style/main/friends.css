@@ -3,14 +3,14 @@
     flex-direction: column;
     gap: 30px;
     cursor: pointer;
+    max-height: 60vh;
+    overflow-y: scroll;
 }
 
 .friendsList {
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* justify-content: center; */
-    /* align-self: center; */
     gap: 10px;
     border-bottom: 1px solid black;
 }

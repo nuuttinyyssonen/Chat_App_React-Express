@@ -59,7 +59,10 @@ const Chat = () => {
   useEffect(() => {
     socket.on('display', (data) => {
       if (data.typing === true) {
-        setTypingText(`${data.user.data.username} is typing...`);
+        console.log(data)
+        const temp = { text: `${data.user.data.username} is typing...`, room: data.room }
+        setTypingText(temp);
+        // setTypingText(`${data.user.data.username} is typing...`);
       } else {
         setTypingText('');
       }
@@ -87,6 +90,7 @@ const Chat = () => {
         sendMessage={sendMessage}
         typingText={typingText}
         user={user}
+        id={id}
       />
     </div>
   );

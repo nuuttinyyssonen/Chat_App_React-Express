@@ -8,7 +8,7 @@ import { useSpring, animated } from 'react-spring';
 import useGetUserData from '../../hooks/useGetUserData';
 import { SlPencil, SlUser, SlPeople, SlClose } from "react-icons/sl";
 import socket from '../../socketConfig';
-import CreateGroupChat from './CreateGroupChat';
+import CreateGroupChat from '../CreateGroupChat/CreateGroupChat';
 
 const UserBar = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -67,15 +67,13 @@ const UserBar = () => {
         />
       </animated.div>}
        </animated.div>
-      {users && newChat
-        ? <SearchedUsers
+      {users && newChat &&
+        <SearchedUsers
           users={users}
-        />
-        : null}
+        />}
       <animated.div style={animationProps}>
-      {data.data && !search && !newChat && !newGroupChat
-        ? <FriendsList chats={data.data.chats} data={data}/>
-        : null}
+      {data.data && !search && !newChat && !newGroupChat &&
+        <FriendsList chats={data.data.chats} data={data}/>}
       </animated.div>
         <div className='newChat'>
           <div className={`newChatItems ${dropDown ? 'visible' : ''}`}>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import profilePic from '../../style/images/Profile_picture.png';
 import useGetUsers from "../../hooks/useGetUsers";
 import chatService from "../../services/chatService";
+import CreateGroupChatMap from "./CreateGroupChatMap";
 const CreateGroupChat = () => {
     const [group, setGroup] = useState([]);
     const [username, setUsername] = useState("");
@@ -31,23 +32,16 @@ const CreateGroupChat = () => {
     }
 
     return (
-        <div>
-            <input placeholder="search for users..." value={username} onChange={e => setUsername(e.target.value)}/>
-            {users.users && users.users.map((user, key) => (
-                <div className="userInList" key={key} onClick={() => addToGroup(user)}>
-                    <img className="profilePicInUserList" src={profilePic} alt={`Profile for ${user}`} />
-                    <h2 className="usernameInList">{user}</h2>
-                </div>
-            ))}
-            {group.map((user, key) => (
-                <div className="userInList" key={key}>
-                    <img className="profilePicInUserList" src={profilePic} alt={`Profile for ${user}`} />
-                    <h2 className="usernameInList">{user}</h2>
-                    <button onClick={() => removeFromGroup(user)}>Remove</button>
-                </div>
-            ))}
-            <button onClick={() => createGroup()}>Create</button>
-        </div>
+        <CreateGroupChatMap
+            username={username}
+            setUsername={setUsername}
+            users={users}
+            addToGroup={addToGroup}
+            removeFromGroup={removeFromGroup}
+            createGroup={createGroup}
+            group={group}
+            profilePic={profilePic}
+        />
     );
 };
 
