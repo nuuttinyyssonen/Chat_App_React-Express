@@ -160,9 +160,9 @@
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
     cursor: pointer;
-  }
+}
   
-  .currentUserMsgs:hover .deleteMessage {
+.currentUserMsgs:hover .deleteMessage {
     opacity: 1;
     max-height: 100px;
-  }
+}

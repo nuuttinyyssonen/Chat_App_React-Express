@@ -4,13 +4,20 @@ import Navbar from './Navbar';
 import SearchedUsers from './SearchedUsers';
 import FriendsList from './FriendsList';
 import useGetUsers from '../../hooks/useGetUsers';
-import { useSpring, animated } from 'react-spring';
+import { IoMdArrowBack } from "react-icons/io";
 import useGetUserData from '../../hooks/useGetUserData';
 import { SlPencil, SlUser, SlPeople, SlClose } from "react-icons/sl";
 import socket from '../../socketConfig';
 import CreateGroupChat from '../CreateGroupChat/CreateGroupChat';
+import '../../style/main/animations.css';
 
 const UserBar = () => {
+  const mountedStyle = { animation: "inAnimation 250ms ease-in" };
+  const unmountedStyle = {
+    animation: "outAnimation 250ms ease-out",
+    animationFillMode: "forwards"
+  };
+
   const [dropDown, setDropDown] = useState(false);
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
@@ -33,11 +40,20 @@ const UserBar = () => {
 
   const handleNewChat = () => {
     setNewChat(!newChat);
-    setDropDown(!dropDown);
+    setNewGroupChat(false);
+    handleDropDown();
   }
 
   const handleNewGroupChat = () => {
     setNewGroupChat(!newGroupChat);
+    setNewChat(false);
+    handleDropDown();
+  }
+
+  const undoCreatePrivateChat = () => {
+    setNewChat(false);
+    setNewGroupChat(false);
+    setDropDown(false);
   }
 
   useEffect(() => {
@@ -46,41 +62,44 @@ const UserBar = () => {
     }
   }, [newChat]);
 
-  const animationProps = useSpring({
-    opacity: newChat ? 0 : 1,
-    transform: newChat ? 'translateY(-100%)' : 'translateY(0%)'
-  });
+  const displayGroupChat = newGroupChat && users;
+  const displayFriendList = data.data && !newChat && !newGroupChat;
 
   return (
     <div className="left-side">
       {newChat && <input ref={inputRef} className="search-input" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)}/>}
-      <animated.div className='navbar-container' style={animationProps}>
+      <div className='navbar-container' style={!newGroupChat && !newChat ? mountedStyle : unmountedStyle}>
       {!search && !newChat && !newGroupChat && <Navbar
         user={data}
         handleLogout={handleLogout}
         search={search}
         setSearch={setSearch}
       />}
-      {!search && !newChat && newGroupChat && users && <animated.div style={animationProps}>
+       </div>
+       {displayGroupChat && <div style={newGroupChat ? mountedStyle : unmountedStyle}>
         <CreateGroupChat
           users={users}
         />
-      </animated.div>}
-       </animated.div>
-      {users && newChat &&
+      </div>}
+      {users && newChat && <div style={newChat ? mountedStyle : unmountedStyle}>
         <SearchedUsers
           users={users}
-        />}
-      <animated.div style={animationProps}>
-      {data.data && !search && !newChat && !newGroupChat &&
+        />
+      </div>}
+      <div>
+      {displayFriendList &&
         <FriendsList chats={data.data.chats} data={data}/>}
-      </animated.div>
+      </div>
         <div className='newChat'>
           <div className={`newChatItems ${dropDown ? 'visible' : ''}`}>
             <p className='newChatItem' onClick={() => handleNewChat()}><SlUser /> New Private Chat</p>
             <p className='newChatItem' onClick={() => handleNewGroupChat()}><SlPeople /> New Group Chat</p>
           </div>
-          <SlPencil onClick={() => handleDropDown()} className='edit' />
+          {dropDown
+          ? <SlClose style={dropDown ? mountedStyle : unmountedStyle} onClick={() => handleDropDown()} className='edit'/>
+          : newChat || newGroupChat
+          ? <IoMdArrowBack style={(!dropDown && newGroupChat) || (!dropDown && newChat) ? mountedStyle : unmountedStyle} onClick={() => undoCreatePrivateChat()} className='edit' />
+          : <SlPencil style={!dropDown ? mountedStyle : unmountedStyle} onClick={() => handleDropDown()} className='edit' />}
         </div>
     </div>
   );

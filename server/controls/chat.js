@@ -59,12 +59,15 @@ chatRouter.delete('/:id', async (req, res, next) => {
 });
 
 chatRouter.put('/:id', async (req, res, next) => {
-    const { groupChatName } = req.body;
+    const groupChatName = req.body.groupChatName;
     try {
         const chat = await Chat.findById(req.params.id);
+        if(!chat) {
+            res.status(404).json({ error: "Chat was not found!" });
+        }
         chat.chatName = groupChatName;
-        await chat.save();
-        res.status(200).json(chat);
+        const updatedChat = await chat.save();
+        res.status(200).json(updatedChat);
     } catch (error) {
         next(error);
     }

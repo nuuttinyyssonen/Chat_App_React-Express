@@ -1,0 +1,6 @@
+PUT http://localhost:5000/chat/656ee9c25d5c02d8489caba1
+Content-Type: application/json
+
+{
+    "groupChatName": "test"
+}

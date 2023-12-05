@@ -39,7 +39,7 @@ describe('Chat api', () => {
 
       test('Group chat name can be changed', async () => {
         const chat = await Chat.findById(chatId);
-        const groupChatName = 'test'
+        const groupChatName = { groupChatName: "test" };
         const response = await api
           .put(`/chat/${chat._id}`)
           .send(groupChatName)
