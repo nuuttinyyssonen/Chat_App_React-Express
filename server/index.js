@@ -64,7 +64,6 @@ io.on('connection', (socket) => {
 
   socket.on('joinRoom', (room) => {
     socket.join(room);
-    console.log(`joined room: ${room}`);
     socket.emit('joinedRoom', room);
   });
 
@@ -78,7 +77,6 @@ io.on('connection', (socket) => {
 
   socket.on('image', async (data) => {
     const { dataURL, room, userId } = data
-    console.log(room, userId)
     const chatRoom = await Chat.findById(room);
     const chatImage = new ChatImage({
       dataUrl: dataURL,
@@ -104,7 +102,6 @@ io.on('connection', (socket) => {
     chatRoom.messages.push(msg._id);
     await chatRoom.save();
     const queriedMessage = await ChatMessage.findById(msg._id).populate('user');
-    console.log(`message ${message} to ${room}`);
     io.in(room).emit('receive_message', queriedMessage);
   })
 

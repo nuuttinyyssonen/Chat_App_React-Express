@@ -41,7 +41,6 @@ const useGetChat = () => {
 
   useEffect(() => {
     queryChat();
-    console.log(chat)
   }, [id]);
 
   return { chat, addMessage, setChat, setName, addImage };

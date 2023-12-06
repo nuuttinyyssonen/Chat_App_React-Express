@@ -144,6 +144,15 @@
     border-radius: 15px;
 }
 
+.currentUserMsgs.image {
+    background-color: #fff;
+    padding: 5px;
+}
+
+.deleteMessage.image {
+    color: black
+}
+
 .ProfilepicHeader {
     width: 60px;
 }

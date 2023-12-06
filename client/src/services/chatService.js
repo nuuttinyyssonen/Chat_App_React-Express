@@ -30,14 +30,20 @@ const deleteMessage = async (chat, message) => {
   return response.data;
 };
 
+const deleteImage = async (chat, image) => {
+  const response = await axios.delete(`${baseUrl}/${chat}/image/${image}`);
+  return response.data;
+}
+
 const updateChatName = async (id, groupChatName) => {
   const response = await axios.put(`${baseUrl}/${id}`, groupChatName);
   return response.data;
-}
+};
 
 export default {
   getChat,
   deleteMessage,
   createGroupChat,
-  updateChatName
+  updateChatName,
+  deleteImage
 };

@@ -17,12 +17,9 @@ const ChatInputContainer = ({ typingText, user, id }) => {
       reader.onload = () => {
         socket.emit('image', { dataURL: reader.result, room: id, userId: user.data._id });
       };
-
       reader.readAsDataURL(selectedImage);
       setSelectedImage(null);
-      return;
-    }
-    if (user) {
+    } else if (message && user) {
       socket.emit('message', { message, room: id, userId: user.data._id });
       setMessage('');
     }

@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { SlTrash } from 'react-icons/sl';
-const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
+const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) => {
   const chatContainerRef = useRef(null);
 
   const chatHistory = () => {
@@ -11,9 +11,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
       return sortedItems.map((item, key) => {
         const itemDate = new Date(item.date);
         const itemMinutes = itemDate.getMinutes() < 10 ? '0' + itemDate.getMinutes() : itemDate.getMinutes();
-
         if (item.message) {
-          console.log("here", item)
           return (
             item.user && <div key={key}>
               <div className={item.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
@@ -29,9 +27,9 @@ const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
         } else if (item.dataUrl) {
           return (
           <div key={key}>
-            <div className={item.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
+            <div className={item.user._id === user.data._id ? 'currentUserMsgs image' : 'otherUserMsgs image'}>
                 {chat.chat.users.length > 2 && item.user._id !== user.data._id && <p>{item.user.username}</p>}
-                {item.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, item._id)} />}
+                {item.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage image" onClick={() => handleDeleteImage(chat.chat._id, item._id)} />}
                 <img src={item.dataUrl} style={{ width: '300px' }} alt="User Uploaded" />
               </div>
               <div className={item.user._id === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
