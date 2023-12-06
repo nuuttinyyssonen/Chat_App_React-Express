@@ -62,7 +62,6 @@ const Chat = () => {
         console.log(data);
         const temp = { text: `${data.user.data.username} is typing...`, room: data.room };
         setTypingText(temp);
-        // setTypingText(`${data.user.data.username} is typing...`);
       } else {
         setTypingText('');
       }

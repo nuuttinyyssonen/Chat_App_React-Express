@@ -42,11 +42,7 @@ const FriendsList = ({ chats, data }) => {
             )}
             {userIndex === -1 && (
               <div>
-                {chat.users.map((user, index) => (
-                  <div key={index}>
-                    <p>{user.username}</p>
-                  </div>
-                ))}
+                <p>{chat.chatName}</p>
               </div>
             )}
             <p className='latestMessage'>{message}</p>

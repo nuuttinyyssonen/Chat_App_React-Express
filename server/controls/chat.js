@@ -60,6 +60,9 @@ chatRouter.delete('/:id', async (req, res, next) => {
 
 chatRouter.put('/:id', async (req, res, next) => {
     const groupChatName = req.body.groupChatName;
+    if (groupChatName.length < 3) {
+        return res.status(400).json({ error: "Group chat name must be longer than 3 characters" });
+    }
     try {
         const chat = await Chat.findById(req.params.id);
         if(!chat) {

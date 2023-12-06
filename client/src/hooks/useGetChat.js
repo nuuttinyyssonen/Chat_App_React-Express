@@ -18,6 +18,13 @@ const useGetChat = () => {
     }
   };
 
+  const setName = (newName) => {
+    setChat((prevChat) => ({
+      ...prevChat,
+      chatName: newName
+    }));
+  };
+
   const addMessage = (newMessage) => {
     setChat((prevChat) => ({
       ...prevChat,
@@ -27,8 +34,10 @@ const useGetChat = () => {
 
   useEffect(() => {
     queryChat();
+    console.log(chat)
   }, [id]);
-  return { chat, addMessage, setChat };
+
+  return { chat, addMessage, setChat, setName };
 };
 
 export default useGetChat;

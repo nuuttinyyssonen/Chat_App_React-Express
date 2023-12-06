@@ -54,6 +54,32 @@
     gap: 10px;
 }
 
+.saveHeader {
+    font-size: 38px;
+    background-color: #4399FF;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    color: #fff;
+    border-radius: 15px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.editGroupName {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.editChatNameInput {
+    border-radius: 15px;
+    border: 1px solid grey;
+    padding: 2px
+}
+
+.headerError {
+    margin-top: 10px;
+}
+
 .chatContainer {
     max-height: 70vh;
     overflow-y: auto;

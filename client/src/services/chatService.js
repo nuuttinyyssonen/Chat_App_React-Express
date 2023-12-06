@@ -27,12 +27,17 @@ const createGroupChat = async (users) => {
 
 const deleteMessage = async (chat, message) => {
   const response = await axios.delete(`${baseUrl}/${chat}/message/${message}`);
-  console.log(response);
   return response.data;
 };
+
+const updateChatName = async (id, groupChatName) => {
+  const response = await axios.put(`${baseUrl}/${id}`, groupChatName);
+  return response.data;
+}
 
 export default {
   getChat,
   deleteMessage,
-  createGroupChat
+  createGroupChat,
+  updateChatName
 };
