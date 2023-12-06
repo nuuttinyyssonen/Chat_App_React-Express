@@ -63,3 +63,17 @@
     margin: 10px;
     cursor: pointer;
 }
+
+.editProfilePic {
+    position: absolute;
+    left: 49%;
+    top: 15%;
+    font-size: 25px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+}
+
+.ProfileImageContainer:hover .editProfilePic {
+    opacity: 1;
+}

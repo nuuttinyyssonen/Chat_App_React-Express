@@ -80,4 +80,20 @@ userRouter.put('/:username', tokenExtractor, async(req, res, next) => {
     }
 });
 
+userRouter.put('/', tokenExtractor, async (req, res, next) => {
+    const { dataUrl } = req.body;
+    console.log(dataUrl)
+    const user = User.findById(req.decodedToken.id);
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+    try {
+        user.profileImage = dataUrl;
+        const updatedUser = await user.save();
+        res.status(200).json(updatedUser);
+    } catch(error) {
+        next(error)
+    }
+});
+
 module.exports = userRouter;

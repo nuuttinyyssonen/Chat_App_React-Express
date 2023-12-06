@@ -1,11 +1,22 @@
 import profile from '../../style/images/Profile_picture.png';
-import { SlUserFollow, SlSocialTwitter, SlSocialInstagram, SlSocialLinkedin, SlSettings } from 'react-icons/sl';
-import { useNavigate } from 'react-router-dom';
-const ProfileHeader = ({ user, addFriend, isAuthenticated, deleteProfile }) => {
-  const navigate = useNavigate();
+import { SlUserFollow, SlSocialTwitter, SlSocialInstagram, SlSocialLinkedin, SlSettings, SlPencil } from 'react-icons/sl';
+
+const ProfileHeader = ({ user, addFriend, isAuthenticated, deleteProfile, setSelectedImage, changeProfilePic }) => {
   return (
     <div className='profileHeader'>
-      <img className='ProfileImage' src={profile}/>
+      <div className='ProfileImageContainer'>
+        <img className='ProfileImage' src={profile}/>
+        <label htmlFor='fileInput'>
+          <SlPencil className='editProfilePic'/>
+        </label>
+        <button onClick={() => changeProfilePic()}>save</button>
+        <input
+          type='file'
+          id='fileInput'
+          style={{ display: 'none' }}
+          onChange={e => setSelectedImage(e.target.files[0])}
+        />
+      </div>
       {user.data &&
             <p className='PersonName'>{user.data.firstName} {user.data.lastName}
               {!isAuthenticated && <SlUserFollow onClick={() => addFriend(user.data.username)} className='follow'/>}

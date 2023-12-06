@@ -59,6 +59,17 @@ const deleteUser = async () => {
   return response.data;
 };
 
+const changeProfilePicture = async (data) => {
+  const token = getToken();
+  const response = await axios.put(`${baseUrl}/user`, data, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  return response.data;
+}
+
 export default {
   createUser,
   loginUser,
@@ -67,5 +78,6 @@ export default {
   getUserById,
   getAuthUser,
   deleteUser,
-  getToken
+  getToken,
+  changeProfilePicture
 };

@@ -24,6 +24,9 @@ const userSchema = mongoose.Schema({
     required: true,
     validate: [isEmail, 'invalid email']
   },
+  profileImage: {
+    type: String,
+  },
   friends: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -9,6 +9,7 @@ const ChatMessage = require('./models/chatMessage');
 const ChatImage = require('./models/chatImage');
 const Chat = require('./models/chat');
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
 
 const signupRouter = require('./controls/signup');
 const loginRouter = require('./controls/login');
@@ -20,6 +21,7 @@ const chatRouter = require('./controls/chat');
 
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json({ limit: '10mb' }));
 
 mongoose.set('strictQuery', false);
 
