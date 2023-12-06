@@ -6,6 +6,7 @@ const cors = require('cors');
 const { errorHandler } = require('./utils/middleware');
 const { Server } = require('socket.io');
 const ChatMessage = require('./models/chatMessage');
+const ChatImage = require('./models/chatImage');
 const Chat = require('./models/chat');
 const jwt = require('jsonwebtoken');
 
@@ -73,6 +74,22 @@ io.on('connection', (socket) => {
        io.in(room).emit('display', data)
     else
        io.in(room).emit('display', data)
+  })
+
+  socket.on('image', async (data) => {
+    const { dataURL, room, userId } = data
+    console.log(room, userId)
+    const chatRoom = await Chat.findById(room);
+    const chatImage = new ChatImage({
+      dataUrl: dataURL,
+      user: userId,
+      chat: room
+    });
+    const image = await chatImage.save();
+    chatRoom.images.push(image._id);
+    await chatRoom.save();
+    const queriedImage = await ChatImage.findById(image._id).populate('user');
+    io.in(room).emit('receive_image', queriedImage);
   })
 
   socket.on('message', async (data) => {

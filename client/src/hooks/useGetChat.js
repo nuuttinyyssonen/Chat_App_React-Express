@@ -32,12 +32,19 @@ const useGetChat = () => {
     }));
   };
 
+  const addImage = (newImage) => {
+    setChat((prevChat) => ({
+      ...prevChat,
+      images: [...prevChat.images, newImage]
+    }))
+  };
+
   useEffect(() => {
     queryChat();
     console.log(chat)
   }, [id]);
 
-  return { chat, addMessage, setChat, setName };
+  return { chat, addMessage, setChat, setName, addImage };
 };
 
 export default useGetChat;

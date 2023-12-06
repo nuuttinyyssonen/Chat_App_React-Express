@@ -7,6 +7,12 @@ const chatSchema = mongoose.Schema({
             ref: 'ChatMessage'
         }
     ],
+    images: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'ChatImage'
+        }
+    ],
     users: [
         {
             type: mongoose.Schema.Types.ObjectId,

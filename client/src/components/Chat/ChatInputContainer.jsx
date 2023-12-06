@@ -12,10 +12,13 @@ const ChatInputContainer = ({ typingText, user, id }) => {
   const chat = useGetChat();
 
   const sendMessage = () => {
-    if (selectedImage) {
-      const formData = new FormData();
-      formData.append('image', selectedImage);
-      socket.emit('image', { data: formData });
+    if (selectedImage && user) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        socket.emit('image', { dataURL: reader.result, room: id, userId: user.data._id });
+      };
+
+      reader.readAsDataURL(selectedImage);
       setSelectedImage(null);
       return;
     }

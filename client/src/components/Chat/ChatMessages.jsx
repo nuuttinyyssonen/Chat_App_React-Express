@@ -4,28 +4,45 @@ const ChatMessages = ({ chat, user, handleDeleteMessage }) => {
   const chatContainerRef = useRef(null);
 
   const chatHistory = () => {
-    if (chat.chat && chat.chat.messages && user.data) {
-      return chat.chat.messages.map((message, key) => {
-        const messageDate = new Date(message.date);
-        const messageMinutes = messageDate.getMinutes() < 10 ? '0' + messageDate.getMinutes() : messageDate.getMinutes();
-        if (message.chat === chat.chat._id) {
+    if (chat.chat && chat.chat.messages && chat.chat.images && user.data) {
+      const allItems = [...chat.chat.messages, ...chat.chat.images]
+      const sortedItems = allItems.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      return sortedItems.map((item, key) => {
+        const itemDate = new Date(item.date);
+        const itemMinutes = itemDate.getMinutes() < 10 ? '0' + itemDate.getMinutes() : itemDate.getMinutes();
+
+        if (item.message) {
+          console.log("here", item)
           return (
-            message.user && <div key={key}>
-              <div className={message.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
-                {chat.chat.users.length > 2 && message.user._id !== user.data._id && <p>{message.user.username}</p>}
-                {message.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, message._id)} />}
-                <p className="messageCurrent">{message.message}</p>
+            item.user && <div key={key}>
+              <div className={item.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
+                {chat.chat.users.length > 2 && item.user._id !== user.data._id && <p>{item.user.username}</p>}
+                {item.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, item._id)} />}
+                <p className="messageCurrent">{item.message}</p>
               </div>
-              <div className={message.user._id === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
-                <p>{messageDate.getHours()}:{messageMinutes}</p>
+              <div className={item.user._id === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
+                <p>{itemDate.getHours()}:{itemMinutes}</p>
               </div>
             </div>
           );
-        } else {
-          return null;
+        } else if (item.dataUrl) {
+          return (
+          <div key={key}>
+            <div className={item.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
+                {chat.chat.users.length > 2 && item.user._id !== user.data._id && <p>{item.user.username}</p>}
+                {item.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, item._id)} />}
+                <img src={item.dataUrl} style={{ width: '300px' }} alt="User Uploaded" />
+              </div>
+              <div className={item.user._id === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
+                <p>{itemDate.getHours()}:{itemMinutes}</p>
+              </div>
+            </div>
+          );
         }
-      });
-    }
+      return null;
+    })
+  }
     return null;
   };
 

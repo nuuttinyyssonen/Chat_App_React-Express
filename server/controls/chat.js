@@ -14,6 +14,13 @@ chatRouter.get('/:id', async (req, res, next) => {
                     model: 'User'
                 }
             })
+            .populate({
+                path: 'images',
+                populate: {
+                    path: 'user',
+                    model: 'User'
+                }
+            })
             .populate('users');
         if(!chat) {
             return res.status(404).json({ error: "chat was not found!" });

@@ -11,6 +11,9 @@ const ChatArea = ({ typingText, user, id }) => {
     socket.on('receive_message', (data) => {
       chat.addMessage(data);
     });
+    socket.on('receive_image', (data) => {
+      chat.addImage(data);
+    })
     return () => socket.off('receive_message');
   }, [socket]);
 
