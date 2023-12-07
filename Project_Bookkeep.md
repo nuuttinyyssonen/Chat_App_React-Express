@@ -15,4 +15,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 4.12.20203 |        8        | Made group chat feature. Had to refactor A LOT of code to make it work as expected. Did some debugging as well. Made some backend tests to it with Jest.|
 | 5.12.2023  |       7.5       | Did a lot of refactoring again and debugging to make everything better. Added also some animations to make the app smooth. Jest testing to bakend. |
 | 6.12.2023  |       7.5       | Users can now upload images to chat. Made all configurations for it in backend and frontend. Images are stored in mongodb. Groupchat names can be changed now as well. Added transitions and refactored some. |
-|   Total    |       92        |   
+| 7.12.2023  |        8        | Refactored whole Profile part of the project. Usernames, emails and other stuff can be changed from client side now. Configured AWS and images are now being sent to AWS and links saved in mongo. |
+|   Total    |       100        |   
