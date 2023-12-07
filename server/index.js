@@ -10,6 +10,8 @@ const ChatImage = require('./models/chatImage');
 const Chat = require('./models/chat');
 const jwt = require('jsonwebtoken');
 const s3 = require('./utils/aws');
+const { v4: uuidv4 } = require('uuid');
+const upload = require('./utils/multer');
 
 const signupRouter = require('./controls/signup');
 const loginRouter = require('./controls/login');
@@ -91,10 +93,32 @@ io.on('connection', (socket) => {
   })
 
   socket.on('image', async (data) => {
-    const { dataURL, room, userId } = data
+    const { buffer, room, userId, file } = data;
+    const key = `${uuidv4()}-${file}`;
+    const s3UploadPromise = () => {
+      return new Promise((resolve, reject) => {
+        s3.upload(
+          {
+            Bucket: 'chatappimages20',
+            Key: key,
+            Body: buffer,
+            ContentType: 'image/jpg'
+          },
+          (err, data) => {
+            if (err) {
+              console.error(err);
+              reject(err);
+            } else {
+              resolve(data.Location);
+            }
+          }
+        );
+      });
+    };
+    const imageUrl = await s3UploadPromise();
     const chatRoom = await Chat.findById(room);
     const chatImage = new ChatImage({
-      dataUrl: dataURL,
+      dataUrl: imageUrl,
       user: userId,
       chat: room
     });

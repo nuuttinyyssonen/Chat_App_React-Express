@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Buffer } from 'buffer';
 import socket from '../../socketConfig';
 import useGetChat from '../../hooks/useGetChat';
 import ChatInput from './ChatInput';
@@ -14,10 +15,13 @@ const ChatInputContainer = ({ typingText, user, id }) => {
   const sendMessage = () => {
     if (selectedImage && user) {
       const reader = new FileReader();
+      console.log(selectedImage.name)
       reader.onload = () => {
-        socket.emit('image', { dataURL: reader.result, room: id, userId: user.data._id });
+        const arrayBuffer = reader.result;
+        const buffer = Buffer.from(arrayBuffer);
+        socket.emit('image', { buffer, room: id, userId: user.data._id, file: selectedImage.name });
       };
-      reader.readAsDataURL(selectedImage);
+      reader.readAsArrayBuffer(selectedImage);
       setSelectedImage(null);
     } else if (message && user) {
       socket.emit('message', { message, room: id, userId: user.data._id });

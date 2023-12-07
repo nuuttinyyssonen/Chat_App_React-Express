@@ -9,6 +9,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) =>
       const sortedItems = allItems.sort((a, b) => new Date(a.date) - new Date(b.date));
 
       return sortedItems.map((item, key) => {
+        console.log(item)
         const itemDate = new Date(item.date);
         const itemMinutes = itemDate.getMinutes() < 10 ? '0' + itemDate.getMinutes() : itemDate.getMinutes();
         if (item.message) {
@@ -25,6 +26,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) =>
             </div>
           );
         } else if (item.dataUrl) {
+          console.log(item.dataUrl)
           return (
           <div key={key}>
             <div className={item.user._id === user.data._id ? 'currentUserMsgs image' : 'otherUserMsgs image'}>
