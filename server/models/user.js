@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema({
     required: true,
     validate: [isEmail, 'invalid email']
   },
+  status: {
+    type: String,
+    default: "I'm a new user"
+  },
   profileImage: {
     type: String,
   },

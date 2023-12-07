@@ -4,6 +4,7 @@ import { SlUserFollow, SlSocialTwitter, SlSocialInstagram, SlSocialLinkedin, SlS
 const ProfileHeader = ({ user, addFriend, isAuthenticated, deleteProfile, setSelectedImage, changeProfilePic }) => {
   return (
     <div className='profileHeader'>
+
       <div className='ProfileImageContainer'>
         <img className='ProfileImage' src={profile}/>
         <label htmlFor='fileInput'>
@@ -17,6 +18,7 @@ const ProfileHeader = ({ user, addFriend, isAuthenticated, deleteProfile, setSel
           onChange={e => setSelectedImage(e.target.files[0])}
         />
       </div>
+
       {user.data &&
             <p className='PersonName'>{user.data.firstName} {user.data.lastName}
               {!isAuthenticated && <SlUserFollow onClick={() => addFriend(user.data.username)} className='follow'/>}

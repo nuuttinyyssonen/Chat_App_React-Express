@@ -13,11 +13,25 @@ const useGetUserData = () => {
     }
   };
 
+  const setEmail = (newEmail) => {
+    setData((prev) => ({
+      ...prev,
+      email: newEmail
+    }));
+  };
+
+  const setUsername = (newUsername) => {
+    setData((prev) => ({
+      ...prev,
+      username: newUsername
+    }));
+  };
+
   useEffect(() => {
     getUserData();
   }, []);
 
-  return { data };
+  return { data, setEmail, setUsername };
 };
 
 export default useGetUserData;

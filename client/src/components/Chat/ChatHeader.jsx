@@ -58,7 +58,6 @@ const ChatHeader = ({ user }) => {
           setErrorMessage("");
         }, [5000])
       }
-      console.log(error);
     }
   };
 

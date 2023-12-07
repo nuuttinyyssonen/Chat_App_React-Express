@@ -80,9 +80,8 @@ userRouter.put('/:username', tokenExtractor, async(req, res, next) => {
     }
 });
 
-userRouter.put('/', tokenExtractor, async (req, res, next) => {
+userRouter.put('/image', tokenExtractor, async (req, res, next) => {
     const { dataUrl } = req.body;
-    console.log(dataUrl)
     const user = User.findById(req.decodedToken.id);
     if (!user) {
         return res.status(404).json({ error: 'User not found' });
@@ -93,6 +92,26 @@ userRouter.put('/', tokenExtractor, async (req, res, next) => {
         res.status(200).json(updatedUser);
     } catch(error) {
         next(error)
+    }
+});
+
+userRouter.put('/update/:field', tokenExtractor, async (req, res, next) => {
+    const fieldToUpdate = req.params.field;
+    const user = await User.findById(req.decodedToken.id);
+
+    if(!user) {
+        return res.status(404).send({ error: "User was not found!" });
+    }
+    if(!user[fieldToUpdate]) {
+        return res.status(404).send({ error: "User does not have this field!" });
+    }
+
+    try {
+        user[fieldToUpdate] = req.body[fieldToUpdate];
+        const updatedUser = await user.save();
+        res.status(200).json(updatedUser);
+    } catch(error) {
+        next(error);
     }
 });
 

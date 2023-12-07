@@ -70,6 +70,17 @@ const changeProfilePicture = async (data) => {
   return response.data;
 }
 
+const updateUserField = async (field, data) => {
+  const token = getToken();
+  const response = await axios.put(`${baseUrl}/user/update/${field}`, data, {
+    headers: {
+      Authorization: `bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  return response.data;
+}
+
 export default {
   createUser,
   loginUser,
@@ -79,5 +90,6 @@ export default {
   getAuthUser,
   deleteUser,
   getToken,
-  changeProfilePicture
+  changeProfilePicture,
+  updateUserField
 };

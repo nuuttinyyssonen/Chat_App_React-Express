@@ -1,0 +1,7 @@
+PUT http://localhost:5000/user/update/firstName
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51dXR0aW55eXNzb25lbiIsImlkIjoiNjU2ZWZkMmU0NTBlZWI4NWE5NTMyNmQyIiwiaWF0IjoxNzAxOTM0MTgyfQ.24sL3qi9Ch8hqNkZPnk1yaLE1nGVHu_aW5UBWAkIcq8
+
+{
+    "firstName": "Nuutti"
+}
