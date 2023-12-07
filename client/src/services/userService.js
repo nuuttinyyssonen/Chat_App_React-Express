@@ -61,10 +61,10 @@ const deleteUser = async () => {
 
 const changeProfilePicture = async (data) => {
   const token = getToken();
-  const response = await axios.put(`${baseUrl}/user`, data, {
+  const response = await axios.put(`${baseUrl}/user/upload/image`, data, {
     headers: {
       Authorization: `bearer ${token}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     }
   });
   return response.data;

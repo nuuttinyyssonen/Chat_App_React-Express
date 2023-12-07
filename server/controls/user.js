@@ -2,6 +2,7 @@ const userRouter = require('express').Router();
 const User = require('../models/user');
 const Chat = require('../models/chat');
 const { tokenExtractor } = require('../utils/middleware');
+const upload = require('../utils/multer');
 
 userRouter.get('/:username', async(req, res) => {
     const user = await User.findOne({ username: req.params.username });
@@ -80,18 +81,16 @@ userRouter.put('/:username', tokenExtractor, async(req, res, next) => {
     }
 });
 
-userRouter.put('/image', tokenExtractor, async (req, res, next) => {
-    const { dataUrl } = req.body;
-    const user = User.findById(req.decodedToken.id);
-    if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-    }
+userRouter.put('/upload/image', upload.single('file'), tokenExtractor, async (req, res, next) => {
+    const { buffer } = req.file;
+    const data = buffer.toString('base64');
+    const user = await User.findById(req.decodedToken.id);
     try {
-        user.profileImage = dataUrl;
+        user.profileImage = data;
         const updatedUser = await user.save();
-        res.status(200).json(updatedUser);
-    } catch(error) {
-        next(error)
+        return res.status(200).json(updatedUser);
+    } catch (error) {
+        next(error);
     }
 });
 

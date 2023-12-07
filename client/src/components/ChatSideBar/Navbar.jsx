@@ -7,7 +7,7 @@ const Navbar = ({ handleLogout, user }) => {
   return (
     <div className="navbar">
       <div className="header">
-        <img src={profile} className="profile-pic"/>
+       {user.data && <img src={`data:image/png;base64,${user.data.profileImage}`} className="profile-pic"/>}
         <div>
           {user.data && <h4>{user.data.firstName} {user.data.lastName}</h4>}
           <p>...</p>
