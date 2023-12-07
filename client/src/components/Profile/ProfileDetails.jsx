@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 
-const ProfileDetails = ({ user, isEditMode, setIsEditMode, statusRef, type, detail, updateDetail, field, setField, errorMessage }) => {
+const ProfileDetails = ({ user, isEditMode, setIsEditMode, statusRef, type, detail, updateDetail, field, setField, errorMessage, isAuthenticated }) => {
   const mountedStyle = { animation: 'inAnimation 300ms ease-in' };
   const unmountedStyle = {
     animation: 'outAnimation 300ms ease-out',
@@ -24,11 +24,13 @@ const ProfileDetails = ({ user, isEditMode, setIsEditMode, statusRef, type, deta
   };
 
   return (
-    <div className="profileDetails">
+    user.data && <div className="profileDetails">
       {errorMessage && <p className="errorMsg">{errorMessage}</p>}
-      {user.data && !isEditMode
-      ? <p ref={statusRef} style={!isEditMode ? mountedStyle : unmountedStyle} onClick={() => handleEditMode()}>{type}: {detail}</p>
-      : <div ref={statusRef}>
+      {!isAuthenticated && <p>{type}: user</p>}
+      {!isEditMode && isAuthenticated &&
+      <p ref={statusRef} style={!isEditMode ? mountedStyle : unmountedStyle} onClick={() => handleEditMode()}>{type}: {detail}</p>}
+      {isAuthenticated && isEditMode &&
+      <div ref={statusRef}>
         <input ref={statusRef} value={field} onChange={e => setField(e.target.value)}/>
         <button onClick={() => updateDetail()}>save</button>
       </div>}
