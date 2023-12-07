@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const { MONGODB_URI, PORT, SECRET } = require('./utils/config');
+const { MONGODB_URI, PORT, SECRET, AWS_KEY, AWS_REGION, AWS_KEY_ID } = require('./utils/config');
 const cors = require('cors');
 const { errorHandler } = require('./utils/middleware');
 const { Server } = require('socket.io');
@@ -9,7 +9,7 @@ const ChatMessage = require('./models/chatMessage');
 const ChatImage = require('./models/chatImage');
 const Chat = require('./models/chat');
 const jwt = require('jsonwebtoken');
-const bodyParser = require('body-parser');
+const s3 = require('./utils/aws');
 
 const signupRouter = require('./controls/signup');
 const loginRouter = require('./controls/login');
@@ -21,7 +21,6 @@ const chatRouter = require('./controls/chat');
 
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json({ limit: '10mb' }));
 
 mongoose.set('strictQuery', false);
 
@@ -34,6 +33,20 @@ const connectToMongoDB = async () => {
   };
 };
 connectToMongoDB();
+
+s3.listObjects({ Bucket: 'chatappimages20' }, (err, data) => {
+  if (err) {
+    console.error('Error listing objects in S3 bucket:', err);
+  } else {
+    const objects = data.Contents;
+    if (objects.length === 0) {
+      console.log('The S3 bucket is empty.');
+    } else {
+      console.log('Objects in S3 bucket:');
+      objects.forEach(object => console.log(object.Key));
+    }
+  }
+});
 
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);

@@ -3,6 +3,8 @@ const User = require('../models/user');
 const Chat = require('../models/chat');
 const { tokenExtractor } = require('../utils/middleware');
 const upload = require('../utils/multer');
+const s3 = require('../utils/aws');
+const { v4: uuidv4 } = require('uuid');
 
 userRouter.get('/:username', async(req, res) => {
     const user = await User.findOne({ username: req.params.username });
@@ -82,16 +84,33 @@ userRouter.put('/:username', tokenExtractor, async(req, res, next) => {
 });
 
 userRouter.put('/upload/image', upload.single('file'), tokenExtractor, async (req, res, next) => {
-    const { buffer } = req.file;
-    const data = buffer.toString('base64');
+    const { originalname, buffer } = req.file;
+    const key = `${uuidv4()}-${originalname}`;
     const user = await User.findById(req.decodedToken.id);
-    try {
-        user.profileImage = data;
-        const updatedUser = await user.save();
-        return res.status(200).json(updatedUser);
-    } catch (error) {
-        next(error);
-    }
+    const s3UploadPromise = () => {
+        return new Promise((resolve, reject) => {
+          s3.upload(
+            {
+              Bucket: 'chatappimages20',
+              Key: key,
+              Body: buffer,
+              ContentType: 'image/jpg'
+            },
+            (err, data) => {
+              if (err) {
+                console.error(err);
+                reject(err);
+              } else {
+                resolve(data.Location);
+              }
+            }
+          );
+        });
+    };
+    const imageUrl = await s3UploadPromise();
+    user.profileImage = imageUrl;
+    const updatedUser = await user.save();
+    res.status(200).json(updatedUser);
 });
 
 userRouter.put('/update/:field', tokenExtractor, async (req, res, next) => {
