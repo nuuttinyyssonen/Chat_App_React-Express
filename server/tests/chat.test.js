@@ -1,11 +1,11 @@
-const { describe, beforeEach, test, expect, afterAll } = require('@jest/globals');
+const { describe, beforeEach, test, expect } = require('@jest/globals');
 const User = require('../models/user');
 const Chat = require('../models/chat');
-const mongoose = require('mongoose');
+
 const supertest = require('supertest');
-const app = require('../index');
+const app = require('../app');
 const api = supertest(app);
-const { initialUser, usersInDb, initializeTests } = require('../tests/test_helper');
+const { initialUser, initializeTests } = require('../tests/test_helper');
 
 let authHeader;
 let chatId;

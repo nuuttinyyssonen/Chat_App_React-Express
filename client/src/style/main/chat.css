@@ -145,8 +145,15 @@
 }
 
 .currentUserMsgs.image {
-    background-color: #fff;
-    padding: 5px;
+    background-color: #F0F0F0;
+    padding: 0px;
+    border-radius: 0px;
+}
+
+.otherUserMsgs.image {
+    background-color: #F0F0F0;
+    padding: 0px;
+    border-radius: 0px;
 }
 
 .deleteMessage.image {

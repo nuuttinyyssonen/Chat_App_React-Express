@@ -1,12 +1,11 @@
-const { describe, beforeEach, test, expect, afterAll } = require('@jest/globals');
+const { describe, beforeEach, test, expect } = require('@jest/globals');
 const User = require('../models/user');
 const Chat = require('../models/chat');
 const ChatMessage = require('../models/chatMessage');
-const mongoose = require('mongoose');
 const supertest = require('supertest');
-const app = require('../index');
+const app = require('../app');
 const api = supertest(app);
-const { initialUser, usersInDb, initializeTests } = require('../tests/test_helper');
+const { initializeTests } = require('../tests/test_helper');
 const { io } = require('socket.io-client');
 
 const socket = io('http://localhost:5000');
@@ -14,7 +13,6 @@ const socket = io('http://localhost:5000');
 let authHeader;
 let chatId;
 let messageId;
-
 
 describe('Socket', () => {
     beforeEach(async () => {

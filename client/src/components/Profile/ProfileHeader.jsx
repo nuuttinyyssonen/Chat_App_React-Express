@@ -6,9 +6,8 @@ const ProfileHeader = ({ user, addFriend, isAuthenticated, deleteProfile, setSel
     <div className='profileHeader'>
 
       <div className='ProfileImageContainer'>
-        {!selectedImage && !user.data?.profileImage && <img className='ProfileImage' style={{ width: '200px', height: '200px', borderRadius: "50%" }} src={profile}/>}
-        {!selectedImage && user.data?.profileImage && <img className='ProfileImage' style={{ width: '200px', height: '200px', borderRadius: "50%" }} src={user.data?.profileImage}/>}
-        {!selectedImage && currentUser.data?.profileImage && <img className='ProfileImage' style={{ width: '200px', height: '200px', borderRadius: "50%" }} src={image}/>}
+        {!selectedImage && !user.data?.profileImage && <img className='ProfileImage' style={{ width: '200px', height: '200px', borderRadius: "50%", marginTop: '10px' }} src={profile}/>}
+        {!selectedImage && user.data?.profileImage && <img className='ProfileImage' style={{ width: '200px', height: '200px', borderRadius: "50%", marginTop: '10px' }} src={user.data?.profileImage}/>}
         {selectedImage && (
           <div className='imagePreview'>
             <img
