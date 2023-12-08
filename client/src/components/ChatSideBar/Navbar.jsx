@@ -7,7 +7,8 @@ const Navbar = ({ handleLogout, user }) => {
   return (
     <div className="navbar">
       <div className="header">
-       {user.data && <img src={user.data.profileImage} className="profile-pic"/>}
+       {user.data && user.data?.profileImage && <img src={user.data.profileImage} style={{ width: '80px', height: '80px', borderRadius: "50%" }} className="profile-pic"/>}
+       {user.data && !user.data?.profileImage && <img src={profile} style={{ width: '60px', height: '60px', borderRadius: "50%" }} className='profile-pic'/>}
         <div>
           {user.data && <h4>{user.data.firstName} {user.data.lastName}</h4>}
           <p>...</p>

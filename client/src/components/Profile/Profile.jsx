@@ -21,6 +21,7 @@ const Profile = () => {
       <div className='profileContainer'>
         <ProfileHeaderContainer
           user={user}
+          currentUser={currentUser}
           isAuthenticated={isAuthenticated}
           newFriend={newFriend}
           navigate={navigate}

@@ -63,7 +63,8 @@ const ChatHeader = ({ user }) => {
 
   return (
     <div className="ChatHeader">
-      <img src={Profile} className='ProfilepicHeader'/>
+      {!isGrourpChat && !person?.profileImage && <img src={Profile} className='ProfilepicHeader'/>}
+      {person?.profileImage && <img src={person?.profileImage} className='ProfilepicHeader' style={{ width: '60px', height: '60px', borderRadius: '50%' }}/>}
       {!isGrourpChat && <p id='headerFirstName' className='headerName'>{person?.username}</p>}
       {isGrourpChat && !isEditMode
         ? <p id='headerFirstName' className='headerName' style={!isEditMode ? mountedStyle : unmountedStyle} onClick={() => handleEditGroupName()}>{chatName}</p>

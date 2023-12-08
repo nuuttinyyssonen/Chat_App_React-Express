@@ -1,16 +1,21 @@
 import ProfileHeader from "./ProfileHeader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import userService from "../../services/userService";
-import ImagePreview from "../Chat/ImagePreview";
-const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, username }) => {
+const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, username, currentUser }) => {
     const [selectedImage, setSelectedImage] = useState(null);
+    const [image, setImage] = useState();
+
+    useEffect(() => {
+      setImage(currentUser.data?.profileImage);
+    }, [currentUser])
 
     const changeProfilePic = async () => {
         const formData = new FormData();
         formData.append('file', selectedImage);
         try {
           const response = await userService.changeProfilePicture(formData);
-          console.log(response);
+          currentUser.setProfilePic(response.profileImage);
+          setSelectedImage(null);
         } catch (error) {
           console.log(error);
         }
@@ -27,6 +32,9 @@ const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, us
         }
     };
 
+    const friendsMap = currentUser.data?.friends?.map(friend => friend._id === user.data?._id);
+    const isAlreadyFriend = friendsMap && friendsMap.includes(true);
+
     return (
         <div>
         <ProfileHeader
@@ -38,6 +46,9 @@ const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, us
           setSelectedImage={setSelectedImage}
           changeProfilePic={changeProfilePic}
           selectedImage={selectedImage}
+          image={image}
+          currentUser={currentUser}
+          isAlreadyFriend={isAlreadyFriend}
         />
         </div>
     );
