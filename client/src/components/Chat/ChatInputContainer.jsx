@@ -13,6 +13,10 @@ const ChatInputContainer = ({ typingText, user, id }) => {
   const chat = useGetChat();
 
   const sendMessage = () => {
+    if (!id) {
+      setMessage("");
+      return;
+    }
     if (selectedImage && user) {
       const reader = new FileReader();
       console.log(selectedImage.name)
@@ -36,6 +40,9 @@ const ChatInputContainer = ({ typingText, user, id }) => {
   };
 
   const handleKeyDown = (e) => {
+    if (!id) {
+      return;
+    }
     if (e.which !== 13) {
       setTyping(true);
       socket.emit('typing', { user, typing: true, room: chat.chat._id });

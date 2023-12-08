@@ -16,4 +16,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 5.12.2023  |       7.5       | Did a lot of refactoring again and debugging to make everything better. Added also some animations to make the app smooth. Jest testing to bakend. |
 | 6.12.2023  |       7.5       | Users can now upload images to chat. Made all configurations for it in backend and frontend. Images are stored in mongodb. Groupchat names can be changed now as well. Added transitions and refactored some. |
 | 7.12.2023  |        8        | Refactored whole Profile part of the project. Usernames, emails and other stuff can be changed from client side now. Configured AWS and images are now being sent to AWS and links saved in mongo. |
-|   Total    |       100        |   
+| 8.12.2023  |        6        | Users can now see each others profile pics and upload new ones. All images are in AWS bucket. Made some error handling and lot of refactoring for backend. Also documented whole backend.
+|   Total    |       106        |

@@ -28,7 +28,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) =>
           return (
           <div key={key}>
             <div className={item.user._id === user.data._id ? 'currentUserMsgs image' : 'otherUserMsgs image'}>
-                {chat.chat.users.length > 2 && item.user._id !== user.data._id && <p>{item.user.username}</p>}
+                {chat.chat.users.length > 2 && item.user?._id !== user.data?._id && <p>{item.user.username}</p>}
                 {item.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage image" onClick={() => handleDeleteImage(chat.chat._id, item._id)} />}
                 <img src={item.dataUrl} style={{ width: '300px' }} alt="User Uploaded" />
               </div>

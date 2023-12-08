@@ -3,6 +3,7 @@ const app = require('../index');
 const supertest = require('supertest');
 const api = supertest(app);
 
+// Users that are being sent to mongodb in test.
 const initialUser = [
   {
     firstName: 'tester',
@@ -26,24 +27,27 @@ const initialUser = [
     email: 'test2@gmail.com'
   }
 ];
+
+// Queries all users from db.
 const usersInDb = async () => {
   const users = await User.find({});
   return users.map(user => user.toJSON());
 };
 
+// Used in beforeEach hooks for the setup.
 const initializeTests = async () => {
   await User.deleteOne({ username: 'tester' });
   await User.deleteOne({ username: 'test1' });
   await User.deleteOne({ username: 'test2' });
 
   await api.post('/signup').send(initialUser[0]);
-  await api.post('/signup').send(initialUser[1]);      
+  await api.post('/signup').send(initialUser[1]);
   await api.post('/signup').send(initialUser[2]);
   const user = initialUser[1];
   const response = await api.post('/login').send(user);
-  let authHeader = `bearer ${response.body.token}`;
-  return authHeader
-}
+  const authHeader = `bearer ${response.body.token}`;
+  return authHeader;
+};
 
 module.exports = {
   initialUser,

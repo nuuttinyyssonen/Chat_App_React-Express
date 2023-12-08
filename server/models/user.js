@@ -29,7 +29,7 @@ const userSchema = mongoose.Schema({
     default: "I'm a new user"
   },
   profileImage: {
-    type: String,
+    type: String
   },
   friends: [
     {

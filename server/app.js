@@ -19,6 +19,7 @@ app.use(cors());
 
 mongoose.set('strictQuery', false);
 
+// connection to mongodb
 const connectToMongoDB = async () => {
   try {
     await mongoose.connect(MONGODB_URI);
@@ -29,14 +30,16 @@ const connectToMongoDB = async () => {
 };
 connectToMongoDB();
 
+// connection to AWS bucket
 s3.listObjects({ Bucket: 'chatappimages20' }, (err, data) => {
-    if (err) {
-      console.error('Error listing objects in S3 bucket:', err);
-    } else {
-      console.log('Connected to S3 bucket', data.Name)
-    }
+  if (err) {
+    console.error('Error listing objects in S3 bucket:', err);
+  } else {
+    console.log('Connected to S3 bucket', data.Name);
+  }
 });
 
+// Routes
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
