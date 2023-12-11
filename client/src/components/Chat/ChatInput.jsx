@@ -1,5 +1,6 @@
 import { SlPaperPlane } from 'react-icons/sl';
 import { IoAdd } from "react-icons/io5";
+import VideoCall from '../Video Call/VideoCall';
 const ChatInput = ({
   handleKeyDown,
   typingText,
@@ -30,6 +31,7 @@ const ChatInput = ({
             style={{ display: 'none' }}
             onChange={e => setSelectedImage(e.target.files[0])}
           />
+          <VideoCall />
         </div>
     );
 };
