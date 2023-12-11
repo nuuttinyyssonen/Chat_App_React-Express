@@ -1,6 +1,7 @@
 import { SlPaperPlane } from 'react-icons/sl';
 import { IoAdd } from "react-icons/io5";
-import VideoCall from '../Video Call/VideoCall';
+import { IoIosCall } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
 const ChatInput = ({
   handleKeyDown,
   typingText,
@@ -11,6 +12,10 @@ const ChatInput = ({
   setSelectedImage,
   id
 }) => {
+    const navigate = useNavigate();
+    const handleCall = () => {
+      navigate(`/chat/videoCall/${id}`);
+    };
     return (
         <div>
           {!typingText.text?.includes(user.data?.username) && id === typingText.room && <p className="typingText">{typingText.text}</p>}
@@ -31,7 +36,7 @@ const ChatInput = ({
             style={{ display: 'none' }}
             onChange={e => setSelectedImage(e.target.files[0])}
           />
-          <VideoCall />
+          <IoIosCall className='send-btn' onClick={() => handleCall()} />
         </div>
     );
 };

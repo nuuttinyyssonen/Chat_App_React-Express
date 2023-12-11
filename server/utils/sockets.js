@@ -96,11 +96,14 @@ io.on('connection', (socket) => {
 
   // Creates connection for video calls.
   socket.on('callUser', (data) => {
-    io.to(data.room).emit('callUser', { signal: data.signalData });
+    console.log(data)
+    io.emit('callUser', { signal: data.signalData });
   });
 
   socket.on('answerCall', (data) => {
-    io.to(data.room).emit('callAccepted', data.signal);
+    console.log(data)
+    console.log(data.room)
+    io.emit('callAccepted', data.signal);
   });
 
   socket.on('logout', (data) => {
