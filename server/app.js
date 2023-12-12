@@ -13,6 +13,7 @@ const userRouter = require('./controls/user');
 const friendsRouter = require('./controls/friends');
 const resetCypressRouter = require('./controls/resetCypress');
 const chatRouter = require('./controls/chat');
+const passwordResetRouter = require('./controls/passwordReset');
 
 app.use(express.json());
 app.use(cors());
@@ -47,6 +48,7 @@ app.use('/user', userRouter);
 app.use('/friends', friendsRouter);
 app.use('/resetCypress', resetCypressRouter);
 app.use('/chat', chatRouter);
+app.use('/passwordReset', passwordResetRouter);
 
 app.use(errorHandler);
 

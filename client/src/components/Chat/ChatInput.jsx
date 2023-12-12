@@ -36,7 +36,6 @@ const ChatInput = ({
             style={{ display: 'none' }}
             onChange={e => setSelectedImage(e.target.files[0])}
           />
-          <IoIosCall className='send-btn' onClick={() => handleCall()} />
         </div>
     );
 };

@@ -94,18 +94,6 @@ io.on('connection', (socket) => {
     io.in(room).emit('receive_message', queriedMessage);
   });
 
-  // Creates connection for video calls.
-  socket.on('callUser', (data) => {
-    console.log(data)
-    io.emit('callUser', { signal: data.signalData });
-  });
-
-  socket.on('answerCall', (data) => {
-    console.log(data)
-    console.log(data.room)
-    io.emit('callAccepted', data.signal);
-  });
-
   socket.on('logout', (data) => {
     // Deletes user from set and sends online users to client so redux is updated.
     users.delete(data);

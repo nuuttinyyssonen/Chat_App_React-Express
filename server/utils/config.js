@@ -6,5 +6,8 @@ module.exports = {
   SECRET: process.env.SECRET,
   AWS_KEY: process.env.ACCESSKEY,
   AWS_KEY_ID: process.env.ACCESSKEYID,
-  AWS_REGION: process.env.REGION
+  AWS_REGION: process.env.REGION,
+  MAIL_USER: process.env.USER_MAIL,
+  MAIL_PASS: process.env.PASS_MAIL,
+  EMAIL: process.env.EMAIL
 };
