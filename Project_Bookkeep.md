@@ -18,4 +18,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 7.12.2023  |        8        | Refactored whole Profile part of the project. Usernames, emails and other stuff can be changed from client side now. Configured AWS and images are now being sent to AWS and links saved in mongo. |
 | 8.12.2023  |        6        | Users can now see each others profile pics and upload new ones. All images are in AWS bucket. Made some error handling and lot of refactoring for backend. Also documented whole backend.
 | 11.12.2023 |        8        | Started working on video calls. Made required socket in backend. Also made frontend components to video calls. Lot of ideas and figuring out how to use WebRTC to make this work flawlessly. |
-|   Total    |       114        |
+| 12.12.2023 |        8        | Dropped the whole video calls idea. Configured mail server to project. Made routes for sending link to change password and route to change it. Links are controlled with jwt token. Made also all of this to work in client side. |
+|   Total    |       122        |
