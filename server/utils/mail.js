@@ -1,6 +1,5 @@
 const { MAIL_USER, MAIL_PASS } = require('./config');
 const nodemailer = require('nodemailer');
-const Mailgen = require('mailgen');
 
 const transport = nodemailer.createTransport({
     host: "sandbox.smtp.mailtrap.io",
@@ -11,12 +10,4 @@ const transport = nodemailer.createTransport({
     }
 });
 
-const MailGenerator = new Mailgen({
-    theme: 'default',
-    product: {
-        name: 'Test Email',
-        link: 'https://mailgen.js/'
-    }
-});
-
-module.exports = { MailGenerator, transport };
+module.exports = { transport };

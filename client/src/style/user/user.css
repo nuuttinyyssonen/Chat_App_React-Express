@@ -15,12 +15,12 @@
 
 .paragraph {
     color: #71797E;
-    padding-bottom: 3vh;
+    padding-bottom: 2vh;
     max-width: 30vh;
     text-align: center;
 }
 
-.login-form {
+.user-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,12 +28,12 @@
     gap: 30px
 }
 
-.login-input {
+.user-input {
     padding: 15px;
     width: 45vh;
 }
 
-.login-btn {
+.action-btn {
     padding: 10px;
     border-radius: 25px;
     border-style: none;
@@ -56,4 +56,13 @@
 .errorMsg {
     text-align: center;
     color: red;
+}
+
+.successMsg {
+    text-align: center;
+    color: #4BB543;
+}
+
+.title {
+    font-weight: 200;
 }
