@@ -15,7 +15,7 @@ const CreateGroupChatMap = ({ username, setUsername, users, addToGroup, removeFr
           <button onClick={() => removeFromGroup(user)}>Remove</button>
         </div>
       ))}
-      <button onClick={() => createGroup()}>Create</button>
+      <button onClick={() => createGroup(group)}>Create</button>
       <p className="errorMsg">{errorMessage}</p>
     </div>
   );

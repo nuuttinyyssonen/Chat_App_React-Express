@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import profilePic from '../../style/images/Profile_picture.png';
 import useGetUsers from '../../hooks/useGetUsers';
-import chatService from '../../services/chatService';
 import CreateGroupChatMap from './CreateGroupChatMap';
+import useCreateGroup from '../../hooks/useCreateGroup';
 const CreateGroupChat = () => {
   const [group, setGroup] = useState([]);
   const [username, setUsername] = useState('');
   const users = useGetUsers(username);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [createGroup, errorMessage] = useCreateGroup();
 
   const addToGroup = (user) => {
     if (group.includes(user)) {
@@ -18,19 +18,6 @@ const CreateGroupChat = () => {
 
   const removeFromGroup = (user) => {
     setGroup(group.filter(person => person !== user));
-  };
-
-  const createGroup = async () => {
-    try {
-      const data = await chatService.createGroupChat(group);
-    } catch (error) {
-      if (error.response?.data?.error) {
-        setErrorMessage(error.response.data.error);
-        setTimeout(() => {
-          setErrorMessage('');
-        }, [5000]);
-      }
-    }
   };
 
   return (

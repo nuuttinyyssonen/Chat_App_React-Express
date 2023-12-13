@@ -1,5 +1,5 @@
 import profile from '../../style/images/Profile_picture.png';
-import { SlUserFollow, SlSocialTwitter, SlSocialInstagram, SlSocialLinkedin, SlSettings, SlPencil, SlTrash } from 'react-icons/sl';
+import { SlUserFollow, SlSocialTwitter, SlSocialInstagram, SlSocialLinkedin, SlSettings, SlPencil } from 'react-icons/sl';
 
 const ProfileHeader = ({ user, addFriend, isAuthenticated, deleteProfile, setSelectedImage, changeProfilePic, selectedImage, image, currentUser, isAlreadyFriend }) => {
   return (

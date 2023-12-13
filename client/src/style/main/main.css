@@ -28,7 +28,7 @@ html, body {
 .newChat {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
     margin-top: auto;
     padding: 20px;
 }

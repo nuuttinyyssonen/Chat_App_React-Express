@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     socket.emit('joinedRoom', room);
   });
 
-  socket.on('typing', async (data) => {
+  socket.on('typing', (data) => {
     // Sends specific users a text if user is typing.
     const { room, typing } = data;
     if (typing === true) {
