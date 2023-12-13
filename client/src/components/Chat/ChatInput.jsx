@@ -1,7 +1,5 @@
 import { SlPaperPlane } from 'react-icons/sl';
 import { IoAdd } from 'react-icons/io5';
-import { IoIosCall } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
 const ChatInput = ({
   handleKeyDown,
   typingText,
@@ -12,30 +10,27 @@ const ChatInput = ({
   setSelectedImage,
   id
 }) => {
-  const navigate = useNavigate();
-  const handleCall = () => {
-    navigate(`/chat/videoCall/${id}`);
-  };
+  console.log(id)
   return (
     <div>
       {!typingText.text?.includes(user.data?.username) && id === typingText.room && <p className="typingText">{typingText.text}</p>}
-      <input
+      {id && <input
         onKeyDown={handleKeyDown}
         id='chatInput'
         className="chatInput"
         placeholder="Write something..."
         value={message} onChange={(e) => setMessage(e.target.value)}
-      />
-      <SlPaperPlane id='send' className="send-btn" onClick={sendMessage}/>
-      <label htmlFor='fileInput' style={{ cursor: 'pointer' }}>
+      />}
+      {id && <SlPaperPlane id='send' className="send-btn" onClick={sendMessage}/>}
+      {id && <label htmlFor='fileInput' style={{ cursor: 'pointer' }}>
         <IoAdd className='send-btn'/>
-      </label>
-      <input
+      </label>}
+      {id && <input
         type='file'
         id='fileInput'
         style={{ display: 'none' }}
         onChange={e => setSelectedImage(e.target.files[0])}
-      />
+      />}
     </div>
   );
 };

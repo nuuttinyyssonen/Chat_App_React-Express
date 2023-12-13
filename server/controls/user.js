@@ -5,6 +5,8 @@ const { tokenExtractor } = require('../utils/middleware');
 const upload = require('../utils/multer');
 const s3 = require('../utils/aws');
 const { v4: uuidv4 } = require('uuid');
+const ChatMessage = require('../models/chatMessage');
+const ChatImage = require('../models/chatImage');
 
 // Gets one user by username
 userRouter.get('/:username', async (req, res) => {
@@ -53,8 +55,41 @@ userRouter.get('/', tokenExtractor, async (req, res) => {
 });
 
 // Deletes authenticated user based on the token. User is queried with the token.
+// Deleting user also deletes it's chats and chats' messages and images.
 userRouter.delete('/', tokenExtractor, async (req, res, next) => {
+  const user = await User.findById(req.decodedToken.id);
+  const friends = user.friends;
+  const chatsInUser = user.chats;
+  // Querying the users chats and friends.
+  const chats = await Chat.find({ _id: { $in: chatsInUser } });
+  const users = await User.find({ _id: { $in: friends } });
+
   try {
+    // Outer loop goes through one user at a time and filters current user out of users friend array.
+    for (let i = 0; i < users.length; i++) {
+      users[i].friends = users[i].friends.filter(friend => friend.toString() !== user._id.toString());
+
+      // Inner loop goes through one chat at a time and deletes messages and images in that chat.
+      for (let j = 0; j < chats.length; j++) {
+        // Checks if current loop variables chat is groupchat or not.
+        if (chats[j].users.length === 2) {
+          users[i].chats = users[i].chats.filter(chat => chat.toString() !== chats[j]._id.toString());
+
+          // Deleting messages from chat.
+          const messages = await ChatMessage.find({ chat: chats[j]._id });
+          const messageIds = messages.map(message => message._id);
+          await ChatMessage.deleteMany({ _id: { $in: messageIds } });
+
+          // Deleting images from chat.
+          const images = await ChatImage.find({ chat: chats[j]._id });
+          const imageIds = images.map(image => image._id);
+          await ChatImage.deleteMany({ _id: { $in: imageIds } });
+
+          await chats[i].deleteOne();
+        }
+      }
+      await users[i].save();
+    }
     await User.findByIdAndDelete(req.decodedToken.id);
     res.status(200).send('User was successfully deleted');
   } catch (error) {

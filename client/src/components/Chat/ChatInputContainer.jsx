@@ -13,8 +13,9 @@ const ChatInputContainer = ({ typingText, user, id }) => {
   const chat = useGetChat();
 
   const sendMessage = () => {
-    if (!id) {
+    if (!chat.chat?._id || !id) {
       setMessage('');
+      setSelectedImage("");
       return;
     }
     if (selectedImage && user) {
@@ -40,7 +41,7 @@ const ChatInputContainer = ({ typingText, user, id }) => {
   };
 
   const handleKeyDown = (e) => {
-    if (!id) {
+    if (!chat.chat?._id || !id) {
       return;
     }
     if (e.which !== 13) {
