@@ -1,7 +1,8 @@
-const CreateGroupChatMap = ({ username, setUsername, users, addToGroup, removeFromGroup, createGroup, group, profilePic, errorMessage }) => {
+import { SlTrash } from 'react-icons/sl';
+const CreateGroupChatMap = ({ username, setUsername, users, addToGroup, removeFromGroup, createGroup, group, profilePic, errorMessage, successMessage }) => {
   return (
     <div>
-      <input placeholder="search for users..." value={username} onChange={e => setUsername(e.target.value)}/>
+      <input className="search-input" placeholder="search for users..." value={username} onChange={e => setUsername(e.target.value)}/>
       {users.users && users.users.map((user, key) => (
         <div className="userInList" key={key} onClick={() => addToGroup(user)}>
           <img className="profilePicInUserList" src={profilePic} alt={`Profile for ${user}`} />
@@ -12,11 +13,12 @@ const CreateGroupChatMap = ({ username, setUsername, users, addToGroup, removeFr
         <div className="userInList" key={key}>
           <img className="profilePicInUserList" src={profilePic} alt={`Profile for ${user}`} />
           <h2 className="usernameInList">{user}</h2>
-          <button onClick={() => removeFromGroup(user)}>Remove</button>
+          <SlTrash onClick={() => removeFromGroup(user)}/>
         </div>
       ))}
-      <button onClick={() => createGroup(group)}>Create</button>
+      <button className='createGroupBtn' onClick={() => createGroup()}>Create</button>
       <p className="errorMsg">{errorMessage}</p>
+      <p className="successMsg">{successMessage}</p>
     </div>
   );
 };

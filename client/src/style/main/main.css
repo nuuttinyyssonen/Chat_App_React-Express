@@ -68,4 +68,13 @@ html, body {
     opacity: 1;
     max-height: 100px;
 }
-  
+
+.createGroupBtn {
+    color: white;
+    background-color: #4399FF;
+    border: 1px solid #4399FF;
+    margin-top: 10px;
+    padding: 1vh;
+    border-radius: 10px;
+    margin-left: 5px;
+}

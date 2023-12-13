@@ -1,13 +1,13 @@
 import profile from '../../style/images/Profile_picture.png';
 import { SlUserFollow, SlSocialTwitter, SlSocialInstagram, SlSocialLinkedin, SlSettings, SlPencil } from 'react-icons/sl';
 
-const ProfileHeader = ({ user, addFriend, isAuthenticated, deleteProfile, setSelectedImage, changeProfilePic, selectedImage, image, currentUser, isAlreadyFriend }) => {
+const ProfileHeader = ({ user, addFriend, isAuthenticated, deleteProfile, setSelectedImage, changeProfilePic, selectedImage, image, isAlreadyFriend }) => {
   return (
     <div className='profileHeader'>
 
       <div className='ProfileImageContainer'>
         {!selectedImage && !user.data?.profileImage && <img className='ProfileImage' style={{ width: '200px', height: '200px', borderRadius: '50%', marginTop: '10px' }} src={profile}/>}
-        {!selectedImage && user.data?.profileImage && <img className='ProfileImage' style={{ width: '200px', height: '200px', borderRadius: '50%', marginTop: '10px' }} src={user.data?.profileImage}/>}
+        {!selectedImage && user.data?.profileImage && image && <img className='ProfileImage' style={{ width: '200px', height: '200px', borderRadius: '50%', marginTop: '10px' }} src={image}/>}
         {selectedImage && (
           <div className='imagePreview'>
             <img

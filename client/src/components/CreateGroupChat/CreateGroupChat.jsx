@@ -7,7 +7,7 @@ const CreateGroupChat = () => {
   const [group, setGroup] = useState([]);
   const [username, setUsername] = useState('');
   const users = useGetUsers(username);
-  const [createGroup, errorMessage] = useCreateGroup();
+  const [createGroup, errorMessage, successMessage] = useCreateGroup();
 
   const addToGroup = (user) => {
     if (group.includes(user)) {
@@ -20,6 +20,11 @@ const CreateGroupChat = () => {
     setGroup(group.filter(person => person !== user));
   };
 
+  const handleCreateGroup = () => {
+    createGroup(group);
+    setGroup([]);
+  };
+
   return (
     <CreateGroupChatMap
       username={username}
@@ -27,10 +32,11 @@ const CreateGroupChat = () => {
       users={users}
       addToGroup={addToGroup}
       removeFromGroup={removeFromGroup}
-      createGroup={createGroup}
+      createGroup={handleCreateGroup}
       group={group}
       profilePic={profilePic}
       errorMessage={errorMessage}
+      successMessage={successMessage}
     />
   );
 };

@@ -56,7 +56,8 @@ chatRouter.post('/groupChat', tokenExtractor, async (req, res, next) => {
       users[i].chats.push(groupChat._id);
       await users[i].save();
     }
-    res.status(200).json(chat);
+    // This sends updated user because chats are queried via user
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
