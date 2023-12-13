@@ -11,7 +11,7 @@ const LoginForm = ({ username, setUsername, password, setPassword, onSubmit, err
         <input id='password' type='password' className='user-input' placeholder="Password..." value={password} onChange={(e) => setPassword(e.target.value)}/>
         <button id='loginBtn' className='action-btn' type="submit">Log In</button>
       </form>
-      <p className='link'>Can&apos;t remember your password? <Link id='signup-link' to='/reset'>Reset your password here</Link></p>
+      <p className='link'>Can&apos;t remember your password? <Link id='reset-link' to='/reset'>Reset your password here</Link></p>
       <p className='link'>Don&apos;t have an account yet? <Link id='signup-link' to='/signup'>Sign up here</Link></p>
     </div>
   );

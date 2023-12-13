@@ -3,7 +3,7 @@ import Profile from '../../style/images/Profile_picture.png';
 import useGetChat from '../../hooks/useGetChat';
 import { useState, useRef, useEffect } from 'react';
 import '../../style/main/animations.css';
-import { MdSaveAlt } from "react-icons/md";
+import { MdSaveAlt } from 'react-icons/md';
 import chatService from '../../services/chatService';
 
 const ChatHeader = ({ user }) => {
@@ -13,9 +13,9 @@ const ChatHeader = ({ user }) => {
     animationFillMode: 'forwards'
   };
   const [isEditMode, setIsEditMode] = useState(false);
-  const [chatNameInput, setChatNameInput] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [chatName, setChatName] = useState("");
+  const [chatNameInput, setChatNameInput] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [chatName, setChatName] = useState('');
 
   const id = useParams().id;
   const chat = useGetChat(id);
@@ -25,8 +25,8 @@ const ChatHeader = ({ user }) => {
   const isGrourpChat = chat.chat?.users.length > 2;
 
   useEffect(() => {
-    setChatName(chat.chat?.chatName)
-  }, [chat])
+    setChatName(chat.chat?.chatName);
+  }, [chat]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -53,10 +53,10 @@ const ChatHeader = ({ user }) => {
       setIsEditMode(false);
     } catch (error) {
       if (error.response?.data?.error) {
-        setErrorMessage(error.response.data.error)
+        setErrorMessage(error.response.data.error);
         setTimeout(() => {
-          setErrorMessage("");
-        }, [5000])
+          setErrorMessage('');
+        }, [5000]);
       }
     }
   };

@@ -45,10 +45,15 @@
 }
 
 .link {
-    padding-top: 10vh;
+    padding-top: 5vh;
 }
 
 #signup-link {
+    color: #5095F6;
+    text-decoration: none;
+}
+
+#reset-link {
     color: #5095F6;
     text-decoration: none;
 }

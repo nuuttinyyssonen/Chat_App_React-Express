@@ -68,7 +68,7 @@ const changeProfilePicture = async (data) => {
     }
   });
   return response.data;
-}
+};
 
 const updateUserField = async (field, data) => {
   const token = getToken();
@@ -77,9 +77,9 @@ const updateUserField = async (field, data) => {
       Authorization: `bearer ${token}`,
       'Content-Type': 'application/json'
     }
-  })
+  });
   return response.data;
-}
+};
 
 export default {
   createUser,

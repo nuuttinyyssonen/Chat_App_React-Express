@@ -83,7 +83,7 @@ const ChatSideBar = () => {
       handleNewGroupChat={handleNewGroupChat}
       handleDropDown={handleDropDown}
       undoCreatePrivateChat={undoCreatePrivateChat}
-  />
+    />
   );
 };
 

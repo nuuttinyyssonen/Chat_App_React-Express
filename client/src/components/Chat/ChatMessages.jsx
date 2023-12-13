@@ -5,7 +5,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) =>
 
   const chatHistory = () => {
     if (chat.chat && chat.chat.messages && chat.chat.images && user.data) {
-      const allItems = [...chat.chat.messages, ...chat.chat.images]
+      const allItems = [...chat.chat.messages, ...chat.chat.images];
       const sortedItems = allItems.sort((a, b) => new Date(a.date) - new Date(b.date));
 
       return sortedItems.map((item, key) => {
@@ -26,8 +26,8 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) =>
           );
         } else if (item.dataUrl) {
           return (
-          <div key={key}>
-            <div className={item.user._id === user.data._id ? 'currentUserMsgs image' : 'otherUserMsgs image'}>
+            <div key={key}>
+              <div className={item.user._id === user.data._id ? 'currentUserMsgs image' : 'otherUserMsgs image'}>
                 {chat.chat.users.length > 2 && item.user?._id !== user.data?._id && <p>{item.user.username}</p>}
                 {item.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage image" onClick={() => handleDeleteImage(chat.chat._id, item._id)} />}
                 <img src={item.dataUrl} style={{ width: '300px' }} alt="User Uploaded" />
@@ -38,9 +38,9 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) =>
             </div>
           );
         }
-      return null;
-    })
-  }
+        return null;
+      });
+    }
     return null;
   };
 

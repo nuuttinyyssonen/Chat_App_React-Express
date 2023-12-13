@@ -14,12 +14,12 @@ const ChatInputContainer = ({ typingText, user, id }) => {
 
   const sendMessage = () => {
     if (!id) {
-      setMessage("");
+      setMessage('');
       return;
     }
     if (selectedImage && user) {
       const reader = new FileReader();
-      console.log(selectedImage.name)
+      console.log(selectedImage.name);
       reader.onload = () => {
         const arrayBuffer = reader.result;
         const buffer = Buffer.from(arrayBuffer);

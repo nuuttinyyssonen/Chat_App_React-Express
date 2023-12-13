@@ -13,11 +13,11 @@ const ChatArea = ({ typingText, user, id }) => {
     });
     socket.on('receive_image', (data) => {
       chat.addImage(data);
-    })
+    });
     return () => {
       socket.off('receive_message');
       socket.off('receive_image');
-    }
+    };
   }, [socket]);
 
   const handleDeleteMessage = async (chatId, messageId) => {
@@ -37,10 +37,10 @@ const ChatArea = ({ typingText, user, id }) => {
         const data = await chatService.deleteImage(chatId, imageId);
         chat.setChat(data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-  }
+  };
 
   return (
     <div className="chatContainer">

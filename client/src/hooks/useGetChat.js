@@ -36,7 +36,7 @@ const useGetChat = () => {
     setChat((prevChat) => ({
       ...prevChat,
       images: [...prevChat.images, newImage]
-    }))
+    }));
   };
 
   useEffect(() => {
