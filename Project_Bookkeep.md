@@ -19,4 +19,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 8.12.2023  |        6        | Users can now see each others profile pics and upload new ones. All images are in AWS bucket. Made some error handling and lot of refactoring for backend. Also documented whole backend.
 | 11.12.2023 |        8        | Started working on video calls. Made required socket in backend. Also made frontend components to video calls. Lot of ideas and figuring out how to use WebRTC to make this work flawlessly. |
 | 12.12.2023 |        8        | Dropped the whole video calls idea. Configured mail server to project. Made routes for sending link to change password and route to change it. Links are controlled with jwt token. Made also all of this to work in client side. |
-|   Total    |       122        |
+| 13.12.2023 |        7        | Added lot of css to the project. Handled some of the biggest errors in project. Deleting user used to break app 'cause of the empty chats messages and all that. it's fixed now. Did some refactoring and other error handling. a lot of small but important things to prepare for deployment. |
+|   Total    |       129        |
