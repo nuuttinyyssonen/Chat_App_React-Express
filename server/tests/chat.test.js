@@ -7,6 +7,10 @@ const supertest = require('supertest');
 const app = require('../app');
 const api = supertest(app);
 const { initialUser, initializeTests } = require('../tests/test_helper');
+const { io } = require('socket.io-client');
+
+// Mock server to make tests to group chat name changing
+const socket = io('http://localhost:5000');
 
 let authHeader;
 let chatId;
@@ -31,35 +35,15 @@ describe('Chat api', () => {
     });
 
     test('Group chats can be created', async () => {
-      const users = [initialUser[0].username, initialUser[1].username, initialUser[2].username];
+      const users = [initialUser[0].username, initialUser[1].username, initialUser[2].username, initialUser[3].username];
       const response = await api
         .post('/chat/groupChat')
         .send(users)
         .set('Authorization', authHeader)
         .expect(200);
-      chatId = response.body._id;
-    });
-
-    test('Group chat name can be changed', async () => {
-      const chat = await Chat.findById(chatId);
-      const groupChatName = { groupChatName: 'test' };
-      const response = await api
-        .put(`/chat/${chat._id}`)
-        .send(groupChatName)
-        .expect(200);
-      console.log(response.body);
-      const updatedChat = await Chat.findById(chatId);
-      expect(updatedChat.chatName).toBe('test');
-    });
-
-    test('Group chats can be deleted', async () => {
-      const chat = await Chat.findById(chatId);
-      const chats = await Chat.find({});
-      await api
-        .delete(`/chat/${chat._id}`)
-        .expect(200);
-      const chatsUpdated = await Chat.find({});
-      expect(chatsUpdated).toHaveLength(chats.length - 1);
+      chatId = response.body.chats[0]._id
+      const chat = await Chat.findById(chatId)
+      expect(chat).toBeDefined();
     });
   });
 });

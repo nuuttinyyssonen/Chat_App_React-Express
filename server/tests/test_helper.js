@@ -25,6 +25,13 @@ const initialUser = [
     username: 'test2',
     password: 'secret',
     email: 'test2@gmail.com'
+  },
+  {
+    firstName: 'test3',
+    lastName: 'test3',
+    username: 'test3',
+    password: 'secret',
+    email: 'test3@gmail.com'
   }
 ];
 
@@ -39,10 +46,12 @@ const initializeTests = async () => {
   await User.deleteOne({ username: 'tester' });
   await User.deleteOne({ username: 'test1' });
   await User.deleteOne({ username: 'test2' });
+  await User.deleteOne({ username: 'test3' });
 
   await api.post('/signup').send(initialUser[0]);
   await api.post('/signup').send(initialUser[1]);
   await api.post('/signup').send(initialUser[2]);
+  await api.post('/signup').send(initialUser[3]);
   const user = initialUser[1];
   const response = await api.post('/login').send(user);
   const authHeader = `bearer ${response.body.token}`;

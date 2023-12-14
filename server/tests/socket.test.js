@@ -72,10 +72,13 @@ describe('Socket', () => {
     // Message record is deleted and the id is deleted from chat record as well.
     test('message can be deleted', async () => {
       const chat = await Chat.findById(chatId);
-      const message = await ChatMessage.findById(messageId);
-      await api
-        .delete(`/chat/${chat._id}/message/${message._id}`)
-        .expect(200);
+      const updatedChatPromise = new Promise((resolve) => {
+        socket.on('updated_chat', (data) => {
+          resolve(data);
+        })
+      });
+      socket.emit('delete_message', { message: messageId, room: chatId });
+      await updatedChatPromise;
       const updatedChat = await Chat.findById(chatId);
       expect(updatedChat.messages).toHaveLength(chat.messages.length - 1);
     });
