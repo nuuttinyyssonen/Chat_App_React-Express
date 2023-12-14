@@ -5,6 +5,8 @@ const ChatArea = ({ typingText, user, id, chat }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   socket.emit('joinRoom', id);
+
+  // updates chat's state based on sockets.
   useEffect(() => {
     socket.on('receive_message', (data) => {
       chat.addMessage(data);

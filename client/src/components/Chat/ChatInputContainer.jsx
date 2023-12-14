@@ -7,11 +7,11 @@ import ImagePreview from './ImagePreview';
 
 const ChatInputContainer = ({ typingText, user, id }) => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [typing, setTyping] = useState(false);
   const [message, setMessage] = useState('');
 
   const chat = useGetChat();
 
+  // This handles both sending message and image.
   const sendMessage = () => {
     if (!chat.chat?._id || !id) {
       setMessage('');
@@ -20,7 +20,6 @@ const ChatInputContainer = ({ typingText, user, id }) => {
     }
     if (selectedImage && user) {
       const reader = new FileReader();
-      console.log(selectedImage.name);
       reader.onload = () => {
         const arrayBuffer = reader.result;
         const buffer = Buffer.from(arrayBuffer);
@@ -36,16 +35,15 @@ const ChatInputContainer = ({ typingText, user, id }) => {
 
   let timeout;
   const typingTimeout = () => {
-    setTyping(false);
     socket.emit('typing', { user, typing: false, room: chat.chat._id });
   };
 
+  // sends data of typing indicator if anything other than enter is pressed and user is in chat room.
   const handleKeyDown = (e) => {
     if (!chat.chat?._id || !id) {
       return;
     }
     if (e.which !== 13) {
-      setTyping(true);
       socket.emit('typing', { user, typing: true, room: chat.chat._id });
       clearTimeout(timeout);
       timeout = setTimeout(typingTimeout, 3000);

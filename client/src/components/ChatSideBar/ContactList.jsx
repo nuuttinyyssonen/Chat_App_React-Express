@@ -33,7 +33,7 @@ const ContactList = ({ chats, data }) => {
 
       return (
         <div id='friend' className='friendsList' key={key} onClick={() => navigateToChat(chats[key]._id)}>
-          <GoDotFill className={isOnline[userIndex] ? 'onlineStatus' : 'offlineStatus'}/>
+          {userIndex !== -1 && <GoDotFill className={isOnline[userIndex] ? 'onlineStatus' : 'offlineStatus'}/>}
           {!chat.users[userIndex]?.profileImage && <img className="profilePicInUserList" src={profilePic} style={{ width: '60px' }} />}
           {chat.users[userIndex]?.profileImage && <img className="profilePicInUserList" src={chat.users[userIndex]?.profileImage} style={{ width: '60px', height: '60px', borderRadius: '50%' }} />}
           <div className='friendDetails'>

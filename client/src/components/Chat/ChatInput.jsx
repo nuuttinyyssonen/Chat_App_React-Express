@@ -12,7 +12,9 @@ const ChatInput = ({
 }) => {
   return (
     <div>
+      {/* typing variable contains the username and the indicator is only displayed if username is not same as current user 's username */}
       {!typingText.text?.includes(user.data?.username) && id === typingText.room && <p className="typingText">{typingText.text}</p>}
+      {/* all below are only renderd when inside of chat room. */}
       {id && <input
         onKeyDown={handleKeyDown}
         id='chatInput'
