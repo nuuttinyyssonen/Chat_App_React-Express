@@ -72,3 +72,17 @@
 .ProfileImageContainer:hover .editProfilePic {
     opacity: 1;
 }
+
+.profilePicActionButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.profilePicActionBtn {
+    color: white;
+    background-color: #4399FF;
+    border: 1px solid #4399FF;
+    padding: 1vh;
+    border-radius: 10px;
+}

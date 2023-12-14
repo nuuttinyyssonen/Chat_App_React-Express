@@ -1,7 +1,7 @@
 import ProfileHeader from './ProfileHeader';
 import { useEffect, useState } from 'react';
 import userService from '../../services/userService';
-const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, username, currentUser }) => {
+const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, username, currentUser, errorMessage, successMessage }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [image, setImage] = useState();
 
@@ -49,6 +49,8 @@ const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, us
         image={image}
         currentUser={currentUser}
         isAlreadyFriend={isAlreadyFriend}
+        errorMessage={errorMessage}
+        successMessage={successMessage}
       />
     </div>
   );

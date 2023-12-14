@@ -11,7 +11,7 @@ const Profile = () => {
   const username = useParams().username;
   const user = useSearchedUser(username);
   const currentUser = useGetUserData();
-  const [newFriend] = useAddFriend();
+  const [newFriend, errorMessage, successMessage] = useAddFriend();
   const navigate = useNavigate();
   const isAuthenticated = currentUser.data && currentUser.data?._id === user.data?._id;
 
@@ -24,6 +24,8 @@ const Profile = () => {
           currentUser={currentUser}
           isAuthenticated={isAuthenticated}
           newFriend={newFriend}
+          errorMessage={errorMessage}
+          successMessage={successMessage}
           navigate={navigate}
           username={username}
         />
