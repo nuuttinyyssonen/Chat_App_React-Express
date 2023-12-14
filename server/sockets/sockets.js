@@ -2,6 +2,7 @@ const { Server } = require('socket.io');
 
 const { handleDeleteMessage, handleDeleteImage } = require('./deleteHandlers');
 const { handleSendMessage, handleTyping } = require('./messageHandlers');
+const { handleGroupNameChange } = require('./groupHandlers');
 const handleSendImage = require('./imageHandlers');
 
 // Socket server configuration with CORS and allowed methods.
@@ -40,6 +41,9 @@ io.on('connection', (socket) => {
 
   // Deletes images real-time
   socket.on('delete_image', (data) => handleDeleteImage(io, data));
+
+  // Updates group's name real-time
+  socket.on('groupName', (data) => handleGroupNameChange(io, data));
 
   socket.on('logout', (data) => {
     // Deletes user from set and sends online users to client so redux is updated.

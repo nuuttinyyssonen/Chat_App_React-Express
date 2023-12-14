@@ -5,10 +5,11 @@ import { useState, useEffect } from 'react';
 import socket from '../../socketConfig';
 import { useParams } from 'react-router-dom';
 import useGetUserData from '../../hooks/useGetUserData';
+import useGetChat from '../../hooks/useGetChat';
 
 const Chat = () => {
   const [typingText, setTypingText] = useState('');
-
+  const chat = useGetChat();
   const user = useGetUserData();
   const id = useParams().id;
 
@@ -45,11 +46,13 @@ const Chat = () => {
     <div className="chat-container">
       <ChatHeader
         user={user}
+        chat={chat}
       />
       <ChatArea
         typingText={typingText}
         id={id}
         user={user}
+        chat={chat}
       />
       <ChatInputContainer
         typingText={typingText}

@@ -7,11 +7,11 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, erro
     if (chat.chat && chat.chat.messages && chat.chat.images && user.data) {
       const allItems = [...chat.chat.messages, ...chat.chat.images];
       const sortedItems = allItems.sort((a, b) => new Date(a.date) - new Date(b.date));
+      console.log(chat.chat.chatName)
 
       return sortedItems.map((item, key) => {
         const itemDate = new Date(item.date);
         const itemMinutes = itemDate.getMinutes() < 10 ? '0' + itemDate.getMinutes() : itemDate.getMinutes();
-        console.log(item)
         if (item.message) {
           return (
             item.user && item.chat === chat.chat?._id && <div key={key}>

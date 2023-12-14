@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import socket from '../../socketConfig';
-import useGetChat from '../../hooks/useGetChat';
 import ChatMessages from './ChatMessages';
-const ChatArea = ({ typingText, user, id }) => {
-  const chat = useGetChat();
+const ChatArea = ({ typingText, user, id, chat }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   socket.emit('joinRoom', id);
@@ -15,6 +13,7 @@ const ChatArea = ({ typingText, user, id }) => {
       chat.addImage(data);
     });
     socket.on('updated_chat', (data) => {
+      console.log(data)
       chat.setChat(data)
     });
     socket.on('error', (data) => {

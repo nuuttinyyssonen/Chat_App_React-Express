@@ -8,3 +8,4 @@ Messaging application that can connect people real-time from all around the worl
  - Bootstrap
  - Socket.io
  - AWS
+ - Redux
