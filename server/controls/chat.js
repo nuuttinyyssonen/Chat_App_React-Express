@@ -33,7 +33,6 @@ chatRouter.get('/:id', async (req, res, next) => {
   }
 });
 
-
 // Creating group chat and adds created chat id to every users chat array.
 chatRouter.post('/groupChat', tokenExtractor, async (req, res, next) => {
   const usernames = req.body;

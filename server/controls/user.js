@@ -72,7 +72,8 @@ userRouter.delete('/', tokenExtractor, async (req, res, next) => {
       // Inner loop goes through one chat at a time and deletes messages and images in that chat.
       for (let j = 0; j < chats.length; j++) {
         // Checks if current loop variables chat is groupchat or not.
-        if (chats[j].users.length === 2) {
+        // If it's group chat of 3 people we want to delete it cause group chats needs to be 3 or more.
+        if (chats[j].users.length === 2 || chats[j].users.length === 3) {
           users[i].chats = users[i].chats.filter(chat => chat.toString() !== chats[j]._id.toString());
 
           // Deleting messages from chat.
@@ -85,7 +86,11 @@ userRouter.delete('/', tokenExtractor, async (req, res, next) => {
           const imageIds = images.map(image => image._id);
           await ChatImage.deleteMany({ _id: { $in: imageIds } });
 
-          await chats[i].deleteOne();
+          await chats[j].deleteOne();
+          // If chat is group chat and contains more than 3 people, filter the deleted user out of it.
+        } else if (chats[j].users.length > 3) {
+          chats[j].users = chats[j].users.filter(otherUser => otherUser.toString() !== user._id.toString());
+          await chats[j].save();
         }
       }
       await users[i].save();

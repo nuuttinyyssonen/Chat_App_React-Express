@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { SlTrash } from 'react-icons/sl';
-const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) => {
+const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, errorMessage }) => {
   const chatContainerRef = useRef(null);
 
   const chatHistory = () => {
@@ -11,13 +11,14 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) =>
       return sortedItems.map((item, key) => {
         const itemDate = new Date(item.date);
         const itemMinutes = itemDate.getMinutes() < 10 ? '0' + itemDate.getMinutes() : itemDate.getMinutes();
+        console.log(item)
         if (item.message) {
           return (
-            item.user && <div key={key}>
+            item.user && item.chat === chat.chat?._id && <div key={key}>
               <div className={item.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
                 {chat.chat.users.length > 2 && item.user._id !== user.data._id && <p>{item.user.username}</p>}
                 {item.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage" onClick={() => handleDeleteMessage(chat.chat._id, item._id)} />}
-                <p className="messageCurrent">{item.message}</p>
+                {item.chat === chat.chat._id && <p className="messageCurrent">{item.message}</p>}
               </div>
               <div className={item.user._id === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
                 <p>{itemDate.getHours()}:{itemMinutes}</p>
@@ -51,6 +52,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage }) =>
   return (
     <div ref={chatContainerRef} className="chatAreaContainer">
       {chatHistory()}
+      {errorMessage && <p className='errorMsg'>{errorMessage}</p>}
     </div>
   );
 };

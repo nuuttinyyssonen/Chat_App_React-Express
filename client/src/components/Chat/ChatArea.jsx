@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import socket from '../../socketConfig';
 import useGetChat from '../../hooks/useGetChat';
 import ChatMessages from './ChatMessages';
 const ChatArea = ({ typingText, user, id }) => {
   const chat = useGetChat();
+  const [errorMessage, setErrorMessage] = useState("");
 
   socket.emit('joinRoom', id);
   useEffect(() => {
@@ -15,11 +16,18 @@ const ChatArea = ({ typingText, user, id }) => {
     });
     socket.on('updated_chat', (data) => {
       chat.setChat(data)
-    })
+    });
+    socket.on('error', (data) => {
+      setErrorMessage(data);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000)
+    });
     return () => {
       socket.off('receive_message');
       socket.off('receive_image');
       socket.off('updated_chat');
+      socket.off('error');
     };
   }, [socket]);
 
@@ -43,6 +51,7 @@ const ChatArea = ({ typingText, user, id }) => {
         typingText={typingText}
         handleDeleteMessage={handleDeleteMessage}
         handleDeleteImage={handleDeleteImage}
+        errorMessage={errorMessage}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 const { describe, beforeEach, test, expect, afterAll } = require('@jest/globals');
 const User = require('../models/user');
 const Chat = require('../models/chat');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const supertest = require('supertest');
 const app = require('../app');

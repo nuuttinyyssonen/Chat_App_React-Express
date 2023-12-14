@@ -69,7 +69,7 @@ describe('Socket', () => {
       expect(chat.messages[0].message).toBe('test');
     });
 
-    // Message record is deleted and the id is deleted from chat record as well. 
+    // Message record is deleted and the id is deleted from chat record as well.
     test('message can be deleted', async () => {
       const chat = await Chat.findById(chatId);
       const message = await ChatMessage.findById(messageId);

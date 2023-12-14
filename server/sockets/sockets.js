@@ -27,13 +27,13 @@ io.on('connection', (socket) => {
   });
 
   // Sends messages real-time
-  socket.on('message', (data) => handleSendMessage(io, data))
+  socket.on('message', (data) => handleSendMessage(io, data));
 
   // Sends typing indicator real-time
-  socket.on('typing', (data) => handleTyping(io, data))
+  socket.on('typing', (data) => handleTyping(io, data));
 
   // Sends images real-time
-  socket.on('image', (data) => handleSendImage(io, data))
+  socket.on('image', (data) => handleSendImage(io, data));
 
   // Deletes messages real-time
   socket.on('delete_message', (data) => handleDeleteMessage(io, data));
