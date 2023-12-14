@@ -5,11 +5,12 @@ const useCreateGroup = () => {
     const [successMessage, setSuccessMessage] = useState("");
     const createGroup = async (group) => {
         try {
-            await chatService.createGroupChat(group);
+            const response = await chatService.createGroupChat(group);
             setSuccessMessage("Group chat created successfully!");
             setTimeout(() => {
               setSuccessMessage("");
             }, 5000);
+            return response;
         } catch (error) {
           if (error.response?.data?.error) {
             setErrorMessage(error.response.data.error);

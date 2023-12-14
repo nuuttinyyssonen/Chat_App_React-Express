@@ -38,7 +38,7 @@ const useGetUserData = () => {
     getUserData();
   }, []);
 
-  return { data, setEmail, setUsername, setProfilePic };
+  return { data, setEmail, setUsername, setProfilePic, setData };
 };
 
 export default useGetUserData;

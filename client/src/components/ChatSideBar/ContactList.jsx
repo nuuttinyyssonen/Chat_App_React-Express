@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { GoDotFill } from 'react-icons/go';
 import { initalizeUsers } from '../../reducers/onlineUserReducer';
 
-const FriendsList = ({ chats, data }) => {
+const ContactList = ({ chats, data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const navigateToChat = (id) => {
@@ -62,4 +62,4 @@ const FriendsList = ({ chats, data }) => {
   );
 };
 
-export default FriendsList;
+export default ContactList;

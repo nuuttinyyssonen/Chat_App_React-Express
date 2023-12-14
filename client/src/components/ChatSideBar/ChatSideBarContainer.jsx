@@ -1,7 +1,7 @@
 import Navbar from './Navbar';
 import DropDown from './DropDown';
 import SearchedUsers from './SearchedUsers';
-import FriendsList from './FriendsList';
+import ContactList from './ContactList';
 import CreateGroupChat from '../CreateGroupChat/CreateGroupChat';
 
 const ChatSideBarContainer = ({
@@ -38,7 +38,7 @@ const ChatSideBarContainer = ({
 
       {displayGroupChat && <div style={newGroupChat ? mountedStyle : unmountedStyle}>
         <CreateGroupChat
-          users={users}
+          data={data}
         />
       </div>}
 
@@ -49,7 +49,7 @@ const ChatSideBarContainer = ({
       </div>}
 
       {displayFriendList && <div style={!newGroupChat && !newChat ? mountedStyle : unmountedStyle}>
-        <FriendsList chats={data.data.chats} data={data}/>
+        <ContactList chats={data.data.chats} data={data}/>
       </div>}
 
       <DropDown

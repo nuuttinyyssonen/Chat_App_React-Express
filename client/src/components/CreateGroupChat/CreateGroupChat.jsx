@@ -3,7 +3,7 @@ import profilePic from '../../style/images/Profile_picture.png';
 import useGetUsers from '../../hooks/useGetUsers';
 import CreateGroupChatMap from './CreateGroupChatMap';
 import useCreateGroup from '../../hooks/useCreateGroup';
-const CreateGroupChat = () => {
+const CreateGroupChat = ({ data }) => {
   const [group, setGroup] = useState([]);
   const [username, setUsername] = useState('');
   const users = useGetUsers(username);
@@ -19,9 +19,12 @@ const CreateGroupChat = () => {
   const removeFromGroup = (user) => {
     setGroup(group.filter(person => person !== user));
   };
-
-  const handleCreateGroup = () => {
-    createGroup(group);
+  console.log("before", data)
+  const handleCreateGroup = async () => {
+    const response = await createGroup(group);
+    console.log(response)
+    data.setData(response);
+    console.log("after", data)
     setGroup([]);
   };
 

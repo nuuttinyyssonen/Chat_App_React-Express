@@ -56,7 +56,25 @@ chatRouter.post('/groupChat', tokenExtractor, async (req, res, next) => {
       await users[i].save();
     }
     // This sends updated user because chats are queried via user
-    res.status(200).json(user);
+    const updatedUser = await User.findById(req.decodedToken.id).populate([
+      {
+        path: 'chats',
+        populate: [
+          {
+            path: 'messages',
+            model: 'ChatMessage'
+          },
+          {
+            path: 'users',
+            model: 'User'
+          }
+        ]
+      },
+      {
+        path: 'friends'
+      }
+    ]);
+    res.status(200).json(updatedUser);
   } catch (error) {
     next(error);
   }
