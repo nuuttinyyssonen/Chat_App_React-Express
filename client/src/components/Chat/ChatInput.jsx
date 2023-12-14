@@ -10,7 +10,6 @@ const ChatInput = ({
   setSelectedImage,
   id
 }) => {
-  console.log(id)
   return (
     <div>
       {!typingText.text?.includes(user.data?.username) && id === typingText.room && <p className="typingText">{typingText.text}</p>}

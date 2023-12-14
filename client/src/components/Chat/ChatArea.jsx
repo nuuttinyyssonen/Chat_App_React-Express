@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import socket from '../../socketConfig';
 import useGetChat from '../../hooks/useGetChat';
 import ChatMessages from './ChatMessages';
-import chatService from '../../services/chatService';
 const ChatArea = ({ typingText, user, id }) => {
   const chat = useGetChat();
 
@@ -14,31 +13,25 @@ const ChatArea = ({ typingText, user, id }) => {
     socket.on('receive_image', (data) => {
       chat.addImage(data);
     });
+    socket.on('updated_chat', (data) => {
+      chat.setChat(data)
+    })
     return () => {
       socket.off('receive_message');
       socket.off('receive_image');
+      socket.off('updated_chat');
     };
   }, [socket]);
 
   const handleDeleteMessage = async (chatId, messageId) => {
     if (window.confirm('do you really want to delete this message')) {
-      try {
-        const data = await chatService.deleteMessage(chatId, messageId);
-        chat.setChat(data);
-      } catch (error) {
-        console.log(error);
-      }
+      socket.emit('delete_message', { message: messageId, room: chatId });
     }
   };
 
   const handleDeleteImage = async (chatId, imageId) => {
     if (window.confirm('do you really want to delete this image')) {
-      try {
-        const data = await chatService.deleteImage(chatId, imageId);
-        chat.setChat(data);
-      } catch (error) {
-        console.log(error);
-      }
+      socket.emit('delete_image', { image: imageId, room: chatId });
     }
   };
 
