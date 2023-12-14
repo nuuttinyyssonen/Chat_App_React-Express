@@ -5,7 +5,7 @@ const { EMAIL, SECRET } = require('../utils/config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-passwordResetRouter.post('/', async (req, res, next) => {
+passwordResetRouter.post('/', async (req, res) => {
     const { emailAddress } = req.body;
     const user = await User.findOne({ email: emailAddress })
     if(!user) {
