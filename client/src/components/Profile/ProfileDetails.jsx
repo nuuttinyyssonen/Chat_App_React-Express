@@ -26,7 +26,7 @@ const ProfileDetails = ({ user, isEditMode, setIsEditMode, statusRef, type, deta
   return (
     user.data && <div className="profileDetails">
       {errorMessage && <p className="errorMsg">{errorMessage}</p>}
-      {!isAuthenticated && <p>{type}: user</p>}
+      {!isAuthenticated && <p>{type}: {user.data[type]}</p>}
       {!isEditMode && isAuthenticated &&
       <p ref={statusRef} style={!isEditMode ? mountedStyle : unmountedStyle} onClick={() => handleEditMode()}>{type}: {detail}</p>}
       {isAuthenticated && isEditMode &&

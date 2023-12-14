@@ -21,10 +21,6 @@
     width: 20vh;
 }
 
-.personDetails {
-    max-width: 45vh;
-}
-
 .follow {
     font-size: 20px;
     cursor: pointer;
@@ -32,18 +28,6 @@
 
 .PersonName {
     font-size: 20px;
-}
-
-.socialMediaContainer {
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 20px;
-    gap: 20px;
-}
-
-.socialMedia {
-    font-size: 25px;
-    cursor: pointer;
 }
 
 .profileDetails {

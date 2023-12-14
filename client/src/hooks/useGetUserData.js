@@ -27,6 +27,13 @@ const useGetUserData = () => {
     }));
   };
 
+  const setStatus = (newStatus) => {
+    setData((prev) => ({
+      ...prev,
+      status: newStatus
+    }));
+  };
+
   const setProfilePic = (newProfilePic) => {
     setData((prev) => ({
       ...prev,
@@ -38,7 +45,7 @@ const useGetUserData = () => {
     getUserData();
   }, []);
 
-  return { data, setEmail, setUsername, setProfilePic, setData };
+  return { data, setEmail, setUsername, setProfilePic, setData, setStatus };
 };
 
 export default useGetUserData;

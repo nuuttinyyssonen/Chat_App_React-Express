@@ -1,9 +1,10 @@
 import ProfileDetails from './ProfileDetails';
 import userService from '../../services/userService';
 import { useEffect, useState, useRef } from 'react';
-const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => {
+const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser, username }) => {
   const [isEmailEditMode, setIsEmailEditMode] = useState(false);
   const [isUsernameEditMode, setIsUsernameEditMode] = useState(false);
+  const [isStatusEditMode, setIsStatusEditMode] = useState(false);
 
   const [emailField, setEmailField] = useState('');
   const [email, setEmail] = useState('');
@@ -11,14 +12,19 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => 
   const [usernameField, setUsernameField] = useState('');
   const [usernameValue, setUsernameValue] = useState('');
 
+  const [statusField, setStatusField] = useState('');
+  const [status, setStatus] = useState("");
+
   const [errorMessageUsername, setErrorMessageUsername] = useState('');
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
+  const [errorMessageStatus, setErrorMessageStatus] = useState("");
 
   const statusRef = useRef(null);
 
   useEffect(() => {
     setEmail(currentUser?.data?.email);
     setUsernameValue(currentUser?.data?.username);
+    setStatus(currentUser?.data?.status);
   }, [currentUser]);
 
   const changeEmail = async () => {
@@ -52,6 +58,21 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => 
     }
   };
 
+  const changeStatus = async () => {
+    try {
+      const data = await userService.updateUserField('status', { status: statusField });
+      currentUser.setStatus(data.status);
+      setIsStatusEditMode(false);
+    } catch (error) {
+      if (error.response?.data?.error) {
+        setErrorMessageStatus("Status can't be longer than 20 characters");
+        setTimeout(() => {
+          setErrorMessageStatus("");
+        }, 5000)
+      }
+    }
+  };
+
   return (
     <div>
       <ProfileDetails
@@ -60,7 +81,7 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => 
         setIsEditMode={setIsEmailEditMode}
         user={currentUser}
         detail={email}
-        type='E-Mail'
+        type='email'
         updateDetail={changeEmail}
         field={emailField}
         setField={setEmailField}
@@ -73,12 +94,25 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => 
         setIsEditMode={setIsUsernameEditMode}
         user={currentUser}
         detail={usernameValue}
-        type='Username'
+        type='username'
         updateDetail={changeUsername}
         field={usernameField}
         setField={setUsernameField}
         errorMessage={errorMessageEmail}
         isAuthenticated={isAuthenticated}
+      />
+      <ProfileDetails
+        field={statusField}
+        setField={setStatusField}
+        isAuthenticated={isAuthenticated}
+        updateDetail={changeStatus}
+        type='status'
+        isEditMode={isStatusEditMode}
+        statusRef={statusRef}
+        setIsEditMode={setIsStatusEditMode}
+        detail={status}
+        user={currentUser}
+        errorMessage={errorMessageStatus}
       />
     </div>
   );

@@ -1,5 +1,5 @@
 import profile from '../../style/images/Profile_picture.png';
-import { SlUserFollow, SlSocialTwitter, SlSocialInstagram, SlSocialLinkedin, SlSettings, SlPencil } from 'react-icons/sl';
+import { SlUserFollow, SlSettings, SlPencil } from 'react-icons/sl';
 
 const ProfileHeader = ({
   user,
@@ -53,12 +53,6 @@ const ProfileHeader = ({
         </p>}
         {successMessage && <p className='successMsg'>{successMessage}</p>}
         {errorMessage && <p className='errorMsg'>{errorMessage}</p>}
-      <p className='personDetails'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-      <div className='socialMediaContainer'>
-        <SlSocialInstagram className='socialMedia' />
-        <SlSocialLinkedin className='socialMedia' />
-        <SlSocialTwitter className='socialMedia' />
-      </div>
     </div>
   );
 };

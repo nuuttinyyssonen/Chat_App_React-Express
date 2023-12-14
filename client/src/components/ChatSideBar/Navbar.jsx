@@ -11,7 +11,7 @@ const Navbar = ({ handleLogout, user }) => {
         {user.data && !user.data?.profileImage && <img src={profile} style={{ width: '60px', height: '60px', borderRadius: '50%' }} className='profile-pic'/>}
         <div>
           {user.data && <h4>{user.data.firstName} {user.data.lastName}</h4>}
-          <p>...</p>
+          {user.data && <p>{user.data.status}</p>}
         </div>
         <div className="menu">
           {user.data && <SlLogout id='logout' onClick={() => handleLogout(user.data._id)} className="icon"/>}

@@ -26,6 +26,7 @@ const userSchema = mongoose.Schema({
   },
   status: {
     type: String,
+    maxLength: 20,
     default: "I'm a new user"
   },
   profileImage: {
