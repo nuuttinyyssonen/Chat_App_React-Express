@@ -21,8 +21,12 @@ loginRouter.post('/', async (req, res) => {
     username: user.username,
     id: user._id
   };
-  // Token is signed for user with jwt library.
-  const token = jwt.sign(userForToken, SECRET);
+  const token = jwt.sign(userForToken, SECRET, { expiresIn: '7d' }); // 7 days validity for "Remember Me"
+  res.cookie('authToken', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // set to true in production (HTTPS)
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
+  });
   res.status(200).json({ token, username: user.username, id: user._id });
 });
 

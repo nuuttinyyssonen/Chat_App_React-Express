@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
 import userService from '../services/userService';
+import { useNavigate } from 'react-router-dom';
 
 const useGetUserData = () => {
   const [data, setData] = useState();
+  const navigate = useNavigate()
 
   const getUserData = async () => {
     try {
       const response = await userService.getAuthUser();
       setData(response);
     } catch (error) {
-      console.log(error);
+      if (error.response?.data?.error === 'token invalid') {
+        navigate('/');
+      }
     }
   };
 

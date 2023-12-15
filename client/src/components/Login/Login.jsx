@@ -15,7 +15,8 @@ const Login = () => {
     try {
       const user = {
         username,
-        password
+        password,
+        rememberMe
       };
       const response = await userService.loginUser(user);
       localStorage.setItem('token', response.token);
