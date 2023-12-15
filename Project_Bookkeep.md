@@ -21,4 +21,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 12.12.2023 |        8        | Dropped the whole video calls idea. Configured mail server to project. Made routes for sending link to change password and route to change it. Links are controlled with jwt token. Made also all of this to work in client side. |
 | 13.12.2023 |        7        | Added lot of css to the project. Handled some of the biggest errors in project. Deleting user used to break app 'cause of the empty chats messages and all that. it's fixed now. Did some refactoring and other error handling. a lot of small but important things to prepare for deployment. |
 | 14.12.2023 |       10        | A lot of refactoring, especially for sockets. Also changed several features to use socket instead of routes, such as deleting images, messages and changin group name. This way everything important is updated real-time. Also made a lot of error handling to those and profile section. Fixed all jest tests and added few. Documented some of the frontend.
-|   Total    |       139        |
+| 15.12.2023 |        8        | Documented whole frontend. Fixed all cypress tests, made test helper file and added few tests. Refactored animations and all services. Modified user's token. Fixed some bugs. |
+|   Total    |       147        |
