@@ -19,13 +19,12 @@ const CreateGroupChat = ({ data }) => {
   const removeFromGroup = (user) => {
     setGroup(group.filter(person => person !== user));
   };
-  console.log("before", data)
+
   const handleCreateGroup = async () => {
     const response = await createGroup(group);
-    console.log(response)
     data.setData(response);
-    console.log("after", data)
     setGroup([]);
+    // setUsername("");
   };
 
   return (

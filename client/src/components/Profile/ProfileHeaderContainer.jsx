@@ -6,15 +6,15 @@ const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, us
   const [image, setImage] = useState();
 
   useEffect(() => {
-    setImage(currentUser.data?.profileImage);
-  }, [currentUser]);
+    setImage(user.data?.profileImage);
+  }, [user]);
 
   const changeProfilePic = async () => {
     const formData = new FormData();
     formData.append('file', selectedImage);
     try {
       const response = await userService.changeProfilePicture(formData);
-      currentUser.setProfilePic(response.profileImage);
+      user.setPic(response.profileImage)
       setSelectedImage(null);
     } catch (error) {
       console.log(error);

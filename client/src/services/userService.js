@@ -33,7 +33,8 @@ const loginUser = async (user) => {
 };
 
 const getUsers = async (username) => {
-  const response = await axios.get(`${baseUrl}/users/${username}`);
+  const config = getConfig();
+  const response = await axios.get(`${baseUrl}/users/${username}`, config);
   return response.data;
 };
 

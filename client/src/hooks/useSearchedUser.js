@@ -16,11 +16,18 @@ const useSearchedUser = (username) => {
     }
   };
 
+  const setPic = (data) => {
+    setData((prev) => ({
+      ...prev,
+      profileImage: data
+    }))
+  };
+
   useEffect(() => {
     getSearchedUser();
   }, [username]);
 
-  return { data };
+  return { data, setPic };
 };
 
 export default useSearchedUser;

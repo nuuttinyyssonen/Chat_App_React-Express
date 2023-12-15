@@ -34,18 +34,11 @@ const useGetUserData = () => {
     }));
   };
 
-  const setProfilePic = (newProfilePic) => {
-    setData((prev) => ({
-      ...prev,
-      profileImage: newProfilePic
-    }));
-  };
-
   useEffect(() => {
     getUserData();
   }, []);
 
-  return { data, setEmail, setUsername, setProfilePic, setData, setStatus };
+  return { data, setEmail, setUsername, setData, setStatus };
 };
 
 export default useGetUserData;
