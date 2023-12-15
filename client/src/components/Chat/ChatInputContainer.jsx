@@ -15,7 +15,7 @@ const ChatInputContainer = ({ typingText, user, id }) => {
   const sendMessage = () => {
     if (!chat.chat?._id || !id) {
       setMessage('');
-      setSelectedImage("");
+      setSelectedImage('');
       return;
     }
     if (selectedImage && user) {

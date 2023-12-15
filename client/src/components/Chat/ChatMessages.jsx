@@ -17,7 +17,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, erro
         if (item.message) {
           return (
             item.user && item.chat === chat.chat?._id && <div style={animationStyle} key={key}>
-            {/* 2 different classNames makes own messages right aligned and others left aligned. */}
+              {/* 2 different classNames makes own messages right aligned and others left aligned. */}
               <div className={item.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
                 {/* User's name is displayed if chat has more than 2 users meaning that it's a group chat. */}
                 {chat.chat.users.length > 2 && item.user._id !== user.data._id && <p>{item.user.username}</p>}

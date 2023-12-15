@@ -1,7 +1,7 @@
 import ProfileDetails from './ProfileDetails';
 import userService from '../../services/userService';
 import { useEffect, useState, useRef } from 'react';
-const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser, username }) => {
+const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => {
   const [isEmailEditMode, setIsEmailEditMode] = useState(false);
   const [isUsernameEditMode, setIsUsernameEditMode] = useState(false);
   const [isStatusEditMode, setIsStatusEditMode] = useState(false);
@@ -13,20 +13,22 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser, usern
   const [usernameValue, setUsernameValue] = useState('');
 
   const [statusField, setStatusField] = useState('');
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState('');
 
   const [errorMessageUsername, setErrorMessageUsername] = useState('');
   const [errorMessageEmail, setErrorMessageEmail] = useState('');
-  const [errorMessageStatus, setErrorMessageStatus] = useState("");
+  const [errorMessageStatus, setErrorMessageStatus] = useState('');
 
   const statusRef = useRef(null);
 
+  // Keeps email, username and status rendered when they are updated.
   useEffect(() => {
     setEmail(currentUser?.data?.email);
     setUsernameValue(currentUser?.data?.username);
     setStatus(currentUser?.data?.status);
   }, [currentUser]);
 
+  // Handles email update
   const changeEmail = async () => {
     try {
       const data = await userService.updateUserField('email', { email: emailField });
@@ -42,11 +44,13 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser, usern
     }
   };
 
+  // Handles username update
   const changeUsername = async () => {
     try {
       const data = await userService.updateUserField('username', { username: usernameField });
       currentUser.setUsername(data.username);
       setIsUsernameEditMode(false);
+      // Params are also updated by navigating to updated /profile/updatedusername.
       navigate(`/profile/${data.username}`);
     } catch (error) {
       if (error.response?.data?.error) {
@@ -58,6 +62,7 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser, usern
     }
   };
 
+  // Handles status update
   const changeStatus = async () => {
     try {
       const data = await userService.updateUserField('status', { status: statusField });
@@ -67,8 +72,8 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser, usern
       if (error.response?.data?.error) {
         setErrorMessageStatus("Status can't be longer than 20 characters");
         setTimeout(() => {
-          setErrorMessageStatus("");
-        }, 5000)
+          setErrorMessageStatus('');
+        }, 5000);
       }
     }
   };

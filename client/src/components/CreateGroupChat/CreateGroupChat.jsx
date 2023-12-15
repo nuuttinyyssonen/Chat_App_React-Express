@@ -6,6 +6,8 @@ import useCreateGroup from '../../hooks/useCreateGroup';
 const CreateGroupChat = ({ data }) => {
   const [group, setGroup] = useState([]);
   const [username, setUsername] = useState('');
+
+  // Custom hooks.
   const users = useGetUsers(username);
   const [createGroup, errorMessage, successMessage] = useCreateGroup();
 
@@ -24,7 +26,7 @@ const CreateGroupChat = ({ data }) => {
     const response = await createGroup(group);
     data.setData(response);
     setGroup([]);
-    setUsername("");
+    setUsername('');
   };
 
   return (

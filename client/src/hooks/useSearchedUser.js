@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import userService from '../services/userService';
 
+// Custom hook gets user data based on username
 const useSearchedUser = (username) => {
   const [data, setData] = useState();
 
@@ -16,11 +17,12 @@ const useSearchedUser = (username) => {
     }
   };
 
+  // This is used to update state's profile picture.
   const setPic = (data) => {
     setData((prev) => ({
       ...prev,
       profileImage: data
-    }))
+    }));
   };
 
   useEffect(() => {

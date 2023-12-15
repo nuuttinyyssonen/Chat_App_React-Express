@@ -11,6 +11,7 @@ const PasswordReset = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
+  // Handles making request for changing password.
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== passwordRepeat) {
@@ -26,13 +27,14 @@ const PasswordReset = () => {
         password
       };
       await verification.changePassword(passwordObject, token);
+      // Users are automatically redirected after successful request.
       setSuccessMessage('Password has been changed successfully! Redirecting to login...');
       setTimeout(() => {
         setSuccessMessage('');
         navigate('/');
       }, 5000);
     } catch (error) {
-      console.log(error.response?.data);
+      // Error is displayed if requirements for password is not met.
       if (error.response?.data) {
         setErrorMessage(error.response?.data);
         setTimeout(() => {

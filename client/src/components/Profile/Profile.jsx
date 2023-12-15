@@ -9,10 +9,14 @@ import ProfileHeaderContainer from './ProfileHeaderContainer';
 
 const Profile = () => {
   const username = useParams().username;
+  const navigate = useNavigate();
+
+  // Custom hooks used in profile.
   const user = useSearchedUser(username);
   const currentUser = useGetUserData();
   const [newFriend, errorMessage, successMessage] = useAddFriend();
-  const navigate = useNavigate();
+
+  // Checks if user is authenticated to change account details or delete it.
   const isAuthenticated = currentUser.data && currentUser.data?._id === user.data?._id;
 
   return (

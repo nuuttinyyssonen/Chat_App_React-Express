@@ -1,5 +1,6 @@
 import '../../style/user/user.css';
 import { Link } from 'react-router-dom';
+// This renders everything from Signup component.
 const SignupForm = ({ username, setUsername, password, setPassword, passwordRepeat, setPasswordRepeat, firstName, setFirstName, lastName, setLastName, email, setEmail, onSubmit, errorMessage }) => {
   return (
     <div className='container' id='container-signup'>

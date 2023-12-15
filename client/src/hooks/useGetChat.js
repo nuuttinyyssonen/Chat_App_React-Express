@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import chatService from '../services/chatService';
 import { useParams } from 'react-router-dom';
 
+// This custom hook is used to get a specific chat based on params.
 const useGetChat = () => {
   const [chat, setChat] = useState();
   const id = useParams().id;
 
   const queryChat = async () => {
+    // If user is not in chat room, then we don't query for chat.
     if (!id) {
       return;
     }
@@ -18,6 +20,7 @@ const useGetChat = () => {
     }
   };
 
+  // This is used to update state's chatName.
   const setName = (newName) => {
     setChat((prevChat) => ({
       ...prevChat,
@@ -25,6 +28,7 @@ const useGetChat = () => {
     }));
   };
 
+  // This is used to update state's messages.
   const addMessage = (newMessage) => {
     setChat((prevChat) => ({
       ...prevChat,
@@ -32,6 +36,7 @@ const useGetChat = () => {
     }));
   };
 
+  // This is used to update state's images 
   const addImage = (newImage) => {
     setChat((prevChat) => ({
       ...prevChat,

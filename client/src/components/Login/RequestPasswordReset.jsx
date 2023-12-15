@@ -6,6 +6,7 @@ const RequestPasswordReset = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Handles making request for sending email about password reset.
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -18,6 +19,7 @@ const RequestPasswordReset = () => {
         setSuccessMessage('');
       }, 5000);
     } catch (error) {
+      // Error is displayed if wrong email is typed.
       if (error.response?.data) {
         setErrorMessage(error.response.data);
         setTimeout(() => {

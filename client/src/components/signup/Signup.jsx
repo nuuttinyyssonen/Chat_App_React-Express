@@ -4,6 +4,7 @@ import userService from '../../services/userService';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  // States for all form's fields
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
@@ -15,6 +16,7 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
+  // Handles making request for new account.
   const onSubmit = async (event) => {
     event.preventDefault();
     if (password !== passwordRepeat) {

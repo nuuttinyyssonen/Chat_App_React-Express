@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import tokenService from '../services/tokenService';
 
 const Main = () => {
+  // If token is not in localStorage user is navigated to log in page.
   const token = tokenService.getToken();
   const navigate = useNavigate();
   useEffect(() => {

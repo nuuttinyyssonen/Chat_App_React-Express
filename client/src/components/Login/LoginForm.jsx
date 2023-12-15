@@ -1,5 +1,6 @@
 import '../../style/user/user.css';
 import { Link } from 'react-router-dom';
+// Renders everything from login component.
 const LoginForm = ({ username, setUsername, password, setPassword, onSubmit, errorMessage }) => {
   return (
     <div className='container' id='container-login'>

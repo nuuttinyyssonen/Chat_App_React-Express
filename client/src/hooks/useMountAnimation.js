@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+// This custom hook is used in most smooth transitions.
 const useMountAnimation = () => {
   const [style, setStyle] = useState({});
 

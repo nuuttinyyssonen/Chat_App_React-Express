@@ -5,22 +5,25 @@ const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, us
   const [selectedImage, setSelectedImage] = useState(null);
   const [image, setImage] = useState();
 
+  // Keeps profile pic rendered when it's updated.
   useEffect(() => {
     setImage(user.data?.profileImage);
   }, [user]);
 
+  // Handles making request for changin profile picture.
   const changeProfilePic = async () => {
     const formData = new FormData();
     formData.append('file', selectedImage);
     try {
       const response = await userService.changeProfilePicture(formData);
-      user.setPic(response.profileImage)
+      user.setPic(response.profileImage);
       setSelectedImage(null);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // Handles making request for deleting account.
   const deleteProfile = async () => {
     if (window.confirm('Do you really want to delete this account?')) {
       try {
@@ -32,6 +35,7 @@ const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, us
     }
   };
 
+  // Maps all of users friends and check if current user is already friends with it.
   const friendsMap = currentUser.data?.friends?.map(friend => friend._id === user.data?._id);
   const isAlreadyFriend = friendsMap && friendsMap.includes(true);
 

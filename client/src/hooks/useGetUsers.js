@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import userService from '../services/userService';
 
+// This custom hook get's all users based on input field's value.
 const useGetUsers = (value) => {
   const [users, setUsers] = useState();
 
@@ -14,6 +15,7 @@ const useGetUsers = (value) => {
     }
   };
 
+  // Request is only being sent every half a second and not if input's value is empty.
   useEffect(() => {
     if (value === '') {
       setUsers();

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import socket from '../../socketConfig';
 import ChatMessages from './ChatMessages';
 const ChatArea = ({ typingText, user, id, chat }) => {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   socket.emit('joinRoom', id);
 
@@ -15,14 +15,14 @@ const ChatArea = ({ typingText, user, id, chat }) => {
       chat.addImage(data);
     });
     socket.on('updated_chat', (data) => {
-      console.log(data)
-      chat.setChat(data)
+      console.log(data);
+      chat.setChat(data);
     });
     socket.on('error', (data) => {
       setErrorMessage(data);
       setTimeout(() => {
-        setErrorMessage("");
-      }, 5000)
+        setErrorMessage('');
+      }, 5000);
     });
     return () => {
       socket.off('receive_message');
