@@ -1,7 +1,9 @@
 import { useRef, useEffect } from 'react';
 import { SlTrash } from 'react-icons/sl';
+import useMountAnimation from '../../hooks/useMountAnimation';
 const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, errorMessage }) => {
   const chatContainerRef = useRef(null);
+  const animationStyle = useMountAnimation();
   const chatHistory = () => {
     if (chat.chat && chat.chat.messages && chat.chat.images && user.data) {
       // Sorting every message or image in chat by date.
@@ -14,7 +16,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, erro
         // This returns messages
         if (item.message) {
           return (
-            item.user && item.chat === chat.chat?._id && <div key={key}>
+            item.user && item.chat === chat.chat?._id && <div style={animationStyle} key={key}>
             {/* 2 different classNames makes own messages right aligned and others left aligned. */}
               <div className={item.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
                 {/* User's name is displayed if chat has more than 2 users meaning that it's a group chat. */}
@@ -32,7 +34,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, erro
         // This returns images.
         } else if (item.dataUrl) {
           return (
-            <div key={key}>
+            <div style={animationStyle} key={key}>
               <div className={item.user._id === user.data._id ? 'currentUserMsgs image' : 'otherUserMsgs image'}>
                 {chat.chat.users.length > 2 && item.user?._id !== user.data?._id && <p>{item.user.username}</p>}
                 {item.user._id === user.data._id && <SlTrash id="deleteMessage" className="deleteMessage image" onClick={() => handleDeleteImage(chat.chat._id, item._id)} />}

@@ -12,6 +12,7 @@ const UsersList = ({ users }) => {
     users.users
       ? (
         <div className="usersList">
+          {/* Maps all users that were queried based on username */}
           {users.users.map((user, key) => (
             <div className="userInList" onClick={() => viewProfile(user)} key={key}>
               <img className="profilePicInUserList" src={profilePic} alt={`Profile for ${user}`} />

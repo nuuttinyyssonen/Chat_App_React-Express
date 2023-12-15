@@ -18,8 +18,7 @@ const ChatSideBarContainer = ({
   users,
   data,
   inputRef,
-  mountedStyle,
-  unmountedStyle,
+  animationStyle,
   handleNewChat,
   handleNewGroupChat,
   handleDropDown,
@@ -29,26 +28,26 @@ const ChatSideBarContainer = ({
     <div className="left-side">
       {newChat && <input ref={inputRef} className="search-input" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)}/>}
 
-      <div className='navbar-container' style={!newGroupChat && !newChat ? mountedStyle : unmountedStyle}>
+      <div className='navbar-container' style={animationStyle}>
         {displayNavbar && <Navbar
           user={data}
           handleLogout={handleLogout}
         />}
       </div>
 
-      {displayGroupChat && <div style={newGroupChat ? mountedStyle : unmountedStyle}>
+      {displayGroupChat && <div style={animationStyle}>
         <CreateGroupChat
           data={data}
         />
       </div>}
 
-      {displayNewChat && <div style={newChat ? mountedStyle : unmountedStyle}>
+      {displayNewChat && <div style={animationStyle}>
         <SearchedUsers
           users={users}
         />
       </div>}
 
-      {displayFriendList && <div style={!newGroupChat && !newChat ? mountedStyle : unmountedStyle}>
+      {displayFriendList && <div style={animationStyle}>
         <ContactList chats={data.data.chats} data={data}/>
       </div>}
 
@@ -56,8 +55,7 @@ const ChatSideBarContainer = ({
         dropDown={dropDown}
         handleNewChat={handleNewChat}
         handleNewGroupChat={handleNewGroupChat}
-        mountedStyle={mountedStyle}
-        unmountedStyle={unmountedStyle}
+        animationStyle={animationStyle}
         undoCreatePrivateChat={undoCreatePrivateChat}
         newGroupChat={newGroupChat}
         newChat={newChat}
