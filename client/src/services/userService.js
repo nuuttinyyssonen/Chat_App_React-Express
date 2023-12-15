@@ -1,18 +1,7 @@
 import axios from 'axios';
+import tokenService from './tokenService';
 
 const baseUrl = 'http://localhost:5000';
-const getToken = () => {
-  return localStorage.getItem('token');
-};
-
-const getConfig = () => {
-  const token = getToken();
-  return {
-    headers: {
-      Authorization: `bearer ${token}`
-    }
-  };
-};
 
 const createUser = async (user) => {
   const response = await axios.post(`${baseUrl}/signup`, user, {
@@ -33,7 +22,7 @@ const loginUser = async (user) => {
 };
 
 const getUsers = async (username) => {
-  const config = getConfig();
+  const config = tokenService.getConfig();
   const response = await axios.get(`${baseUrl}/users/${username}`, config);
   return response.data;
 };
@@ -49,19 +38,19 @@ const getUserById = async (id) => {
 };
 
 const getAuthUser = async () => {
-  const config = getConfig();
+  const config = tokenService.getConfig();
   const response = await axios.get(`${baseUrl}/user`, config);
   return response.data;
 };
 
 const deleteUser = async () => {
-  const config = getConfig();
+  const config = tokenService.getConfig();
   const response = await axios.delete(`${baseUrl}/user`, config);
   return response.data;
 };
 
 const changeProfilePicture = async (data) => {
-  const token = getToken();
+  const token = tokenService.getToken();
   const response = await axios.put(`${baseUrl}/user/upload/image`, data, {
     headers: {
       Authorization: `bearer ${token}`,
@@ -72,7 +61,7 @@ const changeProfilePicture = async (data) => {
 };
 
 const updateUserField = async (field, data) => {
-  const token = getToken();
+  const token = tokenService.getToken();
   const response = await axios.put(`${baseUrl}/user/update/${field}`, data, {
     headers: {
       Authorization: `bearer ${token}`,
@@ -90,7 +79,6 @@ export default {
   getUserById,
   getAuthUser,
   deleteUser,
-  getToken,
   changeProfilePicture,
   updateUserField
 };

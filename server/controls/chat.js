@@ -1,7 +1,5 @@
 const chatRouter = require('express').Router();
 const Chat = require('../models/chat');
-const ChatMessage = require('../models/chatMessage');
-const ChatImage = require('../models/chatImage');
 const User = require('../models/user');
 const { tokenExtractor } = require('../utils/middleware');
 
@@ -105,66 +103,6 @@ chatRouter.put('/:id', async (req, res, next) => {
     chat.chatName = groupChatName;
     const updatedChat = await chat.save();
     res.status(200).json(updatedChat);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Deleting specific message in specific chat room.
-chatRouter.delete('/:chat/message/:message', async (req, res, next) => {
-  try {
-    const chat = await Chat.findById(req.params.chat);
-    // Filtering all messages to not include the message sent with params.
-    chat.messages = chat.messages.filter(message => message !== req.params.message);
-    await chat.save();
-    const newChat = await Chat.findById(req.params.chat)
-      .populate({
-        path: 'messages',
-        populate: {
-          path: 'user',
-          model: 'User'
-        }
-      })
-      .populate({
-        path: 'images',
-        populate: {
-          path: 'user',
-          model: 'User'
-        }
-      })
-      .populate('users');
-    await ChatMessage.findByIdAndDelete(req.params.message);
-    res.status(200).json(newChat);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Deleting specific image in specific chat room.
-chatRouter.delete('/:chat/image/:image', async (req, res, next) => {
-  const chat = await Chat.findById(req.params.chat);
-  try {
-    // Filtering all images to not include the image sent with params.
-    chat.images = chat.images.filter(image => image !== req.params.image);
-    await chat.save();
-    const newChat = await Chat.findById(req.params.chat)
-      .populate({
-        path: 'images',
-        populate: {
-          path: 'user',
-          model: 'User'
-        }
-      })
-      .populate({
-        path: 'messages',
-        populate: {
-          path: 'user',
-          model: 'User'
-        }
-      })
-      .populate('users');
-    await ChatImage.findByIdAndDelete(req.params.image);
-    res.status(200).json(newChat);
   } catch (error) {
     next(error);
   }

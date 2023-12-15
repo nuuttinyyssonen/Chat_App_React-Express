@@ -7,9 +7,10 @@ import '../style/main/searchedUsers.css';
 import Chat from './Chat/Chat';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import tokenService from '../services/tokenService';
 
 const Main = () => {
-  const token = localStorage.getItem('token');
+  const token = tokenService.getToken();
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
