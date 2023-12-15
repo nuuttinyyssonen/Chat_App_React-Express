@@ -36,7 +36,7 @@ const useGetChat = () => {
     }));
   };
 
-  // This is used to update state's images 
+  // This is used to update state's images
   const addImage = (newImage) => {
     setChat((prevChat) => ({
       ...prevChat,

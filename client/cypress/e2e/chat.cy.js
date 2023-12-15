@@ -1,9 +1,27 @@
+import initialUser from "./chat_helper";
 describe('Chat', () => {
+    it('setup', () => {
+        const user = {
+            user1: 'cypressTest1',
+            user2: 'cypressTest2',
+            user3: 'cypressTest3'
+        }
+        cy.request('DELETE', 'http://localhost:5000/resetCypress', user)
+        cy.request('POST', 'http://localhost:5000/signup', initialUser[0]);
+        cy.request('POST', 'http://localhost:5000/signup', initialUser[1]);
+        cy.request('POST', 'http://localhost:5000/signup', initialUser[2]);
+    });
     beforeEach(() => {
         cy.visit('http://localhost:3000')
-        cy.get('#username').type('test1');
+        cy.get('#username').type('cypressTest1');
         cy.get('#password').type('secret');
         cy.get('#loginBtn').click();
+    })
+
+    describe('Chat test', () => {
+        it('can make a friend', () => {
+
+        });
     });
 
     it('can be accessed', () => {

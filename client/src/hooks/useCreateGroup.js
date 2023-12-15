@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import chatService from '../services/chatService';
-//This custom hook is used for creating new group chat.
+// This custom hook is used for creating new group chat.
 const useCreateGroup = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
