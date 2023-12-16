@@ -8,7 +8,7 @@
     "dev": "nodemon index.js",
     "lint": "eslint .",
     "start:test": "NODE_ENV=test node index.js",
-    "build:ui": "cd ../client && npm install && npm run build && cp -r build ../server && cd ../server",
+    "build:ui": "cd ../client && npm install && npm run build && cp -r build ../server && cd ../server && npm install",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   },
   "author": "",
