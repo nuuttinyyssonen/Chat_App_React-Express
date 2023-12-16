@@ -21,7 +21,7 @@ const handleSendMessage = async (io, data) => {
     // Messages are being sent back to client so the chat is updated in real-time.
     io.in(room).emit('receive_message', queriedMessage);
   } catch (error) {
-    io.in(room).emit('error', error)
+    io.in(room).emit('error', error);
   }
 };
 

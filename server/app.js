@@ -17,6 +17,7 @@ const passwordResetRouter = require('./controls/passwordReset');
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static('build'));
 
 mongoose.set('strictQuery', false);
 

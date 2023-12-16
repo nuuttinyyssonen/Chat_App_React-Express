@@ -1,4 +1,5 @@
 const { Server } = require('socket.io');
+const { CLIENT_ORIGIN } = require('../utils/config');
 
 const { handleDeleteMessage, handleDeleteImage } = require('./deleteHandlers');
 const { handleSendMessage, handleTyping } = require('./messageHandlers');
@@ -8,7 +9,7 @@ const handleSendImage = require('./imageHandlers');
 // Socket server configuration with CORS and allowed methods.
 const io = new Server({
   cors: {
-    origin: 'http://localhost:3000',
+    origin: CLIENT_ORIGIN,
     methods: ['GET', 'POST']
   }
 });

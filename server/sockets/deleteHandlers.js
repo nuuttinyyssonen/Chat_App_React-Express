@@ -61,7 +61,7 @@ const handleDeleteImage = async (io, data) => {
         path: 'user',
         model: 'User'
       }
-      })
+    })
       .populate({
         path: 'messages',
         populate: {

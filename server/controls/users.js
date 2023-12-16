@@ -10,7 +10,7 @@ usersRouter.get('/:username', tokenExtractor, async (req, res) => {
     res.status(404).json({ error: 'no users were found!' });
   }
   if (!currentUser) {
-    res.status(400).json({ error: 'you are not logged in!' })
+    res.status(400).json({ error: 'you are not logged in!' });
   }
   // Filtering current user out.
   const updatedUsers = users.filter(user => user._id.toString() !== currentUser._id.toString());

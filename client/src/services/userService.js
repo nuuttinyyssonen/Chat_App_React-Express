@@ -1,10 +1,8 @@
 import axios from 'axios';
 import tokenService from './tokenService';
 
-const baseUrl = 'http://localhost:5000';
-
 const createUser = async (user) => {
-  const response = await axios.post(`${baseUrl}/signup`, user, {
+  const response = await axios.post('/signup', user, {
     headers: {
       'Content-Type': 'application/json'
     }
@@ -13,7 +11,7 @@ const createUser = async (user) => {
 };
 
 const loginUser = async (user) => {
-  const response = await axios.post(`${baseUrl}/login`, user, {
+  const response = await axios.post('/login', user, {
     headers: {
       'Content-Type': 'application/json'
     }
@@ -23,35 +21,35 @@ const loginUser = async (user) => {
 
 const getUsers = async (username) => {
   const config = tokenService.getConfig();
-  const response = await axios.get(`${baseUrl}/users/${username}`, config);
+  const response = await axios.get(`/users/${username}`, config);
   return response.data;
 };
 
 const getUser = async (username) => {
-  const response = await axios.get(`${baseUrl}/user/${username}`);
+  const response = await axios.get(`/user/${username}`);
   return response.data;
 };
 
 const getUserById = async (id) => {
-  const response = await axios.get(`${baseUrl}/user/id/${id}`);
+  const response = await axios.get(`/user/id/${id}`);
   return response.data;
 };
 
 const getAuthUser = async () => {
   const config = tokenService.getConfig();
-  const response = await axios.get(`${baseUrl}/user`, config);
+  const response = await axios.get('/user', config);
   return response.data;
 };
 
 const deleteUser = async () => {
   const config = tokenService.getConfig();
-  const response = await axios.delete(`${baseUrl}/user`, config);
+  const response = await axios.delete('/user', config);
   return response.data;
 };
 
 const changeProfilePicture = async (data) => {
   const token = tokenService.getToken();
-  const response = await axios.put(`${baseUrl}/user/upload/image`, data, {
+  const response = await axios.put('/user/upload/image', data, {
     headers: {
       Authorization: `bearer ${token}`,
       'Content-Type': 'multipart/form-data'
@@ -62,7 +60,7 @@ const changeProfilePicture = async (data) => {
 
 const updateUserField = async (field, data) => {
   const token = tokenService.getToken();
-  const response = await axios.put(`${baseUrl}/user/update/${field}`, data, {
+  const response = await axios.put(`/user/update/${field}`, data, {
     headers: {
       Authorization: `bearer ${token}`,
       'Content-Type': 'application/json'

@@ -1,7 +1,6 @@
 const { describe, beforeEach, test, expect } = require('@jest/globals');
 const User = require('../models/user');
 const Chat = require('../models/chat');
-const ChatMessage = require('../models/chatMessage');
 const supertest = require('supertest');
 const app = require('../app');
 const api = supertest(app);
@@ -75,7 +74,7 @@ describe('Socket', () => {
       const updatedChatPromise = new Promise((resolve) => {
         socket.on('updated_chat', (data) => {
           resolve(data);
-        })
+        });
       });
       socket.emit('delete_message', { message: messageId, room: chatId });
       await updatedChatPromise;

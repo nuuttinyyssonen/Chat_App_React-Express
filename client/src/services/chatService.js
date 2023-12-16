@@ -1,7 +1,7 @@
 import axios from 'axios';
 import tokenService from './tokenService';
 
-const baseUrl = 'http://localhost:5000/chat';
+const baseUrl = '/chat';
 
 const getChat = async (id) => {
   const response = await axios.get(`${baseUrl}/${id}`);

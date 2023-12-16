@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:5000';
-
 const RequestPasswordReseting = async (email) => {
-  const response = await axios.post(`${baseUrl}/passwordReset`, email, {
+  const response = await axios.post('/passwordReset', email, {
     headers: {
       'Content-Type': 'application/json'
     }
@@ -12,7 +10,7 @@ const RequestPasswordReseting = async (email) => {
 };
 
 const changePassword = async (password, token) => {
-  const response = await axios.post(`${baseUrl}/passwordReset/${token}`, password, {
+  const response = await axios.post(`/passwordReset/${token}`, password, {
     headers: {
       'Content-Type': 'application/json'
     }

@@ -9,5 +9,6 @@ module.exports = {
   AWS_REGION: process.env.REGION,
   MAIL_USER: process.env.USER_MAIL,
   MAIL_PASS: process.env.PASS_MAIL,
-  EMAIL: process.env.EMAIL
+  EMAIL: process.env.EMAIL,
+  CLIENT_ORIGIN: process.env.CLIENT_ORIGIN
 };

@@ -7,10 +7,6 @@ const supertest = require('supertest');
 const app = require('../app');
 const api = supertest(app);
 const { initialUser, initializeTests } = require('../tests/test_helper');
-const { io } = require('socket.io-client');
-
-// Mock server to make tests to group chat name changing
-const socket = io('http://localhost:5000');
 
 let authHeader;
 let chatId;
@@ -41,8 +37,8 @@ describe('Chat api', () => {
         .send(users)
         .set('Authorization', authHeader)
         .expect(200);
-      chatId = response.body.chats[0]._id
-      const chat = await Chat.findById(chatId)
+      chatId = response.body.chats[0]._id;
+      const chat = await Chat.findById(chatId);
       expect(chat).toBeDefined();
     });
   });

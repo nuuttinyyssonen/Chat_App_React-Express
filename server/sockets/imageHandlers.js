@@ -31,10 +31,10 @@ const handleSendImage = async (io, data) => {
   try {
     const imageUrl = await s3UploadPromise();
     const chatRoom = await Chat.findById(room);
-    if(!chatRoom)  {
+    if (!chatRoom) {
       return io.in(room).emit('error', 'This chat does not exist anymore!');
     }
-    if(!imageUrl) {
+    if (!imageUrl) {
       return io.in(room).emit('error', 'There was an error uploading image!');
     }
 
