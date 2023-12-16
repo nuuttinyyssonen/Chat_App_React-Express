@@ -32,8 +32,8 @@ const ProfileDetails = ({ user, isEditMode, setIsEditMode, statusRef, type, deta
       <p ref={statusRef} style={animationStyle} onClick={() => handleEditMode()}>{type}: {detail}</p>}
       {isAuthenticated && isEditMode &&
       <div ref={statusRef}>
-        <input ref={statusRef} value={field} onChange={e => setField(e.target.value)}/>
-        <button onClick={() => updateDetail()}>save</button>
+        <input ref={statusRef} id='fieldInput' value={field} onChange={e => setField(e.target.value)}/>
+        <button id='fieldButton' onClick={() => updateDetail()}>save</button>
       </div>}
     </div>
   );

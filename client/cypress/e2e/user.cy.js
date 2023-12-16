@@ -66,6 +66,33 @@ describe('User', () => {
       cy.contains('Login');
     })
 
+    it('can change e-mail, username, status', () => {
+      cy.get('#username').type('cypressTest1');
+      cy.get('#password').type('secret');
+      cy.get('#loginBtn').click();
+      cy.wait(1000);
+      cy.get('#settings').click();
+      cy.wait(1000);
+
+      cy.contains('email').click();
+      cy.get('#fieldInput').type('test@gmail.com');
+      cy.get('#fieldButton').click();
+      cy.wait(1000);
+      cy.contains('test@gmail.com');
+      
+      cy.contains('username').click();
+      cy.get('#fieldInput').type('test');
+      cy.get('#fieldButton').click();
+      cy.wait(1000);
+      cy.contains('test');
+
+      cy.contains("status").click();
+      cy.get('#fieldInput').type('testing');
+      cy.get('#fieldButton').click();
+      cy.wait(1000);
+      cy.contains('testing');
+    });
+
     it('user can be deleted', () => {
       cy.get('#username').type('cypressTest1');
       cy.get('#password').type('secret');

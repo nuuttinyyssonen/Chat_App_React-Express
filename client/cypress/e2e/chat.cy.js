@@ -92,6 +92,6 @@ describe('Chat', () => {
             cy.contains('Group chat created successfully!');
             cy.get('#backToContactList').click();
             cy.contains('New Group Chat');
-        })
+        });
     });
 });
