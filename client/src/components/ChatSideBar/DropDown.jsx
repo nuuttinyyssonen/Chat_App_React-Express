@@ -15,15 +15,15 @@ const DropDown = ({
     <div className='newChat'>
       {/* Dropdown items for creating new chats */}
       <div className={`newChatItems ${dropDown ? 'visible' : ''}`}>
-        <p className='newChatItem' onClick={() => handleNewChat()}><SlUser /> New Private Chat</p>
-        <p className='newChatItem' onClick={() => handleNewGroupChat()}><SlPeople /> New Group Chat</p>
+        <p className='newChatItem' id='createPrivateChatButton' onClick={() => handleNewChat()}><SlUser /> New Private Chat</p>
+        <p className='newChatItem' id='createGroupChatButton' onClick={() => handleNewGroupChat()}><SlPeople /> New Group Chat</p>
       </div>
       {/* Icons for closing the dropdown, navigating back, or opening the dropdown */}
       {dropDown
         ? <SlClose style={animationStyle} onClick={() => handleDropDown()} className='edit'/>
         : newChat || newGroupChat
-          ? <IoMdArrowBack style={animationStyle} onClick={() => undoCreatePrivateChat()} className='edit' />
-          : <SlPencil style={animationStyle} onClick={() => handleDropDown()} className='edit' />}
+          ? <IoMdArrowBack id='backToContactList' style={animationStyle} onClick={() => undoCreatePrivateChat()} className='edit' />
+          : <SlPencil id='openDropDown' style={animationStyle} onClick={() => handleDropDown()} className='edit' />}
     </div>
   );
 };

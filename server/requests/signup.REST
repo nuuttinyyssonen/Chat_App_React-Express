@@ -2,9 +2,9 @@ POST http://localhost:5000/signup
 Content-Type: application/json
 
 {
-    "username": "nuuttinyysonen",
+    "firstName": "cypressTest7",
+    "lastName": "cypressTest7",
+    "username": "cypressTest7",
     "password": "secret",
-    "firstName": "Nuutti",
-    "lastName": "Nyyssönen",
-    "email": "nuutti.nyyssonen@gmail.com"
+    "email": "cypressTest7@gmail.com"
 }

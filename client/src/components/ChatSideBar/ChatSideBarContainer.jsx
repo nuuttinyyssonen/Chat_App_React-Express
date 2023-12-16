@@ -26,7 +26,7 @@ const ChatSideBarContainer = ({
 }) => {
   return (
     <div className="left-side">
-      {newChat && <input ref={inputRef} className="search-input" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)}/>}
+      {newChat && <input ref={inputRef} id='createPrivateChatInput' className="search-input" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)}/>}
 
       <div className='navbar-container' style={animationStyle}>
         {displayNavbar && <Navbar

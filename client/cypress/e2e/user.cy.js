@@ -1,9 +1,7 @@
+import initialUser from "./test_helper";
 describe('User', () => {
   it('setup', () => {
-    const user = {
-      user1: 'cypressTest1'
-    };
-    cy.request('DELETE', 'http://localhost:5000/resetCypress', user);
+    cy.request('DELETE', `http://localhost:5000/resetCypress/${initialUser[0].username}`)
   });
 
   describe('Signup', () => {
@@ -55,14 +53,28 @@ describe('User', () => {
       cy.get('#loginBtn').click();
       cy.contains('cypressTest1 cypressTest1');
     });
+
     it('fails with wrong credentials', () => {
       cy.get('#username').type('test');
       cy.get('#password').type('test');
       cy.get('#loginBtn').click();
       cy.contains('Invalid password or username')
     })
+
     it('cannot be accessed without authorization', () => {
       cy.visit('http://localhost:3000/main');
+      cy.contains('Login');
+    })
+
+    it('user can be deleted', () => {
+      cy.get('#username').type('cypressTest1');
+      cy.get('#password').type('secret');
+      cy.get('#loginBtn').click();
+      cy.wait(1000);
+      cy.get('#settings').click();
+      cy.wait(1000);
+      cy.get('#deleteUser').click();
+      cy.wait(1000);
       cy.contains('Login');
     })
   });

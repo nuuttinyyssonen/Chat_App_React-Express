@@ -2,10 +2,10 @@ import { SlTrash } from 'react-icons/sl';
 const CreateGroupChatMap = ({ username, setUsername, users, addToGroup, removeFromGroup, createGroup, group, profilePic, errorMessage, successMessage }) => {
   return (
     <div>
-      <input className="search-input" placeholder="search for users..." value={username} onChange={e => setUsername(e.target.value)}/>
+      <input id='createGroupChatInput' className="search-input" placeholder="search for users..." value={username} onChange={e => setUsername(e.target.value)}/>
       {/* This renders queried users based on input value */}
       {users.users && users.users.map((user, key) => (
-        <div className="userInList" key={key} onClick={() => addToGroup(user)}>
+        <div id='userInGroup' className="userInList" key={key} onClick={() => addToGroup(user)}>
           <img className="profilePicInUserList" src={profilePic} alt={`Profile for ${user}`} />
           <h2 className="usernameInList">{user}</h2>
         </div>
@@ -18,7 +18,7 @@ const CreateGroupChatMap = ({ username, setUsername, users, addToGroup, removeFr
           <SlTrash onClick={() => removeFromGroup(user)}/>
         </div>
       ))}
-      <button className='createGroupBtn' onClick={() => createGroup()}>Create</button>
+      <button id='createGroupChat' className='createGroupBtn' onClick={() => createGroup()}>Create</button>
       <p className="errorMsg">{errorMessage}</p>
       <p className="successMsg">{successMessage}</p>
     </div>

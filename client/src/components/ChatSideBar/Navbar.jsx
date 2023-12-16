@@ -17,7 +17,7 @@ const Navbar = ({ handleLogout, user }) => {
         <div className="menu">
           {/* Navigation icons for logout and settings. Logout icon triggers the handleLogout function. Settings icon navigates to the user's profile page. */}
           {user.data && <SlLogout id='logout' onClick={() => handleLogout(user.data._id)} className="icon"/>}
-          <SlSettings onClick={() => navigate(`/profile/${user.data.username}`)} className="icon"/>
+          <SlSettings id='settings' onClick={() => navigate(`/profile/${user.data.username}`)} className="icon"/>
         </div>
       </div>
     </div>

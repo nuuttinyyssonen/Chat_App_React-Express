@@ -52,8 +52,8 @@ const ProfileHeader = ({
       If user is not authenticated and viewed user is not in current user's friends, they can add him. */}
       {user.data &&
         <p className='PersonName'>{user.data.firstName} {user.data.lastName}
-          {!isAuthenticated && !isAlreadyFriend && <SlUserFollow onClick={() => addFriend(user.data.username)} className='follow'/>}
-          {isAuthenticated && <SlSettings onClick={() => deleteProfile()} className='follow'/>}
+          {!isAuthenticated && !isAlreadyFriend && <SlUserFollow onClick={() => addFriend(user.data.username)} id='addFriend' className='follow'/>}
+          {isAuthenticated && <SlSettings id='deleteUser' onClick={() => deleteProfile()} className='follow'/>}
         </p>}
       {successMessage && <p className='successMsg'>{successMessage}</p>}
       {errorMessage && <p className='errorMsg'>{errorMessage}</p>}
