@@ -1,13 +1,13 @@
 import initialUser from "./test_helper";
 describe('Chat', () => {
     it('delete users', () => {
-        cy.request('DELETE', `http://localhost:5000/resetCypress/${initialUser[0].username}`)
-        cy.request('DELETE', `http://localhost:5000/resetCypress/${initialUser[1].username}`)
-        cy.request('DELETE', `http://localhost:5000/resetCypress/${initialUser[2].username}`)
+        cy.request('DELETE', `http://localhost:5000/api/resetCypress/${initialUser[0].username}`)
+        cy.request('DELETE', `http://localhost:5000/api/resetCypress/${initialUser[1].username}`)
+        cy.request('DELETE', `http://localhost:5000/api/resetCypress/${initialUser[2].username}`)
     });
 
     it('setup', () => {
-        cy.visit('http://localhost:3000')
+        cy.visit('http://localhost:5000')
         cy.get('#signup-link').click();
         cy.get('#firstName').type('cypressTest1');
         cy.get('#lastName').type('cypressTest1');
@@ -17,7 +17,7 @@ describe('Chat', () => {
         cy.get('#passwordRepeat').type('secret');
         cy.get('#Signup').click();
 
-        cy.visit('http://localhost:3000')
+        cy.visit('http://localhost:5000')
         cy.get('#signup-link').click();
         cy.get('#firstName').type('cypressTest2');
         cy.get('#lastName').type('cypressTest2');
@@ -27,7 +27,7 @@ describe('Chat', () => {
         cy.get('#passwordRepeat').type('secret');
         cy.get('#Signup').click();
 
-        cy.visit('http://localhost:3000')
+        cy.visit('http://localhost:5000')
         cy.get('#signup-link').click();
         cy.get('#firstName').type('cypressTest3');
         cy.get('#lastName').type('cypressTest3');
@@ -40,7 +40,7 @@ describe('Chat', () => {
 
     describe('Chat test', () => {
         beforeEach(() => {
-            cy.visit('http://localhost:3000')
+            cy.visit('http://localhost:5000')
             cy.get('#username').type('cypressTest1');
             cy.get('#password').type('secret');
             cy.get('#loginBtn').click();
