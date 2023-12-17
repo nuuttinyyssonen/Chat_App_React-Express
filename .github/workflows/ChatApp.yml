@@ -28,6 +28,17 @@ jobs:
 
             - name: Start server
               working-directory: ./server
+              env:
+                MONGODB_URI: ${{ secrets.MONGODB_URI }}
+                PORT: ${{ secrets.PORT }}
+                SECRET: ${{ secrets.SECRET }}
+                ACCESSKEYID: ${{ secrets.ACCESSKEYID }}
+                ACCESSKEY: ${{ secrets.ACCESSKEY }}
+                REGION: ${{ secrets.REGION }}
+                USER_MAIL: ${{ secrets.USER_MAIL }}
+                PASS_MAIL: ${{ secrets.PASS_MAIL }}
+                EMAIL: ${{ secrets.EMAIL }}
+                CLIENT_ORIGIN: ${{ secrets.CLIENT_ORIGIN }}
               run: npm start
               
             - name: e2e tests
