@@ -1,7 +1,7 @@
 import axios from 'axios';
 import tokenService from './tokenService';
 
-const baseUrl = process.env.REACT_APP_API_URL || "";
+const baseUrl = process.env.REACT_APP_API_URL || '';
 
 const addFriend = async (username) => {
   const config = tokenService.getConfig();

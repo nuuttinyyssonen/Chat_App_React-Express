@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = process.env.REACT_APP_API_URL || "";
+const baseUrl = process.env.REACT_APP_API_URL || '';
 
 const RequestPasswordReseting = async (email) => {
   const response = await axios.post(`${baseUrl}/api/passwordReset`, email, {
