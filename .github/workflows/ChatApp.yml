@@ -1,0 +1,53 @@
+name: ChatApp pipeline
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches: [master]
+        types: [opened, synchronize]
+
+jobs:
+    ChatApp_deployment:
+        runs-on: ubuntu-20.04
+        timeout-minutes: 4
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                node-version: "20"
+                
+            - name: Run Build
+              working-directory: ./server
+              run: npm run build:ui
+              
+            - name: Run Lint
+              working-directory: ./server
+              run: npm run lint
+
+            - name: Start server
+              working-directory: ./server
+              env:
+                MONGODB_URI: ${{ secrets.MONGODB_URI }}
+                PORT: ${{ secrets.PORT }}
+                SECRET: ${{ secrets.SECRET }}
+                ACCESSKEYID: ${{ secrets.ACCESSKEYID }}
+                ACCESSKEY: ${{ secrets.ACCESSKEY }}
+                REGION: ${{ secrets.REGION }}
+                USER_MAIL: ${{ secrets.USER_MAIL }}
+                PASS_MAIL: ${{ secrets.PASS_MAIL }}
+                EMAIL: ${{ secrets.EMAIL }}
+                CLIENT_ORIGIN: ${{ secrets.CLIENT_ORIGIN }}
+                CI: true
+              run: npm start &
+              
+            - name: e2e tests
+              uses: cypress-io/github-action@v5
+              with:
+                working-directory: ./client
+                start: echo "Server already started"
+                command: npm run e2e:userTest
+                wait-on: http://localhost:5000 
+                wait-on-timeout: 60
+
