@@ -19,8 +19,8 @@ const ChatHeader = ({ user, chat }) => {
   const editGroupNameRef = useRef(null);
 
   // Gets the user in private chat. Variable used in displaying user's name.
-  const person = chat.chat?.users.find(person => person.username !== user.data?.username);
-  const isGrourpChat = chat.chat?.users.length > 2;
+  const person = chat.chat?.users?.find(person => person.username !== user.data?.username);
+  const isGrourpChat = chat.chat?.users?.length > 2;
 
   // Toggles between on/off edit mode in chat name.
   // When anything else other than chat name is clicked edit mode is turned off.

@@ -2,8 +2,8 @@ const { MAIL_USER, MAIL_PASS } = require('./config');
 const nodemailer = require('nodemailer');
 
 const transport = nodemailer.createTransport({
-  host: 'sandbox.smtp.mailtrap.io',
-  port: 2525,
+  host: 'live.smtp.mailtrap.io',
+  port: 587,
   auth: {
     user: MAIL_USER,
     pass: MAIL_PASS

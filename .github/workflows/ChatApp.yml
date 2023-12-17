@@ -62,4 +62,4 @@ jobs:
                 command: npm run e2e:userTest
                 wait-on: http://localhost:5000 
                 wait-on-timeout: 60
-
+                
