@@ -29,7 +29,10 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:eslint": "eslint **/*.{jsx,js}",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cy:run": "cypress run",
+    "e2e:userTest": "npm run cy:run --record --spec 'cypress/e2e/user.cy.js'",
+    "e2e:chatTest": "npm run cy:run --record --spec 'cypress/e2e/chat.cy.js'"
   },
   "eslintConfig": {
     "extends": [
