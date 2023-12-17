@@ -23,4 +23,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 14.12.2023 |       10        | A lot of refactoring, especially for sockets. Also changed several features to use socket instead of routes, such as deleting images, messages and changin group name. This way everything important is updated real-time. Also made a lot of error handling to those and profile section. Fixed all jest tests and added few. Documented some of the frontend.
 | 15.12.2023 |        8        | Documented whole frontend. Fixed all cypress tests, made test helper file and added few tests. Refactored animations and all services. Modified user's token. Fixed some bugs. |
 | 16.12.2023 |        6        | Added lots of Cypress tests and made all tests work in app. Also made production build and deployd first version of the chat application. |
-|   Total    |       153        |
+| 17.12.2023 |        7        | Fixed all routing issues in production. Also made development evironment to work again in client side. Made CI/CD pipeline for the project. The pipeline covers build, tests (jest and cypress), lint, deploying and adding tags. Also configured mailtrap and it to work in production.|
+|   Total    |       160        |
