@@ -47,7 +47,7 @@ jobs:
               with:
                 working-directory: ./client
                 start: echo "Server already started"
-                command: npm run e2e:test
+                command: npm run e2e:userTest
                 wait-on: http://localhost:5000 
                 wait-on-timeout: 60
 
