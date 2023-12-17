@@ -34,7 +34,7 @@ const ContactList = ({ chats, data }) => {
       // Determines online status and chat type (private/group).
       const isOnline = chat.users.map(user => onlineUsers.includes(user._id));
       const isPrivateChat = chat.users.length === 2;
-      const userIndex = isPrivateChat ? (chat.users[0].username === data.data.username ? 1 : 0) : -1;
+      const userIndex = isPrivateChat ? (chat.users[0]?.username === data.data?.username ? 1 : 0) : -1;
 
       return (
         <div id='friend' className='friendsList' key={key} onClick={() => navigateToChat(chats[key]._id)}>

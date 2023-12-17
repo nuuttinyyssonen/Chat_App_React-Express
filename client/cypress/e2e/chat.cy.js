@@ -64,6 +64,7 @@ describe('Chat', () => {
         });
 
         it('message can be sent', () => {
+            cy.wait(1000);
             cy.get('#friend').click();
             cy.get('#chatInput').type('Hello user!');
             cy.get('#send').click();
