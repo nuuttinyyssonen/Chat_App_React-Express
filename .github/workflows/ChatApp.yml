@@ -1,0 +1,38 @@
+name: ChatApp pipeline
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches: [master]
+        types: [opened, synchronize]
+
+jobs:
+    ChatApp_deployment:
+        runs-on: ubuntu-20.04
+        timeout-minutes: 4
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                node-version: "20"
+                
+            - name: Run Build
+              working-directory: ./server
+              run: npm run build:ui
+              
+            - name: Run Lint
+              working-directory: ./server
+              run: npm run lint
+
+            - name: Start server
+              working-directory: ./server
+              run: npm start
+              
+            - name: e2e tests
+              uses: cypress-io/github-action@v5
+              with:
+                working-directory: ./client
+                command: npm run e2e:test
+                wait-on: http://localhost:5000 
