@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const mongoose = require('mongoose');
 const { MONGODB_URI } = require('./utils/config');
 const cors = require('cors');
@@ -42,14 +43,19 @@ s3.listObjects({ Bucket: 'chatappimages20' }, (err, data) => {
 });
 
 // Routes
-app.use('/signup', signupRouter);
-app.use('/login', loginRouter);
-app.use('/users', usersRouter);
-app.use('/user', userRouter);
-app.use('/friends', friendsRouter);
-app.use('/resetCypress', resetCypressRouter);
-app.use('/chat', chatRouter);
-app.use('/passwordReset', passwordResetRouter);
+app.use('/api/signup', signupRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/user', userRouter);
+app.use('/api/friends', friendsRouter);
+app.use('/api/resetCypress', resetCypressRouter);
+app.use('/api/chat', chatRouter);
+app.use('/api/passwordReset', passwordResetRouter);
+
+// Fixes routing issues.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.use(errorHandler);
 
