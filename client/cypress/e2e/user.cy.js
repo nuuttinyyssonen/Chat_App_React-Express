@@ -1,12 +1,13 @@
 import initialUser from "./test_helper";
+// Tests are for localhost:5000 because of the production.
 describe('User', () => {
   it('setup', () => {
-    cy.request('DELETE', `http://localhost:5000/resetCypress/${initialUser[0].username}`)
+    cy.request('DELETE', `http://localhost:5000/api/resetCypress/${initialUser[0].username}`)
   });
 
   describe('Signup', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:3000');
+      cy.visit('http://localhost:5000');
     })
     it('succeeds with correct credentials', () => {
       cy.get('#signup-link').click();
@@ -44,7 +45,7 @@ describe('User', () => {
 
   describe('Login', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:3000');
+      cy.visit('http://localhost:5000');
     })
 
     it('succeeds with correct credentials', () => {
@@ -62,7 +63,7 @@ describe('User', () => {
     })
 
     it('cannot be accessed without authorization', () => {
-      cy.visit('http://localhost:3000/main');
+      cy.visit('http://localhost:5000/main');
       cy.contains('Login');
     })
 
