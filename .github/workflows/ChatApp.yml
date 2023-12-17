@@ -40,7 +40,7 @@ jobs:
                 EMAIL: ${{ secrets.EMAIL }}
                 CLIENT_ORIGIN: ${{ secrets.CLIENT_ORIGIN }}
                 CI: true
-              run: npm start
+              run: npm start &
               
             - name: e2e tests
               uses: cypress-io/github-action@v5
