@@ -23,7 +23,7 @@ describe('Chat api', () => {
       const user = await User.findOne({ username: 'test2' });
       const username = user.username;
       const response = await api
-        .put(`/user/${username}`)
+        .put(`/api/user/${username}`)
         .set('Authorization', authHeader)
         .expect(200);
       chatId = response.body.chats[0];
@@ -33,7 +33,7 @@ describe('Chat api', () => {
     test('Group chats can be created', async () => {
       const users = [initialUser[0].username, initialUser[1].username, initialUser[2].username, initialUser[3].username];
       const response = await api
-        .post('/chat/groupChat')
+        .post('/api/chat/groupChat')
         .send(users)
         .set('Authorization', authHeader)
         .expect(200);

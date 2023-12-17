@@ -14,7 +14,7 @@ describe('users api', () => {
     test('can signup', async () => {
       const users = await usersInDb();
       await api
-        .post('/signup')
+        .post('/api/signup')
         .send(initialUser[0])
         .expect(200);
       const usersAfter = await usersInDb();
@@ -28,7 +28,7 @@ describe('users api', () => {
         password: initialUser[0].password
       };
       const response = await api
-        .post('/login')
+        .post('/api/login')
         .send(user)
         .expect(200);
       const token = response.body.token;
@@ -37,11 +37,11 @@ describe('users api', () => {
 
     // Same user can be deleted and mongodb won't have that record anymore.
     test('user can be deleted', async () => {
-      const response = await api.post('/login').send({ username: 'tester', password: 'secret' });
+      const response = await api.post('/api/login').send({ username: 'tester', password: 'secret' });
       authHeader = `bearer ${response.body.token}`;
       const users = await usersInDb();
       await api
-        .delete('/user')
+        .delete('/api/user')
         .set('Authorization', authHeader)
         .expect(200);
       const updatedUsers = await usersInDb();
@@ -60,9 +60,9 @@ describe('Friends api', () => {
     await User.deleteOne({ username: initialUser[2].username });
     const firstUser = initialUser[1];
     const secondUser = initialUser[2];
-    await api.post('/signup').send(firstUser);
-    await api.post('/signup').send(secondUser);
-    const response = await api.post('/login').send({ username: 'test1', password: 'secret' });
+    await api.post('/api/signup').send(firstUser);
+    await api.post('/api/signup').send(secondUser);
+    const response = await api.post('/api/login').send({ username: 'test1', password: 'secret' });
     authHeader = `bearer ${response.body.token}`;
   });
 
@@ -71,7 +71,7 @@ describe('Friends api', () => {
     test('can add friends', async () => {
       const user = await User.findOne({ username: initialUser[1].username });
       const response = await api
-        .put('/user/test2')
+        .put('/api/user/test2')
         .set('Authorization', authHeader)
         .expect(200);
       const friends = response.body.friends;
@@ -81,7 +81,7 @@ describe('Friends api', () => {
     // If same user is being added twice to users friends array, error is being thrown.
     test('fails when adding existing friend', async () => {
       await api
-        .put('/user/test2')
+        .put('/api/user/test2')
         .set('Authorization', authHeader)
         .expect(400);
     });

@@ -26,7 +26,7 @@ describe('Socket', () => {
       const person = await User.findOne({ username: 'test2' });
       const username = person.username;
       const response = await api
-        .put(`/user/${username}`)
+        .put(`/api/user/${username}`)
         .set('Authorization', authHeader)
         .expect(200);
       chatId = response.body.chats[0];

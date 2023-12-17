@@ -48,12 +48,12 @@ const initializeTests = async () => {
   await User.deleteOne({ username: 'test2' });
   await User.deleteOne({ username: 'test3' });
 
-  await api.post('/signup').send(initialUser[0]);
-  await api.post('/signup').send(initialUser[1]);
-  await api.post('/signup').send(initialUser[2]);
-  await api.post('/signup').send(initialUser[3]);
+  await api.post('/api/signup').send(initialUser[0]);
+  await api.post('/api/signup').send(initialUser[1]);
+  await api.post('/api/signup').send(initialUser[2]);
+  await api.post('/api/signup').send(initialUser[3]);
   const user = initialUser[1];
-  const response = await api.post('/login').send(user);
+  const response = await api.post('/api/login').send(user);
   const authHeader = `bearer ${response.body.token}`;
   return authHeader;
 };

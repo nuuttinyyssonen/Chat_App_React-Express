@@ -25,6 +25,18 @@ jobs:
             - name: Run Lint
               working-directory: ./server
               run: npm run lint
+            
+            - name: Run Jest Chat
+              working-directory: ./server
+              run: npm run test chat.test.js
+            
+            - name: Run Jest Socket
+              working-directory: ./server
+              run: npm run test socket.test.js
+            
+            - name: Run Jest User
+              working-directory: ./server
+              run: npm run test user.test.js
 
             - name: Start server
               working-directory: ./server
