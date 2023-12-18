@@ -47,8 +47,8 @@ const ChatHeader = ({ user, chat }) => {
   };
 
   return (
-    <div className="ChatHeader">
-      {!isGrourpChat && !person?.profileImage && <img src={Profile} className='ProfilepicHeader'/>}
+    <div style={user.data?.isDarkMode ? { backgroundColor: 'black', color: 'white', border: '1px solid black' } : { backgroundColor: 'white' }} className="ChatHeader">
+      {!isGrourpChat && !person?.profileImage && <img src={Profile} className='ProfilepicHeader' style={{ width: '60px', height: '60px', borderRadius: '50%' }}/>}
       {!isGrourpChat && person?.profileImage && <img src={person?.profileImage} className='ProfilepicHeader' style={{ width: '60px', height: '60px', borderRadius: '50%' }}/>}
       {!isGrourpChat && <p id='headerFirstName' className='headerName'>{person?.username}</p>}
       {isGrourpChat && !isEditMode

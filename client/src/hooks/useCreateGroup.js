@@ -13,7 +13,7 @@ const useCreateGroup = () => {
       }, 5000);
       return response;
     } catch (error) {
-      // Error is thrown if for example group chat for 2 people is tried to create.
+      // Error handling
       if (error.response?.data?.error) {
         setErrorMessage(error.response.data.error);
         setTimeout(() => {

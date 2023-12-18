@@ -25,7 +25,7 @@ const ChatSideBarContainer = ({
   undoCreatePrivateChat
 }) => {
   return (
-    <div className="left-side">
+    <div style={data.data?.isDarkMode ? { backgroundColor: 'black', color: 'white', border: '1px solid black' } : { backgroundColor: 'white' }} className="left-side">
       {newChat && <input ref={inputRef} id='createPrivateChatInput' className="search-input" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)}/>}
 
       <div className='navbar-container' style={animationStyle}>

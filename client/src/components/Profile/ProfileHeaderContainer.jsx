@@ -40,7 +40,7 @@ const ProfileHeaderContainer = ({ user, isAuthenticated, newFriend, navigate, us
   const isAlreadyFriend = friendsMap && friendsMap.includes(true);
 
   return (
-    <div>
+    <div style={currentUser.data?.isDarkMode ? { backgroundColor: 'black', color: 'white', borderRadius: '15px 15px 0px 0px' } : { backgroundColor: 'white' }}>
       <ProfileHeader
         user={user}
         addFriend={newFriend}

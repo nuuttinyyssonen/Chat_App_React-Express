@@ -2,7 +2,6 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #F0F0F0;
 }
   
 .Main-container {
@@ -13,6 +12,7 @@ html, body {
   
 .left-side {
     background-color: white;
+    height: 97%;
     margin-top: 20px;
     margin-left: 10px;
     display: flex;

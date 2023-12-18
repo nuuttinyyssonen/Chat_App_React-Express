@@ -1,6 +1,7 @@
 import ProfileDetails from './ProfileDetails';
 import userService from '../../services/userService';
 import { useEffect, useState, useRef } from 'react';
+import '../../style/main/sliderButton.css';
 const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => {
   const [isEmailEditMode, setIsEmailEditMode] = useState(false);
   const [isUsernameEditMode, setIsUsernameEditMode] = useState(false);
@@ -78,8 +79,29 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => 
     }
   };
 
+  // Handles Dark mode updating.
+  const changeTheme = async () => {
+    try {
+      const data = await userService.updateUserField('isDarkMode', { isDarkMode: !currentUser.data?.isDarkMode });
+      currentUser.setChangeTheme(data.isDarkMode);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div>
+    <div style={currentUser.data?.isDarkMode ? { backgroundColor: 'black', color: 'white', borderRadius: '0px 0px 15px 15px' } : { backgroundColor: 'white' }} className='profileDetails'>
+      {isAuthenticated && <div className='DarkModeContainer'>
+        <p>Dark mode</p>
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={currentUser.data?.isDarkMode}
+            onChange={changeTheme}
+          />
+          <span className="slider round"></span>
+        </label>
+      </div>}
       <ProfileDetails
         statusRef={statusRef}
         isEditMode={isEmailEditMode}

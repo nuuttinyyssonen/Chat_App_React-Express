@@ -46,7 +46,7 @@ const Chat = () => {
   }, []);
 
   return (
-    <div className="chat-container">
+    <div style={ user.data?.isDarkMode ? { backgroundColor: '#222222' } : { background: 'white' }} className="chat-container">
       <ChatHeader
         user={user}
         chat={chat}

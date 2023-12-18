@@ -13,6 +13,8 @@ const Main = () => {
   // If token is not in localStorage user is navigated to log in page.
   const token = tokenService.getToken();
   const navigate = useNavigate();
+  // const user = useGetUserData();
+  // const user =
   useEffect(() => {
     if (!token) {
       navigate('/');

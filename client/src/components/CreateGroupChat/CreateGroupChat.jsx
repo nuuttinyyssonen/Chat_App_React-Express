@@ -24,6 +24,9 @@ const CreateGroupChat = ({ data }) => {
 
   const handleCreateGroup = async () => {
     const response = await createGroup(group);
+    if (group.length < 2) {
+      return;
+    }
     data.setData(response);
     setGroup([]);
     setUsername('');

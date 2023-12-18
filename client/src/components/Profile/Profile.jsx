@@ -20,8 +20,8 @@ const Profile = () => {
   const isAuthenticated = currentUser.data && currentUser.data?._id === user.data?._id;
 
   return (
-    <div>
-      <VscArrowLeft onClick={() => navigate('/main')} className='goBack'/>
+    <div className='profile' style={ currentUser.data?.isDarkMode ? { backgroundColor: '#222222' } : { background: 'white' }}>
+      <VscArrowLeft style={ currentUser.data?.isDarkMode ? { color: 'white' } : { color: 'black' }} onClick={() => navigate('/main')} className='goBack'/>
       <div className='profileContainer'>
         <ProfileHeaderContainer
           user={user}

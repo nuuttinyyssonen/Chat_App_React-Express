@@ -173,9 +173,6 @@ userRouter.put('/update/:field', tokenExtractor, async (req, res, next) => {
   if (!user) {
     return res.status(404).send({ error: 'User was not found!' });
   }
-  if (!user[fieldToUpdate]) {
-    return res.status(404).send({ error: 'User does not have this field!' });
-  }
 
   try {
     user[fieldToUpdate] = req.body[fieldToUpdate];

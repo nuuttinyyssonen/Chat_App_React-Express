@@ -1,5 +1,6 @@
 import profile from '../../style/images/Profile_picture.png';
-import { SlUserFollow, SlSettings, SlPencil } from 'react-icons/sl';
+import { SlUserFollow, SlPencil } from 'react-icons/sl';
+import { MdOutlineDeleteOutline } from 'react-icons/md';
 
 const ProfileHeader = ({
   user,
@@ -53,7 +54,7 @@ const ProfileHeader = ({
       {user.data &&
         <p className='PersonName'>{user.data.firstName} {user.data.lastName}
           {!isAuthenticated && !isAlreadyFriend && <SlUserFollow onClick={() => addFriend(user.data.username)} id='addFriend' className='follow'/>}
-          {isAuthenticated && <SlSettings id='deleteUser' onClick={() => deleteProfile()} className='follow'/>}
+          {isAuthenticated && <MdOutlineDeleteOutline id='deleteUser' onClick={() => deleteProfile()} className='follow'/>}
         </p>}
       {successMessage && <p className='successMsg'>{successMessage}</p>}
       {errorMessage && <p className='errorMsg'>{errorMessage}</p>}

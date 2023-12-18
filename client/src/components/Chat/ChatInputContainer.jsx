@@ -55,7 +55,7 @@ const ChatInputContainer = ({ typingText, user, id }) => {
   };
 
   return (
-    <div className="chatInput-container">
+    <div style={user.data?.isDarkMode ? { backgroundColor: 'black', color: 'white', border: '1px solid black' } : { backgroundColor: 'white' }} className="chatInput-container">
       <ImagePreview
         setSelectedImage={setSelectedImage}
         selectedImage={selectedImage}

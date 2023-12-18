@@ -43,11 +43,19 @@ const useGetUserData = () => {
     }));
   };
 
+  // This is used to update state's theme.
+  const setChangeTheme = (newTheme) => {
+    setData((prev) => ({
+      ...prev,
+      isDarkMode: newTheme
+    }));
+  };
+
   useEffect(() => {
     getUserData();
   }, []);
 
-  return { data, setEmail, setUsername, setData, setStatus };
+  return { data, setEmail, setUsername, setData, setStatus, setChangeTheme };
 };
 
 export default useGetUserData;

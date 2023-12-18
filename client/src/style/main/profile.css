@@ -1,3 +1,7 @@
+.profile {
+    height: 100vh;
+}
+
 .profileContainer {
     background-color: white;
     display: flex;
@@ -22,12 +26,15 @@
 }
 
 .follow {
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
 }
 
 .PersonName {
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .profileDetails {
@@ -69,4 +76,17 @@
     border: 1px solid #4399FF;
     padding: 1vh;
     border-radius: 10px;
+}
+
+.profileDetails {
+    display: flex;
+    justify-content: center;
+}
+
+.DarkModeContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
 }

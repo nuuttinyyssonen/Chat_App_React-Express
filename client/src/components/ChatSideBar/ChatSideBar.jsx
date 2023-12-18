@@ -67,26 +67,28 @@ const ChatSideBar = () => {
   const displayNavbar = !search && !newChat && !newGroupChat;
 
   return (
-    <ChatSideBarContainer
-      displayGroupChat={displayGroupChat}
-      displayNewChat={displayNewChat}
-      displayFriendList={displayFriendList}
-      displayNavbar={displayNavbar}
-      newChat={newChat}
-      newGroupChat={newGroupChat}
-      dropDown={dropDown}
-      handleLogout={handleLogout}
-      search={search}
-      setSearch={setSearch}
-      users={users}
-      data={data}
-      inputRef={inputRef}
-      animationStyle={animationStyle}
-      handleNewChat={handleNewChat}
-      handleNewGroupChat={handleNewGroupChat}
-      handleDropDown={handleDropDown}
-      undoCreatePrivateChat={undoCreatePrivateChat}
-    />
+    <div style={ data.data?.isDarkMode ? { backgroundColor: '#222222' } : { background: 'white' }}>
+      <ChatSideBarContainer
+        displayGroupChat={displayGroupChat}
+        displayNewChat={displayNewChat}
+        displayFriendList={displayFriendList}
+        displayNavbar={displayNavbar}
+        newChat={newChat}
+        newGroupChat={newGroupChat}
+        dropDown={dropDown}
+        handleLogout={handleLogout}
+        search={search}
+        setSearch={setSearch}
+        users={users}
+        data={data}
+        inputRef={inputRef}
+        animationStyle={animationStyle}
+        handleNewChat={handleNewChat}
+        handleNewGroupChat={handleNewGroupChat}
+        handleDropDown={handleDropDown}
+        undoCreatePrivateChat={undoCreatePrivateChat}
+      />
+    </div>
   );
 };
 

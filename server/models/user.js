@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema({
     maxLength: 20,
     default: "I'm a new user"
   },
+  isDarkMode: {
+    type: Boolean,
+    default: false
+  },
   profileImage: {
     type: String
   },
