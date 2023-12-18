@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { SlTrash } from 'react-icons/sl';
 import useMountAnimation from '../../hooks/useMountAnimation';
+import formatDate from '../../services/formatDate';
 const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, errorMessage }) => {
   const chatContainerRef = useRef(null);
   const animationStyle = useMountAnimation();
@@ -13,10 +14,23 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, erro
       return sortedItems.map((item, key) => {
         const itemDate = new Date(item.date);
         const itemMinutes = itemDate.getMinutes() < 10 ? '0' + itemDate.getMinutes() : itemDate.getMinutes();
+
+        // Displaying timeline (day.month.year) when day is different between messages.
+        let displayTimeline = false;
+        const day = new Date(item.date);
+        const dateToDisplay = formatDate(day);
+
+        if (key > 0) {
+          const previousItemDate = new Date(sortedItems[key - 1].date);
+          displayTimeline = day.getDate() !== previousItemDate.getDate();
+        }
         // This returns messages
         if (item.message) {
           return (
             item.user && item.chat === chat.chat?._id && <div style={animationStyle} key={key}>
+              {displayTimeline && <div className="timeline">
+                <span className="day-label">{dateToDisplay}</span>
+              </div>}
               {/* 2 different classNames makes own messages right aligned and others left aligned. */}
               <div className={item.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
                 {/* User's name is displayed if chat has more than 2 users meaning that it's a group chat. */}

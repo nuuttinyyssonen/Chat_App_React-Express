@@ -221,3 +221,21 @@
     opacity: 1;
     max-height: 100px;
 }
+.timeline {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.timeline:before,
+.timeline:after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid black;
+}
+
+.day-label {
+    padding: 10px;
+    color: black;
+}
