@@ -24,4 +24,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 15.12.2023 |        8        | Documented whole frontend. Fixed all cypress tests, made test helper file and added few tests. Refactored animations and all services. Modified user's token. Fixed some bugs. |
 | 16.12.2023 |        6        | Added lots of Cypress tests and made all tests work in app. Also made production build and deployd first version of the chat application. |
 | 17.12.2023 |        7        | Fixed all routing issues in production. Also made development environment to work again in client side. Made CI/CD pipeline for the project. The pipeline covers build, tests (jest and cypress), lint, deploying and adding tags. Also configured mailtrap and it to work in production.|
-|   Total    |       160        |
+| 18.12.2023 |        6        | Added Timelines to the chat. Modified users model to include isDarkMode. Configured Dark mode to all authenticated pages and users can change their theme from profile. Also fixed group chat creation. |
+|   Total    |       166        |
