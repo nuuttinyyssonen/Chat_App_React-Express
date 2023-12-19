@@ -18,7 +18,7 @@ passwordResetRouter.post('/', async (req, res) => {
         <tr>
             <td>
                 <p>Here is your password reset link:</p>
-                <a href="http://localhost:3000/reset-password/${token}">Reset your password</a>
+                <a href="https://chat-app-kufo.onrender.com/reset-password/${token}">Reset your password</a>
             </td>
         </tr>
     </table>`;
