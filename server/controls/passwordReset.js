@@ -9,6 +9,7 @@ passwordResetRouter.post('/', async (req, res) => {
   const { emailAddress } = req.body;
   const user = await User.findOne({ email: emailAddress });
   if (!user) {
+    console.log("here")
     return res.status(404).send('Invalid email address!');
   }
   const token = jwt.sign({ userId: user._id }, SECRET, { expiresIn: '1h' });
