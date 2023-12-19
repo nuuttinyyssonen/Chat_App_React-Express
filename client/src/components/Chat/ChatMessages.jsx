@@ -29,7 +29,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, erro
           return (
             item.user && item.chat === chat.chat?._id && <div style={animationStyle} key={key}>
               {displayTimeline && <div className="timeline">
-                <span style={user.data.isDarkMode ? { color: "white" } : { color: "black" } } className="day-label">{dateToDisplay}</span>
+                <span style={user.data.isDarkMode ? { color: 'white' } : { color: 'black' } } className="day-label">{dateToDisplay}</span>
               </div>}
               {/* 2 different classNames makes own messages right aligned and others left aligned. */}
               <div className={item.user._id === user.data._id ? 'currentUserMsgs' : 'otherUserMsgs'}>
@@ -41,7 +41,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, erro
               </div>
               {/* Time stamps */}
               <div className={item.user._id === user.data._id ? 'currentUserMsgTime' : 'otherUserMsgTime'}>
-                <p style={user.data.isDarkMode ? { color: "white" } : { color: "black" } } >{itemDate.getHours()}:{itemMinutes}</p>
+                <p style={user.data.isDarkMode ? { color: 'white' } : { color: 'black' } } >{itemDate.getHours()}:{itemMinutes}</p>
               </div>
             </div>
           );

@@ -23,7 +23,7 @@ const ProfileDetails = ({ user, isEditMode, setIsEditMode, statusRef, type, deta
     setIsEditMode(!isEditMode);
   };
 
-  console.log(user)
+  console.log(user);
 
   return (
     user.data && <div className="profileDetails">
