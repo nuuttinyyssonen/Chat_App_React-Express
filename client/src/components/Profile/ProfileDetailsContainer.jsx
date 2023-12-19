@@ -2,7 +2,7 @@ import ProfileDetails from './ProfileDetails';
 import userService from '../../services/userService';
 import { useEffect, useState, useRef } from 'react';
 import '../../style/main/sliderButton.css';
-const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => {
+const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser, user }) => {
   const [isEmailEditMode, setIsEmailEditMode] = useState(false);
   const [isUsernameEditMode, setIsUsernameEditMode] = useState(false);
   const [isStatusEditMode, setIsStatusEditMode] = useState(false);
@@ -114,6 +114,7 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => 
         setField={setEmailField}
         errorMessage={errorMessageUsername}
         isAuthenticated={isAuthenticated}
+        searchedUser={user}
       />
       <ProfileDetails
         isEditMode={isUsernameEditMode}
@@ -127,6 +128,7 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => 
         setField={setUsernameField}
         errorMessage={errorMessageEmail}
         isAuthenticated={isAuthenticated}
+        searchedUser={user}
       />
       <ProfileDetails
         field={statusField}
@@ -140,6 +142,7 @@ const ProfileDetailsContainer = ({ isAuthenticated, navigate, currentUser }) => 
         detail={status}
         user={currentUser}
         errorMessage={errorMessageStatus}
+        searchedUser={user}
       />
     </div>
   );

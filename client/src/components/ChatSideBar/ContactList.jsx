@@ -1,5 +1,5 @@
 import profilePic from '../../style/images/Profile_picture.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import socket from '../../socketConfig';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import { initalizeUsers } from '../../reducers/onlineUserReducer';
 
 const ContactList = ({ chats, data }) => {
   const navigate = useNavigate();
+  const urlId = useParams().id;
   const dispatch = useDispatch();
   const navigateToChat = (id) => {
     navigate(`/chat/${id}`);
@@ -37,7 +38,7 @@ const ContactList = ({ chats, data }) => {
       const userIndex = isPrivateChat ? (chat.users[0]?.username === data.data?.username ? 1 : 0) : -1;
 
       return (
-        <div id='friend' className='friendsList' key={key} onClick={() => navigateToChat(chats[key]._id)}>
+        <div id='friend' className={ urlId === chat._id ? "friendsList SelectedChat" : "friendsList" } key={key} onClick={() => navigateToChat(chats[key]._id)}>
           {/* Online/offline status icon and profile image are displayed if chat is private chat */}
           {userIndex !== -1 && <GoDotFill className={isOnline[userIndex] ? 'onlineStatus' : 'offlineStatus'}/>}
           {!chat.users[userIndex]?.profileImage && <img className="profilePicInUserList" src={profilePic} style={{ width: '60px' }} />}

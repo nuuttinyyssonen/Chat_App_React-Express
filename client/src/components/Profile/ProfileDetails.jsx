@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useMountAnimation from '../../hooks/useMountAnimation';
 
 // This component is reused for all status, email and username fields.
-const ProfileDetails = ({ user, isEditMode, setIsEditMode, statusRef, type, detail, updateDetail, field, setField, errorMessage, isAuthenticated }) => {
+const ProfileDetails = ({ user, isEditMode, setIsEditMode, statusRef, type, detail, updateDetail, field, setField, errorMessage, isAuthenticated, searchedUser }) => {
   const animationStyle = useMountAnimation();
 
   /* This toggles edit mode between on/off based on where user clicks.
@@ -23,11 +23,12 @@ const ProfileDetails = ({ user, isEditMode, setIsEditMode, statusRef, type, deta
     setIsEditMode(!isEditMode);
   };
 
+  console.log(user)
+
   return (
     user.data && <div className="profileDetails">
       {errorMessage && <p className="errorMsg">{errorMessage}</p>}
-      {!isAuthenticated && <p>{type}: {user.data[type]}</p>}
-      {/* if user is authenticated, user is allowed to modify account details. */}
+      {!isAuthenticated && searchedUser && <p>{type}: {searchedUser.data[type]}</p>}
       {!isEditMode && isAuthenticated &&
       <p ref={statusRef} style={animationStyle} onClick={() => handleEditMode()}>{type}: {detail}</p>}
       {isAuthenticated && isEditMode &&

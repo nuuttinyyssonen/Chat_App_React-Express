@@ -110,6 +110,10 @@ userRouter.put('/:username', tokenExtractor, async (req, res, next) => {
   if (user.friends.includes(userToAdd._id)) {
     return res.status(400).json({ error: 'This user is already in your friends' });
   }
+  // Error is also thrown if user is trying to add himself as friend
+  if (user._id.toString() === userToAdd._id.toString()) {
+    return res.status(400).json({ error: "You can't add yourself as friend." });
+  }
   const chat = new Chat({
     users: [
       user._id,

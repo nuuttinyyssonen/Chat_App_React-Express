@@ -37,6 +37,7 @@ const Profile = () => {
           isAuthenticated={isAuthenticated}
           navigate={navigate}
           currentUser={currentUser}
+          user={user}
         />
       </div>
     </div>
