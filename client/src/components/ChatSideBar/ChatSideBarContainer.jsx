@@ -22,7 +22,9 @@ const ChatSideBarContainer = ({
   handleNewChat,
   handleNewGroupChat,
   handleDropDown,
-  undoCreatePrivateChat
+  undoCreatePrivateChat,
+  setShowContactList,
+  showContactList
 }) => {
   return (
     <div style={data.data?.isDarkMode ? { backgroundColor: 'black', color: 'white', border: '1px solid black' } : { backgroundColor: 'white' }} className="left-side">
@@ -48,7 +50,7 @@ const ChatSideBarContainer = ({
       </div>}
 
       {displayFriendList && <div style={animationStyle}>
-        <ContactList chats={data.data.chats} data={data}/>
+        <ContactList chats={data.data.chats} data={data} showContactList={showContactList} setShowContactList={setShowContactList}/>
       </div>}
 
       <DropDown

@@ -4,8 +4,9 @@ import { useState, useRef, useEffect } from 'react';
 import '../../style/main/animations.css';
 import { MdSaveAlt } from 'react-icons/md';
 import socket from '../../socketConfig';
+import { VscArrowLeft } from 'react-icons/vsc';
 
-const ChatHeader = ({ user, chat }) => {
+const ChatHeader = ({ user, chat, isMobile, setShowContactList }) => {
   // Smooth transitions
   const mountedStyle = { animation: 'inAnimation 300ms ease-in' };
   const unmountedStyle = {
@@ -46,8 +47,13 @@ const ChatHeader = ({ user, chat }) => {
     setIsEditMode(false);
   };
 
+  const showContactsOnMobile = () => {
+    setShowContactList(true);
+  };
+
   return (
     <div style={user.data?.isDarkMode ? { backgroundColor: 'black', color: 'white', border: '1px solid black' } : { backgroundColor: 'white' }} className="ChatHeader">
+      {isMobile && <VscArrowLeft className='goBack' onClick={() => showContactsOnMobile()}/>}
       {!isGrourpChat && !person?.profileImage && <img src={Profile} className='ProfilepicHeader' style={{ width: '60px', height: '60px', borderRadius: '50%' }}/>}
       {!isGrourpChat && person?.profileImage && <img src={person?.profileImage} className='ProfilepicHeader' style={{ width: '60px', height: '60px', borderRadius: '50%' }}/>}
       {!isGrourpChat && <p id='headerFirstName' className='headerName'>{person?.username}</p>}

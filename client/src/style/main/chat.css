@@ -1,20 +1,21 @@
 .chat-container {
-    flex: 2;
+    flex: 1;
     background-color: #F0F0F0;
     padding: 20px;
+    width: 66vw;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .chatInput-container {
     background-color: white;
-    position: absolute;
-    bottom: 0;
     padding: 30px;
-    width: 64%;
+    margin-top: auto;
     text-align: center;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border: 1px solid lightgray;
     border-radius: 15px;
-    margin-bottom: 15px;
 }
 
 .imagePreview {
@@ -33,7 +34,7 @@
     cursor: pointer;
 }
 
-.chatInput {
+#chatInput {
     padding: 10px;
     border-radius: 25px;
     border-width: 1px;
@@ -94,7 +95,7 @@
 }
 
 .chatContainer {
-    max-height: 70vh;
+    max-height: 100vh;
     overflow-y: auto;
 }
 
@@ -238,4 +239,20 @@
 .day-label {
     padding: 10px;
     color: black;
+}
+
+@media only screen and (max-width: 600px) {
+    .chat-container {
+        height: 90vh;
+        padding: 10px;
+    }
+    .ChatHeader {
+       width: 95vw;
+    }
+    .chatInput-container {
+        width: 95vw;
+    }
+    #chatInput {
+        width: 27vh;
+    }
 }

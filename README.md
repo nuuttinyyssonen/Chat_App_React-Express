@@ -47,12 +47,15 @@ Messaging application that can connect people real-time from all around the worl
     - Selecting images opens file explorer and you have to select from there what you want to send.
     - If message is sent by a current user (blue message), user can hover the message which shows blue icon. Clicking this icon deletes the messages or image.
     - You can see typing indicator if other person is typing in the chat.
+    - Messages have time stamps.
+    - You can also see timelines or dates in chat if the day is different between 2 messages.
 
 - Profile
     - You can navigate to your profile from main page by clicking settings icon. 
     - Authenticated user is allowed to modify profile picture, email, username and status in profile page.
     - Fields are modified by clicking them. Profile picture if changed by hovering over to it and clicking the edit icon. 
     - Trash icon pops up window alert. Clicking yes will delete the account and navigate back to login page.
+    - You can turn on dark mode from profile as well.
 
 - Some things to note
     - If group chat has only 3 people and one of them deletes their account. The group chat is automatically deleted as well since it has to contain more than 2 people.

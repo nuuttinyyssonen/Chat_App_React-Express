@@ -90,3 +90,12 @@
     gap: 15px;
     margin-top: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+    .profile {
+        max-height: 85vh;
+    }
+    .profileContainer {
+        width: 80vw;
+    }
+}

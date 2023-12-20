@@ -8,7 +8,7 @@ import useGetUserData from '../../hooks/useGetUserData';
 import useGetChat from '../../hooks/useGetChat';
 
 // Main Chat component
-const Chat = () => {
+const Chat = ({ isMobile, showContactList, setShowContactList }) => {
   const [typingText, setTypingText] = useState('');
   const chat = useGetChat();
   const user = useGetUserData();
@@ -34,6 +34,7 @@ const Chat = () => {
     socket.on('display', (data) => {
       if (data.typing === true) {
         const temp = { text: `${data.user.data.username} is typing...`, room: data.room };
+        console.log(temp);
         setTypingText(temp);
       } else {
         setTypingText('');
@@ -45,9 +46,16 @@ const Chat = () => {
     };
   }, []);
 
+  const containerStyle = {
+    display: isMobile && showContactList ? 'none' : 'flex',
+    backgroundColor: user.data?.isDarkMode ? '#222222' : 'white'
+  };
+
   return (
-    <div style={ user.data?.isDarkMode ? { backgroundColor: '#222222' } : { background: 'white' }} className="chat-container">
+    <div style={containerStyle} className="chat-container">
       <ChatHeader
+        isMobile={isMobile}
+        setShowContactList={setShowContactList}
         user={user}
         chat={chat}
       />

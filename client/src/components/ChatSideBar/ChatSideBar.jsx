@@ -7,7 +7,7 @@ import '../../style/main/animations.css';
 import ChatSideBarContainer from './ChatSideBarContainer';
 import useMountAnimation from '../../hooks/useMountAnimation';
 
-const ChatSideBar = () => {
+const ChatSideBar = ({ isMobile, showContactList, setShowContactList }) => {
   // Custom hook for animations
   const animationStyle = useMountAnimation();
 
@@ -66,9 +66,16 @@ const ChatSideBar = () => {
   const displayFriendList = data.data && !newChat && !newGroupChat;
   const displayNavbar = !search && !newChat && !newGroupChat;
 
+  const containerStyle = {
+    display: isMobile && !showContactList ? 'none' : 'flex',
+    backgroundColor: data.data?.isDarkMode ? '#222222' : 'white'
+  };
+
   return (
-    <div style={ data.data?.isDarkMode ? { backgroundColor: '#222222' } : { background: 'white' }}>
+    <div style={containerStyle}>
       <ChatSideBarContainer
+        setShowContactList={setShowContactList}
+        showContactList={showContactList}
         displayGroupChat={displayGroupChat}
         displayNewChat={displayNewChat}
         displayFriendList={displayFriendList}

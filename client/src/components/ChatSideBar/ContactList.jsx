@@ -6,12 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { GoDotFill } from 'react-icons/go';
 import { initalizeUsers } from '../../reducers/onlineUserReducer';
 
-const ContactList = ({ chats, data }) => {
+const ContactList = ({ chats, data, setShowContactList }) => {
   const navigate = useNavigate();
   const urlId = useParams().id;
   const dispatch = useDispatch();
   const navigateToChat = (id) => {
     navigate(`/chat/${id}`);
+    setShowContactList(false);
   };
 
   // Retrieves the list of online users from the Redux store.

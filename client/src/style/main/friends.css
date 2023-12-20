@@ -1,7 +1,6 @@
 .friendsContainer {
     display: flex;
     flex-direction: column;
-    /* gap: 30px; */
     cursor: pointer;
     max-height: 60vh;
     overflow-y: scroll;
@@ -64,4 +63,10 @@
     background-color: #4399FF;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    .friendsContainer {
+        max-height: 50vh;
+    }
 }
