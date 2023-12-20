@@ -1,4 +1,5 @@
 # Chat App
+https://chat-app-kufo.onrender.com/
 Messaging application that can connect people real-time from all around the world.
 
 ## Technologies used
