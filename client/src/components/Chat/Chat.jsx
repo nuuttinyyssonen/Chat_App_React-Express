@@ -15,18 +15,10 @@ const Chat = ({ isMobile, showContactList, setShowContactList }) => {
   const id = useParams().id;
 
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log('connected');
-    });
-
     // Online users are stored inside of a set in backend and Redux in frontend.
     if (user.data) {
       socket.emit('login', user.data._id);
     }
-
-    socket.on('disconnect', () => {
-      console.log('disconnected');
-    });
   }, [user]);
 
   // Watches for display emits and sets typing indicator.
@@ -34,7 +26,6 @@ const Chat = ({ isMobile, showContactList, setShowContactList }) => {
     socket.on('display', (data) => {
       if (data.typing === true) {
         const temp = { text: `${data.user.data.username} is typing...`, room: data.room };
-        console.log(temp);
         setTypingText(temp);
       } else {
         setTypingText('');

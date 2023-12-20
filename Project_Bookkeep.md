@@ -26,4 +26,5 @@ This file is to track what did I do in my project and how many hours I spent eac
 | 17.12.2023 |        7        | Fixed all routing issues in production. Also made development environment to work again in client side. Made CI/CD pipeline for the project. The pipeline covers build, tests (jest and cypress), lint, deploying and adding tags. Also configured mailtrap and it to work in production.|
 | 18.12.2023 |        6        | Added Timelines to the chat. Modified users model to include isDarkMode. Configured Dark mode to all authenticated pages and users can change their theme from profile. Also fixed group chat creation. |
 | 19.12.2023 |        4        | Fixed some of the last bugs and added visuals. Also changed the whole mail service to gmail from mailtrap for simplicity reasons. And it's also free. Fixed some cypress tests as well. Project almost at the finish line.
-|   Total    |       170        |
+| 20.12.2023 |        6        | Added instructions to README. Made the app way more responsive than it was before. Also made it mobile friendly. isMobile state is tracking if device is mobile or not. This has big effect on main page. Also refactored chat histtory and contactlist. This is final entry on bookkeep. Project is finished and is ready to be deployed.
+|   Total    |       176        |

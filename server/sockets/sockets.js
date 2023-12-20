@@ -55,10 +55,6 @@ io.on('connection', (socket) => {
   socket.on('error', (error) => {
     console.error('Socket error:', error);
   });
-
-  socket.on('disconnect', () => {
-    console.log('disconnected');
-  });
 });
 
 module.exports = io;

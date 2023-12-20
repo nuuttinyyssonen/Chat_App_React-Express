@@ -15,7 +15,6 @@ const ChatArea = ({ typingText, user, id, chat }) => {
       chat.addImage(data);
     });
     socket.on('updated_chat', (data) => {
-      console.log(data);
       chat.setChat(data);
     });
     socket.on('error', (data) => {

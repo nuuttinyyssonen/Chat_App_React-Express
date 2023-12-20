@@ -1,10 +1,9 @@
-import profilePic from '../../style/images/Profile_picture.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import socket from '../../socketConfig';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { GoDotFill } from 'react-icons/go';
 import { initalizeUsers } from '../../reducers/onlineUserReducer';
+import Contact from './Contact';
 
 const ContactList = ({ chats, data, setShowContactList }) => {
   const navigate = useNavigate();
@@ -39,26 +38,14 @@ const ContactList = ({ chats, data, setShowContactList }) => {
       const userIndex = isPrivateChat ? (chat.users[0]?.username === data.data?.username ? 1 : 0) : -1;
 
       return (
-        <div id='friend' className={ urlId === chat._id ? 'friendsList SelectedChat' : 'friendsList' } key={key} onClick={() => navigateToChat(chats[key]._id)}>
-          {/* Online/offline status icon and profile image are displayed if chat is private chat */}
-          {userIndex !== -1 && <GoDotFill className={isOnline[userIndex] ? 'onlineStatus' : 'offlineStatus'}/>}
-          {!chat.users[userIndex]?.profileImage && <img className="profilePicInUserList" src={profilePic} style={{ width: '60px' }} />}
-          {chat.users[userIndex]?.profileImage && <img className="profilePicInUserList" src={chat.users[userIndex]?.profileImage} style={{ width: '60px', height: '60px', borderRadius: '50%' }} />}
-
-          {/* Contact details display */}
-          <div className='friendDetails'>
-            {userIndex !== -1 && (
-              <div className='friendName'>
-                <p>{chat.users[userIndex].username}</p>
-              </div>
-            )}
-            {userIndex === -1 && (
-              <div>
-                <p>{chat.chatName}</p>
-              </div>
-            )}
-            <p className='latestMessage'>{message}</p>
-          </div>
+        <div id='friend' key={key} onClick={() => navigateToChat(chats[key]._id)}>
+          <Contact
+            userIndex={userIndex}
+            chat={chat}
+            isOnline={isOnline}
+            message={message}
+            urlId={urlId}
+          />
         </div>
       );
     });
