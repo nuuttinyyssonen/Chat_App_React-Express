@@ -44,6 +44,7 @@ const ChatMessages = ({ chat, user, handleDeleteMessage, handleDeleteImage, erro
         // This returns images.
         } else if (item.dataUrl) {
           return (
+            item.user && item.chat === chat.chat?._id &&
             <div key={key} style={animationStyle}>
               <Image
                 item={item}

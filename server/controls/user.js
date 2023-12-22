@@ -162,11 +162,15 @@ userRouter.put('/upload/image', upload.single('file'), tokenExtractor, async (re
       );
     });
   };
-  // Images link is stored in mongodb.
-  const imageUrl = await s3UploadPromise();
-  user.profileImage = imageUrl;
-  const updatedUser = await user.save();
-  res.status(200).json(updatedUser);
+  try {
+    // Images link is stored in mongodb.
+    const imageUrl = await s3UploadPromise();
+    user.profileImage = imageUrl;
+    const updatedUser = await user.save();
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Reusable route that can handle user's username, email, status and name modifications.

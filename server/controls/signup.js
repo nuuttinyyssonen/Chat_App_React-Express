@@ -31,9 +31,4 @@ signupRouter.post('/', async (req, res, next) => {
   };
 });
 
-signupRouter.get('/', async (req, res) => {
-  const users = await User.find({});
-  res.json(users);
-});
-
 module.exports = signupRouter;

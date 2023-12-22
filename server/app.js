@@ -4,7 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const { MONGODB_URI } = require('./utils/config');
 const cors = require('cors');
-const { errorHandler } = require('./utils/middleware');
+const { errorHandler, unknownEndpoint } = require('./utils/middleware');
 const s3 = require('./utils/aws');
 
 const signupRouter = require('./controls/signup');
@@ -53,10 +53,11 @@ app.use('/api/chat', chatRouter);
 app.use('/api/passwordReset', passwordResetRouter);
 
 // Fixes routing issues.
-app.get('*', (req, res) => {
+app.get('*', (res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+app.use(unknownEndpoint);
 app.use(errorHandler);
 
 module.exports = app;
